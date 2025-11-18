@@ -1,0 +1,247 @@
+:root {
+  --white-color: #fff;
+  --primary-color: #2f2f37;
+  --border-primary: #808080;
+  --btn-bg-color: #4e75ff;
+  --btn-bg-hover: #6c8cff;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 300ms;
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
+  color: #2f2f37;
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+/* --- Загальний reset --- */
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  position: relative;
+}
+/* --- Шапка пошуку --- */
+header {
+  width: 100%;
+  box-shadow: 0 2px 4px var(--shadow-md);
+  background: var(--white-color);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 10px 0;
+}
+
+.form--container {
+  background: transparent;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  min-width: 272px;
+}
+
+.searchTerm {
+  min-width: 272px;
+  border: 2px solid var(--border-primary);
+  border-radius: 4px;
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: var(--border-primary);
+  padding: 8px 16px;
+  margin-right: 8px;
+  transition: border-color var(--animation-duration) var(--timing-function);
+}
+
+.searchTerm:hover,
+.searchTerm:focus,
+.searchTerm:active {
+  border-color: var(--primary-color);
+}
+.searchTerm:active {
+  color: var(--primary-color);
+}
+
+.searchButton,
+.load-more {
+  border: none;
+  background: var(--btn-bg-color);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: background var(--animation-duration) var(--timing-function),
+    transform var(--animation-duration) var(--timing-function);
+}
+
+.searchButton:hover,
+.load-more:hover {
+  background: var(--btn-bg-hover);
+  transform: translateY(-1px);
+}
+
+/* --- Info сповіщення --- */
+.info--container {
+  text-align: center;
+  font-size: 16px;
+  color: var(--primary-color);
+  margin-top: 20px;
+  font-weight: 400;
+}
+/* --- Галерея --- */
+.gallery--container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: visible;
+  height: auto;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* мобільний — 1 фото в ряд */
+  gap: 20px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* планшети */
+@media (min-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* середні екрани */
+@media (min-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* десктопи */
+@media (min-width: 1200px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr); /* 4 фото в ряд */
+  }
+}
+
+.img--wrap {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3; /* пропорції картинки */
+  overflow: hidden;
+}
+
+.img--wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery__item {
+  position: relative;
+  background: var(--white-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s var(--timing-function),
+    box-shadow 0.25s var(--timing-function);
+}
+
+.gallery__item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.img--wrap {
+  height: 200px;
+  overflow: hidden;
+}
+
+.img--wrap img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform var(--animation-duration) var(--timing-function);
+}
+
+.img--wrap img:hover {
+  transform: scale(1.08);
+}
+
+.gallery__item--info {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 5px 12px;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.gallery__item--style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery__item--info li:first-child {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+/* --- Load more --- */
+.load-more--container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 60px;
+}
+.load-more {
+  display: none;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
