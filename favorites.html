@@ -28,12 +28,9 @@
       content="https://studentvlad5.github.io/your-energy/images/share-image.jpg"
     />
     <meta property="og:type" content="website" />
-    <script type="module" crossorigin src="/your-energy/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/your-energy/assets/vendor-BIqg12Vg.js">
-    <link rel="stylesheet" crossorigin href="/your-energy/assets/vendor-D_nxXpU-.css">
     <link rel="stylesheet" crossorigin href="/your-energy/assets/styles-CjEvJn-W.css">
   </head>
-  <body class="fixedClass">
+  <body>
     <header class="header">
   <div class="container header__container">
     <nav class="nav">
@@ -82,26 +79,9 @@
     </nav>
   </div>
 </header>
-
     <main>
-      <div class="container">
-  <h3>Hero</h3>
-</div>
-
-      <div class="container">
-  <h3>filters</h3>
-</div>
-
-      <div class="container">
-  <h3>categories</h3>
-</div>
-
-      <div class="container">
-  <h3>exercises</h3>
-</div>
-
-      <div class="sidebar">
-  <div class="quote-of-the-day">
+      <div class="container favorites-wrapper">
+        <div class="quote-of-the-day">
   <div class="quote-of-the-day__icon-wrap">
     <svg class="quote-of-the-day__run-icon" width="20" height="20">
       <use href="/your-energy/assets/icons-CzYEQ2n2.svg#icon-run"></use>
@@ -124,36 +104,8 @@
 </div>
 
 
-  <div class="sidebar__photo-card"></div>
-
-  <div class="sidebar__daily-norm">
-    <div class="sidebar__daily-norm-wrapper">
-      <div class="sidebar__daily-norm-icon">
-        <svg class="sidebar__daily-norm-icon-svg" width="34" height="32">
-          <use href="/your-energy/assets/icons-CzYEQ2n2.svg#icon-dailynorm"></use>
-        </svg>
+        <section class="favorites-list"></section>
       </div>
-
-      <div class="sidebar__daily-norm-text-wrapper">
-        <div class="sidebar__daily-norm-title-wrapper">
-          <div class="sidebar__daily-norm-title">110 min</div>
-          <div class="sidebar__daily-norm-subtitle">Daily norm of sports</div>
-        </div>
-
-        <div class="sidebar__daily-norm-text">
-          The World Health Organization recommends at least 150 minutes of
-          moderate-intensity aerobic physical activity throughout the week for
-          adults aged 18-64. However, what happens if we adjust that number to
-          110 minutes every day? While it might seem like a high number to hit,
-          dedicating 110 minutes daily to sporting activities may offer
-          unparalleled benefits to physical health, mental well-being, and
-          overall quality of life.
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
     </main>
 
     <footer class="footer">
@@ -178,5 +130,6 @@
 </div>
 
 
+    <!-- <script type="module" src="./js/favorites.js"></script> -->
   </body>
 </html>
