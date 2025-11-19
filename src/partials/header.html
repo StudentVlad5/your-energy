@@ -1,11 +1,48 @@
 <header class="header">
-  <div class="container">
+  <div class="container header__container">
     <nav class="nav">
-      <a class="nav-logo" href="./index.html" aria-label="Site logo">
-        <svg class="nav-logo-icon" width="100" height="30">
-          <use href="{=$icon-path}"></use>
-        </svg>
+      <a class="nav__logo-link" href="./index.html" aria-label="Your Energy home">
+        <img class="nav__logo-img" src="./img/logo-your-energy.svg" alt="Your Energy logo" width="132" height="16" />
       </a>
+
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a class="nav__link nav__link--active" href="./index.html">Home</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="./favorites.html">Favorites</a>
+        </li>
+      </ul>
+
+      <div class="nav__right">
+        <ul class="socials">
+          <li class="socials__item">
+            <a class="socials__link" href="https://www.facebook.com/goITclub/" target="_blank" rel="noopener noreferrer"
+              aria-label="Facebook">
+              <img class="socials__icon" src="./img/icon-facebook.svg" alt="Facebook" width="28" height="28" />
+            </a>
+          </li>
+          <li class="socials__item">
+            <a class="socials__link" href="https://www.instagram.com/goitclub/" target="_blank"
+              rel="noopener noreferrer" aria-label="Instagram">
+              <img class="socials__icon" src="./img/icon-instagram.svg" alt="Instagram" width="28" height="28" />
+            </a>
+          </li>
+          <li class="socials__item">
+            <a class="socials__link" href="https://www.youtube.com/c/GoIT" target="_blank" rel="noopener noreferrer"
+              aria-label="YouTube">
+              <img class="socials__icon" src="./img/icon-youtube.svg" alt="YouTube" width="28" height="28" />
+            </a>
+          </li>
+        </ul>
+
+        <!-- БУРГЕР ДЛЯ МОБ -->
+        <button class="nav__burger" type="button" aria-label="Open menu" data-menu-open>
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+        </button>
+      </div>
     </nav>
   </div>
 </header>

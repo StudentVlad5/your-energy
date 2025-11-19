@@ -1,0 +1,154 @@
+/* ===== HEADER: mobile first ===== */
+
+.header {
+  padding-top: 20px;
+  padding-bottom: 12px;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 16px;
+}
+
+/* Лого */
+.nav__logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav__logo-icon {
+  display: block;
+}
+
+/* Моб */
+.nav__menu {
+  display: none;
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.socials__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  background-color: #f4f4f4;
+  transition: background-color var(--animation-duration)
+      var(--timing-function),
+    box-shadow var(--animation-duration) var(--timing-function);
+}
+
+.socials__link:hover,
+.socials__link:focus-visible {
+  background-color: #ffffff;
+  box-shadow: var(--shadow-md);
+}
+
+.socials__icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+/* Бургер */
+.nav__burger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 28px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.nav__burger-line {
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background-color: #2f2f37;
+}
+
+/* ===== Tablet & Desktop ===== */
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .nav__menu {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 999px;
+    background-color: #242424;
+    column-gap: 4px;
+    margin: 0 auto;  
+  }
+
+  .nav__item {
+    list-style: none;
+  }
+
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    line-height: 1.2;
+    text-decoration: none;
+    color: #f4f4f4;
+    transition: background-color var(--animation-duration)
+        var(--timing-function),
+      color var(--animation-duration) var(--timing-function);
+  }
+
+  .nav__link:hover,
+  .nav__link:focus-visible {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .nav__link--active {
+    background-color: #f4f4f4;
+    color: #242424;
+  }
+
+  .socials {
+    display: flex;
+  }
+
+  .nav__burger {
+    display: none;
+  }
+
+  .nav__logo-img {
+  display: block;
+}
+
+}
