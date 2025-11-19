@@ -9,6 +9,10 @@
   --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
   --font-main: 'DM Sans', sans-serif;
+  --color-header-bg-dark: #242424;
+  --color-header-bg-light: #f4f4f4;
+  --color-header-border-light: #e8e8e8;
+  --color-header-link-hover-bg: rgba(255, 255, 255, 0.12);
 }
 
 body {
