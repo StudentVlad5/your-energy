@@ -1,0 +1,269 @@
+/* Block: sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  margin-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: unset;
+    justify-content: unset;
+    column-gap: 16px;
+    row-gap: 32px;
+
+    margin-bottom: 100px;
+  }
+
+  .favorites .sidebar {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebar {
+    flex-direction: column;
+
+    align-items: unset;
+    justify-content: unset;
+
+    gap: 32px;
+
+    margin-bottom: 0;
+    padding-bottom: 60px;
+  }
+}
+
+.favorites .sidebar {
+  margin-bottom: 0;
+}
+
+/* Element: photo card */
+.sidebar__photo-card {
+  background-image: url('../img/sidebar-img/sidebar-mob@1x.jpg');
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+
+  width: 335px;
+  height: 242px;
+}
+
+@media screen and (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .sidebar__photo-card {
+    background-image: url('../img/sidebar-img/sidebar-mob@2x.jpg');
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar__photo-card {
+    width: 288px;
+    height: 249px;
+
+    background-image: url('../img/sidebar-img/sidebar-tabl@1x.jpg');
+  }
+}
+
+@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
+  (min-width: 768px) and (min-resolution: 192dpi),
+  (min-width: 768px) and (min-resolution: 2dppx) {
+  .sidebar__photo-card {
+    background-image: url('../img/sidebar-img/sidebar-tabl@2x.jpg');
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebar__photo-card {
+    width: 444px;
+    height: 242px;
+
+    background-image: url('../img/sidebar-img/sidebar-desk@1x.jpg');
+  }
+}
+
+@media screen and (min-width: 1440px) and (min-device-pixel-ratio: 2),
+  (min-width: 1440px) and (min-resolution: 192dpi),
+  (min-width: 1440px) and (min-resolution: 2dppx) {
+  .sidebar__photo-card {
+    background-image: url('../img/sidebar-img/sidebar-desk@2x.jpg');
+  }
+}
+
+/* Element: daily norm card */
+.sidebar__daily-norm {
+  background-color: var(--white-bg-color);
+
+  border-radius: 20px;
+  width: 335px;
+  height: 201px;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .sidebar__daily-norm {
+    width: 400px;
+    height: 249px;
+    padding: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebar__daily-norm {
+    width: 444px;
+    height: 315px;
+  }
+}
+
+.sidebar__daily-norm-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.sidebar__daily-norm-title-wrapper,
+.sidebar__daily-norm-text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__daily-norm-title-wrapper {
+  gap: 2px;
+}
+
+.sidebar__daily-norm-text-wrapper {
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .sidebar__daily-norm-text-wrapper {
+    gap: 20px;
+  }
+}
+
+.sidebar__daily-norm-icon-svg {
+  max-width: unset !important;
+}
+
+.sidebar__daily-norm-title {
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .sidebar__daily-norm-title {
+    font-size: 24px;
+  }
+}
+
+.sidebar__daily-norm-subtitle {
+  color: var(--button-disabled-color);
+  font-size: 14px;
+}
+
+.sidebar__daily-norm-text {
+  font-size: 14px;
+  line-height: 18px;
+  max-height: 6.5em;
+  overflow: hidden;
+}
+
+@media (min-width: 1440px) {
+  .sidebar__daily-norm-text {
+    max-height: unset;
+  }
+}
+
+/* Favorites Page Styles can be used if anyone wants*/
+
+.favorites .sidebar__daily-norm-text {
+  display: none;
+}
+
+.favorites .sidebar__daily-norm {
+  width: 335px;
+  height: 119px;
+}
+
+.favorites .sidebar__photo-card {
+  background-image: url('../img/fav-sidebar-img/sidebar-mob@1x.jpg');
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  width: 335px;
+  height: 119px;
+}
+
+@media screen and (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .favorites .sidebar__photo-card {
+    background-image: url('../img/fav-sidebar-img/sidebar-mob@2x.jpg');
+  }
+}
+
+@media (min-width: 768px) {
+  .favorites .sidebar__photo-card {
+    background-image: url('../img/fav-sidebar-img/sidebar-tabl@1x.jpg');
+  }
+}
+
+@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
+  (min-width: 768px) and (min-resolution: 192dpi),
+  (min-width: 768px) and (min-resolution: 2dppx) {
+  .favorites .sidebar__photo-card {
+    background-image: url('../img/fav-sidebar-img/sidebar-tabl@2x.jpg');
+  }
+}
+
+@media (min-width: 1440px) {
+  .favorites .sidebar__photo-card {
+    background-image: url('../img/fav-sidebar-img/sidebar-desk@1x.jpg');
+  }
+}
+
+@media screen and (min-width: 1440px) and (min-device-pixel-ratio: 2),
+  (min-width: 1440px) and (min-resolution: 192dpi),
+  (min-width: 1440px) and (min-resolution: 2dppx) {
+  .favorites .sidebar__photo-card {
+    background-image: url('../img/fav-sidebar-img/sidebar-desk@2x.jpg');
+  }
+}
+
+/* Favorites layout overrides */
+@media (min-width: 768px) {
+  .favorites .sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 16px;
+  }
+
+  .favorites .quote-of-the-day {
+    grid-column: 1 / span 2;
+    width: 704px;
+  }
+
+  .favorites .sidebar__photo-card,
+  .favorites .sidebar__daily-norm {
+    width: 344px;
+    height: 141px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .favorites .quote-of-the-day {
+    width: 494px;
+  }
+
+  .favorites .sidebar__photo-card,
+  .favorites .sidebar__daily-norm {
+    width: 239px;
+    height: 141px;
+  }
+}
