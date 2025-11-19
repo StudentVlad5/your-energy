@@ -40,7 +40,7 @@
 }
 
 .socials {
-  display: flex;
+  display: none;
   align-items: center;
   column-gap: 12px;
 }
@@ -52,8 +52,8 @@
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  border: 1px solid #e8e8e8;
-  background-color: #f4f4f4;
+  border: 1px solid var(--color-header-border-light);
+  background-color: var(--color-header-bg-light);
   transition: background-color var(--animation-duration)
       var(--timing-function),
     box-shadow var(--animation-duration) var(--timing-function);
@@ -61,7 +61,7 @@
 
 .socials__link:hover,
 .socials__link:focus-visible {
-  background-color: #ffffff;
+  background-color:  var(--white-color);
   box-shadow: var(--shadow-md);
 }
 
@@ -89,7 +89,7 @@
   width: 100%;
   height: 2px;
   border-radius: 999px;
-  background-color: #2f2f37;
+  background-color: var(--color-header-bg-dark);
 }
 
 /* ===== Tablet & Desktop ===== */
@@ -105,7 +105,7 @@
     align-items: center;
     padding: 4px;
     border-radius: 999px;
-    background-color: #242424;
+    background-color: var(--color-header-bg-dark);
     column-gap: 4px;
     margin: 0 auto;  
   }
@@ -123,7 +123,7 @@
     font-size: 14px;
     line-height: 1.2;
     text-decoration: none;
-    color: #f4f4f4;
+    color: var(--color-header-bg-light);
     transition: background-color var(--animation-duration)
         var(--timing-function),
       color var(--animation-duration) var(--timing-function);
@@ -131,12 +131,12 @@
 
   .nav__link:hover,
   .nav__link:focus-visible {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: var(--color-header-link-hover-bg);
   }
 
   .nav__link--active {
-    background-color: #f4f4f4;
-    color: #242424;
+    background-color: var(--color-header-bg-light);
+    color: var(--color-header-bg-dark);
   }
 
   .socials {
@@ -149,6 +149,27 @@
 
   .nav__logo-img {
   display: block;
+  }
 }
 
+@media screen and (min-width: 1440px) {
+    .container {
+    max-width: 1440px;
+    padding: 0 96px;
+  }
+
+  .nav__link {
+    padding: 12px 34px;
+    font-size: 15px;
+  }
+
+  .nav__menu {
+    column-gap: 6px;
+    padding: 6px;
+  }
+
+    .socials__link {
+    width: 44px;
+    height: 44px;
+  }
 }
