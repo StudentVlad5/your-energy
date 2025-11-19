@@ -1,0 +1,53 @@
+/* Основні стилі для лоадера */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-loader-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out;
+}
+
+.loader-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.sport-loader {
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--white-color);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+  box-shadow: 0 0 15px var(--color-header-link-hover-bg);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8); /* Зменшуємо */
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1); /* Збільшуємо */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8); /* Повертаємо до зменшеного стану */
+    opacity: 0.7;
+  }
+}
+
+/* Додатково: стилі для body, щоб лоадер був помітний */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #333;
+  min-height: 150vh; /* Щоб можна було скролити і побачити, як лоадер зникає */
+}
