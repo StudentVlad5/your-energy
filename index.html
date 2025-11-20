@@ -29,9 +29,9 @@
     />
     <meta property="og:type" content="website" />
     <script type="module" crossorigin src="/your-energy/assets/vendor-3BNOZKAJ.js"></script>
-    <script type="module" crossorigin src="/your-energy/assets/main-BNxIBw-t.js"></script>
-    <link rel="stylesheet" crossorigin href="/your-energy/assets/main-BCTeAkM1.css">
+    <script type="module" crossorigin src="/your-energy/assets/main-COdEKpdt.js"></script>
     <link rel="stylesheet" crossorigin href="/your-energy/assets/vendor-D_nxXpU-.css">
+    <link rel="stylesheet" crossorigin href="/your-energy/assets/main-BYojnovM.css">
   </head>
   <body id="bg-loader" class="fixedClass">
     <header class="header">
@@ -43,10 +43,10 @@
 
       <ul class="nav__menu">
         <li class="nav__item">
-          <a class="nav__link nav__link--active" href="./index.html">Home</a>
+          <a class="nav__link" data-page="home" href="./index.html">Home</a>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="./favorites.html">Favorites</a>
+          <a class="nav__link" data-page="favorites" href="./favorites.html">Favorites</a>
         </li>
       </ul>
 
@@ -72,7 +72,6 @@
           </li>
         </ul>
 
-        <!-- БУРГЕР ДЛЯ МОБ -->
         <button class="nav__burger" type="button" aria-label="Open menu" data-menu-open>
           <span class="nav__burger-line"></span>
           <span class="nav__burger-line"></span>
@@ -83,21 +82,98 @@
   </div>
 </header>
 
+<script>
+  const currentPage = location.pathname.includes("favorites") ? "favorites" : "home";
+  document.querySelector(`[data-page="${currentPage}"]`)?.classList.add("nav__link--active");
+</script>
+
+
     <main>
       <div class="container">
   <h3>Hero</h3>
 </div>
 
-      <div class="container">
-  <h3>filters</h3>
+      <section class="filters">
+  <div class="container">
+
+    <!-- Хештеги -->
+    <div class="filters__tags">
+      <button class="filters__tag" type="button">#Sport</button>
+      <button class="filters__tag" type="button">#Healthy</button>
+      <button class="filters__tag" type="button">#Workout</button>
+      <button class="filters__tag" type="button">#Diet</button>
+    </div>
+
+    <div class="filters__header">
+  <h2 class="filters__title">
+    Exercises <span class="filters__subtitle"></span>
+  </h2>
+
+  <div class="filters__controls">
+    <div class="filters__search hidden">
+      <input
+        type="text"
+        placeholder="Search"
+        class="filters__input"
+      />
+      <button class="filters__search-btn" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M15.5 15.5L20 20"
+            stroke="#101010"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <circle
+            cx="11"
+            cy="11"
+            r="6"
+            stroke="#101010"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div
+      class="filters__tabs"
+      data-filters-tabs
+      role="tablist"
+      aria-label="Exercise filters"
+    >
+      <button
+        class="filters__tab filters__tab--active"
+        type="button"
+        data-filter="muscles"
+        role="tab"
+        aria-selected="true"
+      >
+        Muscles
+      </button>
+      <button
+        class="filters__tab"
+        type="button"
+        data-filter="bodypart"
+        role="tab"
+        aria-selected="false"
+      >
+        Body parts
+      </button>
+      <button
+        class="filters__tab"
+        type="button"
+        data-filter="equipment"
+        role="tab"
+        aria-selected="false"
+      >
+        Equipment
+      </button>
+    </div>
+  </div>
 </div>
 
       <div class="container">
   <h3>categories</h3>
-</div>
-
-      <div class="container">
-  <h3>exercises</h3>
 </div>
 
       <div class="sidebar">
