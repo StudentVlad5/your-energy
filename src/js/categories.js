@@ -1,20 +1,23 @@
 import { YourEnergyAPI } from './api';
 import { showError } from './iziToast-helper';
+import { injectSchema } from './seo-function';
 
 export const fetchApi = new YourEnergyAPI();
 
 const PAGE_LIMIT = window.innerWidth < 768 ? 9 : 12;
 
 // UI state
-let activeFilter = "Muscles";
+let activeFilter = 'Muscles';
 let activePage = 1;
 
 // Fetch categories from API and render cards + pagination.
 
-async function getCategories(filter = activeFilter, page = 1, limit = PAGE_LIMIT) {
-  //console.log(`categories: ${filter}, page: ${page}, limit: ${limit}`);
-
-  // update UI state
+async function getCategories(
+  filter = activeFilter,
+  page = 1,
+  limit = PAGE_LIMIT
+) {
+  // Update UI state early
   activeFilter = filter;
   activePage = page;
 
@@ -22,23 +25,35 @@ async function getCategories(filter = activeFilter, page = 1, limit = PAGE_LIMIT
     const params = { filter, page, limit };
     const data = await fetchApi.getFilters(params);
 
-    renderCards(data.results);
-    renderPagination(activePage, data.totalPages);
+    // Validate expected structure
+    if (!data) {
+      return showError('Data is empty');
+    }
+
+    // Render UI
+    renderCards(data.results || []);
+    renderPagination(activePage, data.totalPages || 1);
+
+    // Optional: ensure data is structured before injecting
+    if (typeof injectSchema === 'function') {
+      injectSchema(data);
+    }
   } catch (err) {
-    showError(err.message || 'Something went wrong');
+    console.error('getCategories error:', err);
+    showError(err?.message || 'Something went wrong');
   }
 }
 
 // Cards
 
 function renderCards(items) {
-  const container = document.getElementById("cards-container");
+  const container = document.getElementById('cards-container');
   if (!container) return;
-  container.innerHTML = "";
+  container.innerHTML = '';
 
   items.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "card";
+    const card = document.createElement('div');
+    card.className = 'card';
 
     card.innerHTML = `
       <img src="${item.imgURL}" alt="${item.name}" />
@@ -55,28 +70,28 @@ function renderCards(items) {
 // Pagination
 
 function renderPagination(currentPage, totalPages) {
-  const container = document.getElementById("pagination");
+  const container = document.getElementById('pagination');
   if (!container) return;
-  container.innerHTML = "";
+  container.innerHTML = '';
 
   for (let i = 1; i <= totalPages; i++) {
     const pageNum = i;
-    const btn = document.createElement("button");
+    const btn = document.createElement('button');
 
     btn.textContent = pageNum;
-    btn.className = "pagination-page";
-    btn.setAttribute("data-page", pageNum);
+    btn.className = 'pagination-page';
+    btn.setAttribute('data-page', pageNum);
 
     if (pageNum === currentPage) {
-      btn.classList.add("active");
+      btn.classList.add('active');
     }
 
     // CLICK HANDLER
-    btn.addEventListener("click", () => {
+    btn.addEventListener('click', () => {
       if (pageNum === activePage) return; // already active
       activePage = pageNum;
       getCategories(activeFilter, pageNum, PAGE_LIMIT);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     container.appendChild(btn);
@@ -85,4 +100,3 @@ function renderPagination(currentPage, totalPages) {
 
 // First load
 getCategories(activeFilter, activePage, PAGE_LIMIT);
-
