@@ -5,16 +5,20 @@ import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
 
 export default defineConfig(({ command }) => {
+  const basePath = process.env.VITE_BASE_PATH;
+  const devHost = process.env.VITE_DEV_HOST;
+  const devPort = process.env.VITE_DEV_PORT;
+
   return {
-    base: '/your-energy/',
+    base: basePath,
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
     },
     root: 'src',
 
     server: {
-      host: '127.0.0.1', // ✅ используем IPv4 localhost
-      port: 3000, // можно поменять на 3000, если 5173 занят
+      host: devHost,
+      port: devPort,
       open: true, // опционально — откроет браузер при старте
     },
 

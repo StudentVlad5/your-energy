@@ -1,14 +1,16 @@
+import { SEO } from './constants.js';
+
 //  SEO ФУНКЦІЯ
 // Динамічно створюємо JSON-LD для Google, щоб він бачив вправи як структуровані дані
 function injectSchema(data) {
   const schemaData = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
+    '@context': SEO.SCHEMA_CONTEXT,
+    '@type': SEO.SCHEMA_TYPES.ITEM_LIST,
     itemListElement: data.map((ex, index) => ({
-      '@type': 'ListItem',
+      '@type': SEO.SCHEMA_TYPES.LIST_ITEM,
       position: index + 1,
       item: {
-        '@type': 'ExercisePlan',
+        '@type': SEO.SCHEMA_TYPES.EXERCISE_PLAN,
         name: ex.title,
         description: ex.description,
         category: ex.category,
@@ -17,7 +19,7 @@ function injectSchema(data) {
   };
 
   const script = document.createElement('script');
-  script.type = 'application/ld+json';
+  script.type = SEO.JSON_LD_TYPE;
   script.text = JSON.stringify(schemaData);
   document.head.appendChild(script);
 }

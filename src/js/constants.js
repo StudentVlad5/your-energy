@@ -1,0 +1,98 @@
+// Local Storage Keys
+export const STORAGE_KEYS = {};
+
+export const COLORS = {
+  WHITE: '#fff',
+  BLACK: '#000',
+  GRAY_LIGHT: '#808080',
+};
+
+// API Endpoints
+export const API_ENDPOINTS = {
+  FILTERS: '/filters',
+  EXERCISES: '/exercises',
+  QUOTE: '/quote',
+  SUBSCRIPTION: '/subscription',
+};
+
+// ========== REGULAR EXPRESSIONS ==========
+export const REGEX = {
+  EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+};
+
+// ========== VALIDATION CONSTANTS ==========
+export const VALIDATION = {
+  EMAIL_REGEX: REGEX.EMAIL,
+  RATING_MIN: 1,
+  RATING_MAX: 5,
+};
+
+// ========== PAGINATION CONSTANTS ==========
+export const PAGINATION = {
+  DEFAULT_PAGE: 1,
+  DEFAULT_LIMIT: 12,
+  MIN_LIMIT: 1,
+  MAX_LIMIT: 100,
+};
+
+// ========== TOAST NOTIFICATION CONSTANTS ==========
+export const TOAST = {
+  POSITION: {
+    TOP_RIGHT: 'topRight',
+    TOP_LEFT: 'topLeft',
+    TOP_CENTER: 'topCenter',
+    BOTTOM_RIGHT: 'bottomRight',
+    BOTTOM_LEFT: 'bottomLeft',
+    BOTTOM_CENTER: 'bottomCenter',
+  },
+
+  TIMEOUT: {
+    SHORT: 2000,
+    DEFAULT: 4000,
+    LONG: 6000,
+  },
+
+  TRANSITION: {
+    IN: 'fadeInLeft',
+    OUT: 'fadeOutRight',
+  },
+
+  TITLE: {
+    SUCCESS: 'OK',
+    ERROR: 'Error',
+    INFO: 'Info',
+    WARNING: 'Warning',
+  },
+
+  ICON: {
+    SUCCESS: 'icon-check',
+    ERROR: 'icon-error',
+    INFO: 'icon-info',
+    WARNING: 'icon-warning',
+  },
+};
+
+// ========== SEO CONSTANTS ==========
+export const SEO = {
+  SCHEMA_CONTEXT: 'https://schema.org',
+  SCHEMA_TYPES: {
+    ITEM_LIST: 'ItemList',
+    LIST_ITEM: 'ListItem',
+    EXERCISE_PLAN: 'ExercisePlan',
+  },
+  JSON_LD_TYPE: 'application/ld+json',
+};
+
+// ========== MODAL TYPES ==========
+export const MODAL_TYPES = {
+  RATING: 'rating',
+  EXERCISE: 'exercise',
+};
+
+// ========== ERROR MESSAGES ==========
+export const ERROR_MESSAGES = {
+  API_ERROR: 'Something went wrong',
+  EMAIL_REQUIRED: 'Valid email is required',
+  RATING_RANGE: `Rating must be between ${VALIDATION.RATING_MIN} and ${VALIDATION.RATING_MAX}`,
+  EXERCISE_ID_REQUIRED: 'Exercise ID is required',
+};

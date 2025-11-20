@@ -1,5 +1,6 @@
 import { YourEnergyAPI } from './api';
 import { showError } from './iziToast-helper';
+import { ERROR_MESSAGES } from './constants.js';
 
 export const fetchApi = new YourEnergyAPI();
 
@@ -34,7 +35,7 @@ async function fetchGetExercisesQuote() {
     localStorage.setItem('quoteData', JSON.stringify(quoteData));
     addTextContent(newQuote, author);
   } catch (err) {
-    showError(err.message || 'Something went wrong');
+    showError(err.message || ERROR_MESSAGES.API_ERROR);
   }
 }
 

@@ -14,6 +14,11 @@
   --color-header-border-light: #e8e8e8;
   --color-header-link-hover-bg: rgba(255, 255, 255, 0.12);
   --bg-loader-color: rgba(0, 0, 0, 0.9);
+  --bg-modal-overlay: rgba(4, 4, 4, 0.4);
+  --color-secondary: #f4f4f466;
+  --color-accent: #eea10c;
+  --color-text-placeholder: #f4f4f499;
+  --btn-hover-color: #e0e0e0;
 }
 
 body {
