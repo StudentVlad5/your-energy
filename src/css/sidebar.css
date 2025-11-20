@@ -1,81 +1,3 @@
-/* Block */
-.quote-of-the-day {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  background: var(--primary-color);
-  border-radius: 20px;
-  color: var(--white-color);
-  width: 335px;
-}
-
-@media screen and (min-width: 768px) {
-  .quote-of-the-day {
-    padding: 40px;
-    gap: 16px;
-    width: 400px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .quote-of-the-day {
-    width: 444px;
-  }
-}
-
-/* Elements */
-.quote-of-the-day__icon-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  padding: 6px;
-  background-color: var(--rating-color);
-  border-radius: 50%;
-}
-
-.quote-of-the-day__run-icon {
-  display: block;
-}
-
-.quote-of-the-day__container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.quote-of-the-day__header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.quote-of-the-day__title {
-  font-size: 24px;
-}
-
-.quote-of-the-day__body {
-  display: block;
-}
-
-.quote-of-the-day__content {
-  color: var(--text-secondary-color);
-  margin-bottom: 10px;
-}
-
-.quote-of-the-day__author {
-  font-size: 16px;
-}
-
-@media screen and (min-width: 768px) {
-  .quote-of-the-day__commas {
-    width: 24px;
-    height: 24px;
-  }
-}
-
 /* Block: sidebar */
 .sidebar {
   display: flex;
@@ -84,10 +6,6 @@
   justify-content: center;
   gap: 20px;
   margin-bottom: 80px;
-}
-
-.quote-of-the-day {
-  width: 295px;
 }
 
 @media (min-width: 768px) {
@@ -104,10 +22,6 @@
   .favorites .sidebar {
     margin-bottom: 0;
   }
-
-  .quote-of-the-day {
-    width: 320px;
-  }
 }
 
 @media (min-width: 1440px) {
@@ -118,10 +32,6 @@
     gap: 32px;
     margin-bottom: 0;
     padding-bottom: 60px;
-  }
-
-  .quote-of-the-day {
-    width: 364px;
   }
 }
 
