@@ -1,0 +1,241 @@
+.modal-template {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--animation-duration) var(--timing-function),
+    visibility var(--animation-duration) var(--timing-function);
+}
+
+.modal-template.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-template:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-template__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-modal-overlay);
+  cursor: pointer;
+}
+
+.modal-template__content {
+  position: relative;
+  background-color: var(--color-header-bg-dark);
+  border-radius: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.modal-template__close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-header-bg-light);
+  border-radius: 50%;
+  transition: background-color var(--animation-duration) var(--timing-function),
+    color var(--animation-duration) var(--timing-function),
+    transform var(--animation-duration) var(--timing-function);
+  z-index: 1002;
+
+  @media screen and (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+.modal-template__close-btn-icon {
+  width: 10px;
+  height: 10px;
+
+  @media screen and (max-width: 768px) {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.modal-template__close-btn:hover,
+.modal-template__close-btn:focus {
+  background-color: var(--color-header-link-hover-bg);
+  color: var(--color-header-bg-light);
+  transform: scale(1.1);
+}
+
+.modal-template__close-btn:active {
+  transform: scale(0.95);
+}
+
+.modal-template__close-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  transition: transform var(--animation-duration) var(--timing-function);
+
+  @media screen and (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.modal-template__close-btn:hover svg,
+.modal-template__close-btn:focus svg {
+  transform: rotate(90deg);
+}
+
+.modal-template__body {
+  overflow-y: auto;
+  max-height: calc(90vh - 48px);
+}
+
+body.modal-open {
+  overflow: hidden;
+  padding-right: 0;
+}
+
+.modal-confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--animation-duration) var(--timing-function),
+    visibility var(--animation-duration) var(--timing-function);
+}
+
+.modal-confirm.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-confirm:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-confirm__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(4, 4, 4, 0.6);
+  cursor: pointer;
+}
+
+.modal-confirm__content {
+  position: relative;
+  background-color: var(--color-header-bg-dark);
+  border-radius: 20px;
+  padding: 32px 24px;
+  max-width: 400px;
+  width: 100%;
+  z-index: 2001;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+
+  @media screen and (max-width: 768px) {
+    padding: 24px 20px;
+    max-width: 90vw;
+  }
+}
+
+.modal-confirm__message {
+  color: var(--color-header-bg-light);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+}
+
+.modal-confirm__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.modal-confirm__btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--animation-duration) var(--timing-function);
+  min-width: 100px;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: 90px;
+  }
+}
+
+.modal-confirm__btn--cancel {
+  background-color: transparent;
+  color: var(--color-header-bg-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-confirm__btn--cancel:hover,
+.modal-confirm__btn--cancel:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.modal-confirm__btn--confirm {
+  background-color: var(--color-header-bg-light);
+  color: var(--color-header-bg-dark);
+}
+
+.modal-confirm__btn--confirm:hover,
+.modal-confirm__btn--confirm:focus {
+  background-color: rgba(244, 244, 244, 0.9);
+  transform: scale(1.02);
+}
+
+.modal-confirm__btn:active {
+  transform: scale(0.98);
+}

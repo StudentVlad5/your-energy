@@ -1,6 +1,12 @@
 // Local Storage Keys
 export const STORAGE_KEYS = {};
 
+export const COLORS = {
+  WHITE: '#fff',
+  BLACK: '#000',
+  GRAY_LIGHT: '#808080',
+};
+
 // API Endpoints
 export const API_ENDPOINTS = {
   FILTERS: '/filters',
@@ -75,6 +81,12 @@ export const SEO = {
     EXERCISE_PLAN: 'ExercisePlan',
   },
   JSON_LD_TYPE: 'application/ld+json',
+};
+
+// ========== MODAL TYPES ==========
+export const MODAL_TYPES = {
+  RATING: 'rating',
+  EXERCISE: 'exercise',
 };
 
 // ========== ERROR MESSAGES ==========

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CONFIG } from './config.js';
-import { VALIDATION, ERROR_MESSAGES } from './constants.js';
+import { VALIDATION, ERROR_MESSAGES, API_ENDPOINTS } from './constants.js';
 
 export class YourEnergyAPI {
   constructor(baseURL = CONFIG.BASE_API_URL) {
@@ -52,7 +52,7 @@ export class YourEnergyAPI {
    * @returns {Promise<Object>}
    */
   async getFilters(params = {}) {
-    return this._request('get', '/filters', null, params);
+    return this._request('get', API_ENDPOINTS.FILTERS, null, params);
   }
 
   /**
@@ -61,7 +61,14 @@ export class YourEnergyAPI {
    * @returns {Promise<Object>}
    */
   async getExercises(params = {}) {
-    return this._request('get', '/exercises', null, params);
+    return this._request('get', API_ENDPOINTS.EXERCISES, null, params);
+  }
+
+  async getExerciseById(id) {
+    if (!id) {
+      throw new Error(ERROR_MESSAGES.EXERCISE_ID_REQUIRED);
+    }
+    return this._request('get', `${API_ENDPOINTS.EXERCISES}/${id}`);
   }
 
   /**
@@ -69,7 +76,7 @@ export class YourEnergyAPI {
    * @returns {Promise<Object>}
    */
   async getQuote() {
-    return this._request('get', '/quote');
+    return this._request('get', API_ENDPOINTS.QUOTE);
   }
 
   /**
@@ -81,7 +88,7 @@ export class YourEnergyAPI {
     if (!data.email || !VALIDATION.EMAIL_REGEX.test(data.email)) {
       throw new Error(ERROR_MESSAGES.EMAIL_REQUIRED);
     }
-    return this._request('post', '/subscription', data);
+    return this._request('post', API_ENDPOINTS.SUBSCRIPTION, data);
   }
 
   /**
@@ -104,6 +111,10 @@ export class YourEnergyAPI {
     if (!data.email || !VALIDATION.EMAIL_REGEX.test(data.email)) {
       throw new Error(ERROR_MESSAGES.EMAIL_REQUIRED);
     }
-    return this._request('patch', `/exercises/${id}/rating`, data);
+    return this._request(
+      'patch',
+      `${API_ENDPOINTS.EXERCISES}/${id}/rating`,
+      data
+    );
   }
 }
