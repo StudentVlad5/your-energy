@@ -7,10 +7,10 @@
 
       <ul class="nav__menu">
         <li class="nav__item">
-          <a class="nav__link nav__link--active" href="./index.html">Home</a>
+          <a class="nav__link" data-page="home" href="./index.html">Home</a>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="./favorites.html">Favorites</a>
+          <a class="nav__link" data-page="favorites" href="./favorites.html">Favorites</a>
         </li>
       </ul>
 
@@ -36,7 +36,6 @@
           </li>
         </ul>
 
-        <!-- БУРГЕР ДЛЯ МОБ -->
         <button class="nav__burger" type="button" aria-label="Open menu" data-menu-open>
           <span class="nav__burger-line"></span>
           <span class="nav__burger-line"></span>
@@ -46,3 +45,8 @@
     </nav>
   </div>
 </header>
+
+<script>
+  const currentPage = location.pathname.includes("favorites") ? "favorites" : "home";
+  document.querySelector(`[data-page="${currentPage}"]`)?.classList.add("nav__link--active");
+</script>

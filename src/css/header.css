@@ -3,8 +3,6 @@
 .header {
   padding-top: 20px;
   padding-bottom: 12px;
-  display: flex;
-  margin: 0;
   width: 100%;
 }
 
@@ -156,11 +154,6 @@
 }
 
 @media screen and (min-width: 1440px) {
-    .container {
-    max-width: 1440px;
-    padding-left: 96px;
-    padding-right: 96px;
-  }
 
   .nav__link {
     padding: 12px 34px;
