@@ -44,10 +44,9 @@
 }
 
 /* Додатково: стилі для body, щоб лоадер був помітний */
-body {
+.bg-loader {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   color: #333;
   min-height: 150vh; /* Щоб можна було скролити і побачити, як лоадер зникає */
 }

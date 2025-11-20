@@ -10,8 +10,8 @@ import {
 } from './js/modal-rating-content.js';
 
 // функція пошуку
-ref.searchButton.addEventListener('click', onSearch);
-ref.loadMoreButton.addEventListener('click', loadMore);
+// ref.searchButton.addEventListener('click', onSearch);
+// ref.loadMoreButton.addEventListener('click', loadMore);
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
@@ -28,9 +28,4 @@ function initModals() {
   // registerModalType(MODAL_TYPES.EXERCISE, getExerciseModalContent, initExerciseModal);
 
   initModalButtons();
-
-
-
-
-
-
+}
