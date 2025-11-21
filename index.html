@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/your-energy/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your energy</title>
+    <meta
+      name="description"
+      content="A free database of sports exercises, an overview of equipment and a designer of training programs. Exercise correctly with Your energy."
+    />
+    <meta
+      name="keywords"
+      content="sport, fitness, exercises, training program, gym, weight loss"
+    />
+    <link rel="canonical" href="https://studentvlad5.github.io/your-energy/" />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/your-energy/favicon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your energy</title>
-  <meta name="description"
-    content="A free database of sports exercises, an overview of equipment and a designer of training programs. Exercise correctly with Your energy." />
-  <meta name="keywords" content="sport, fitness, exercises, training program, gym, weight loss" />
-  <link rel="canonical" href="https://studentvlad5.github.io/your-energy/" />
+    <meta
+      property="og:title"
+      content="Your energy: Your guide in the world of sports"
+    />
+    <meta
+      property="og:description"
+      content="Create your training program for free."
+    />
+    <meta
+      property="og:image"
+      content="https://studentvlad5.github.io/your-energy/hero.webp"
+    />
+    <meta property="og:type" content="website" />
+    <script type="module" crossorigin src="/your-energy/assets/vendor-3BNOZKAJ.js"></script>
+    <script type="module" crossorigin src="/your-energy/assets/main-CoJeu-3i.js"></script>
+    <link rel="stylesheet" crossorigin href="/your-energy/assets/vendor-D_nxXpU-.css">
+    <link rel="stylesheet" crossorigin href="/your-energy/assets/main-Bv5dS-9r.css">
+  </head>
 
-  <meta property="og:title" content="Your energy: Your guide in the world of sports" />
-  <meta property="og:description" content="Create your training program for free." />
-  <meta property="og:image" content="https://studentvlad5.github.io/your-energy/hero.webp" />
-  <meta property="og:type" content="website" />
-  <script type="module" crossorigin src="/your-energy/assets/vendor-3BNOZKAJ.js"></script>
-  <script type="module" crossorigin src="/your-energy/assets/main-BtkfFNlI.js"></script>
-  <link rel="stylesheet" crossorigin href="/your-energy/assets/vendor-D_nxXpU-.css">
-  <link rel="stylesheet" crossorigin href="/your-energy/assets/main-CfnjpY_Y.css">
-</head>
-
-<body id="bg-loader" class="fixedClass">
-  <header class="header">
+  <body id="bg-loader" class="fixedClass">
+    <header class="header">
   <div class="container header__container">
     <nav class="nav">
       <a class="nav__logo-link" href="./index.html" aria-label="Your Energy home">
@@ -76,8 +89,8 @@
 </script>
 
 
-  <main>
-    <section class="section">
+    <main>
+      <section class="section">
   <div class="container">
     <div class="hero-wrapper">
       <div class="hero-title-and-text">
@@ -118,7 +131,7 @@
     </ul>
   </div>
 </section>
-    <section class="filters">
+      <section class="filters">
   <div class="container">
 
 
@@ -195,13 +208,13 @@
   </div>
 </div>
 
-    <div class="container">
+      <div class="container">
   <h3>categories</h3>
   <div id="cards-container"></div>
   <div id="pagination"></div>
 </div>
 
-    <div class="sidebar">
+      <div class="sidebar">
   <div class="quote-of-the-day">
     <div class="quote-of-the-day__icon-wrap">
       <svg class="quote-of-the-day__run-icon" width="20" height="20">
@@ -273,7 +286,11 @@
 </div>
 
 
-    <button type="button" data-modal="rating" data-exercise-id="64f389465ae26083f39b17a4" style="
+      <button
+        type="button"
+        data-modal="rating"
+        data-exercise-id="64f389465ae26083f39b17a4"
+        style="
           padding: 10px 20px;
           background-color: transparent;
           color: #2f2f37;
@@ -282,14 +299,15 @@
           cursor: pointer;
           margin: 20px auto;
           display: block;
-        ">
-      Modal Rating
-    </button>
-    <!-- TODO: delete after real implementation -->
-    <!-- TODO: data-exercise-id should be dynamic -->
-  </main>
+        "
+      >
+        Modal Rating
+      </button>
+      <!-- TODO: delete after real implementation -->
+      <!-- TODO: data-exercise-id should be dynamic -->
+    </main>
 
-  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <symbol id="icon-Frame-52" viewBox="0 0 32 32">
       <path
@@ -377,7 +395,7 @@
   </div>
 </footer>
 
-  <!-- <div class="container">
+    <!-- <div class="container">
   <h3>modal exercises</h3>
 
   <button class="favorites-btn" data-id="">Add to favorites</button>
@@ -400,7 +418,7 @@
     <button class="favorites-btn">Add to favorites</button>
   </div>
 </template> -->
-  <div id="modal-template" class="modal-template hidden">
+    <div id="modal-template" class="modal-template hidden">
   <div class="modal-template__backdrop" data-modal-close></div>
   <div class="modal-template__content">
     <button
@@ -419,7 +437,7 @@
   </div>
 </div>
 
-  <div class="rating-modal">
+    <div class="rating-modal">
   <form class="rating-modal__form" id="rating-form">
     <div class="rating-modal__rating">
       <p class="rating-modal__label">Rating</p>
@@ -560,7 +578,7 @@
   </form>
 </div>
 
-  <div id="modal-confirm" class="modal-confirm hidden">
+    <div id="modal-confirm" class="modal-confirm hidden">
   <div class="modal-confirm__backdrop" data-confirm-close></div>
   <div class="modal-confirm__content">
     <p class="modal-confirm__message" data-confirm-message>
@@ -585,7 +603,7 @@
   </div>
 </div>
 
-  <div class="mobile-menu" data-menu>
+    <div class="mobile-menu" data-menu>
   <div class="mobile-menu__container">
     <button
       class="mobile-menu__close"
@@ -657,11 +675,10 @@
   </div>
 </div>
 
-  <div id="loader-overlay" class="loader-overlay hidden">
+    <div id="loader-overlay" class="loader-overlay hidden">
   <div class="sport-loader"></div>
 </div>
 
 
-</body>
-
+  </body>
 </html>
