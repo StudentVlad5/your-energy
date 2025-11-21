@@ -27,10 +27,10 @@ import { initExercisesSearch } from './js/exercises-search.js';
 // ref.loadMoreButton.addEventListener('click', loadMore);
 
 // if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    // cancelLoader();
-    initModals();
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => cancelLoader(), 200);
+  initModals();
+});
 // } else {
 //   cancelLoader();
 //   initModals();
