@@ -1,25 +1,27 @@
-(() => {
-  const refs = {
-    openMenuBtn: document.querySelector('[data-menu-open]'),
-    closeMenuBtn: document.querySelector('[data-menu-close]'),
-    menu: document.querySelector('[data-menu]'),
-  };
+import { REFS } from './constants.js';
 
-  if (!refs.openMenuBtn || !refs.menu || !refs.closeMenuBtn) return;
+(() => {
+  const {
+    mobileMenu: menu,
+    mobileMenuOpenBtn: openMenuBtn,
+    mobileMenuCloseBtn: closeMenuBtn,
+  } = REFS;
+
+  if (!openMenuBtn || !menu || !closeMenuBtn) return;
 
   const toggleMenu = () => {
-    refs.menu.classList.toggle('is-open');
+    menu.classList.toggle('is-open');
     document.body.classList.toggle('menu-open');
   };
 
-  refs.openMenuBtn.addEventListener('click', toggleMenu);
-  refs.closeMenuBtn.addEventListener('click', toggleMenu);
+  openMenuBtn.addEventListener('click', toggleMenu);
+  closeMenuBtn.addEventListener('click', toggleMenu);
 
   window
     .matchMedia('(min-width: 768px)')
     .addEventListener('change', e => {
       if (!e.matches) return;
-      refs.menu.classList.remove('is-open');
+      menu.classList.remove('is-open');
       document.body.classList.remove('menu-open');
     });
 })();

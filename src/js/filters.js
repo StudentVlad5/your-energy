@@ -1,8 +1,13 @@
-const tabsContainer = document.querySelector('[data-filters-tabs]');
-const searchBox = document.querySelector('.filters__search');
-const subtitle = document.querySelector('.filters__subtitle');
+import { REFS } from './constants.js';
+
+const {
+  filtersTabs: tabsContainer,
+  filtersSearchBox: searchBox,
+  filtersSubtitle: subtitle,
+} = REFS;
 
 const isDesktop = () => window.matchMedia('(min-width: 1440px)').matches;
+
 
 if (tabsContainer && searchBox && subtitle) {
   const updateUIForFilter = filter => {

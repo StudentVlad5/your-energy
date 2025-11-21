@@ -113,4 +113,16 @@ export const REFS = {
 
   exerciseModal: document.querySelector('.exercise-modal'), // from modal-exercise.html
   exerciseTrigger: document.querySelector('[data-modal="exercise"]'),
+
+  // Filters
+  filtersTabs: document.querySelector('[data-filters-tabs]'),
+  filtersSearchBox: document.querySelector('.filters__search'),
+  filtersSubtitle: document.querySelector('.filters__subtitle'),
+  filtersInput: document.querySelector('.filters__input'),
+  filtersClearBtn: document.querySelector('.filters__clear-btn'),
+
+  // Mobile menu
+  mobileMenu: document.querySelector('[data-menu]'),
+  mobileMenuOpenBtn: document.querySelector('[data-menu-open]'),
+  mobileMenuCloseBtn: document.querySelector('[data-menu-close]'),
 };
