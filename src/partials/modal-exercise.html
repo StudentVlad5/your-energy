@@ -1,3 +1,23 @@
 <div class="container">
   <h3>modal exercises</h3>
+
+  <button class="favorites-btn" data-id="">Add to favorites</button>
 </div>
+<template id="exercise-modal-template">
+  <div class="exercise-modal">
+
+    <h2 class="exercise-modal__title"></h2>
+
+    <img class="exercise-modal__gif" src="" alt="Exercise GIF" />
+
+    <div class="exercise-modal__info">
+      <p><b>Target:</b> <span class="exercise-modal__target"></span></p>
+      <p><b>Body part:</b> <span class="exercise-modal__bodypart"></span></p>
+      <p><b>Equipment:</b> <span class="exercise-modal__equipment"></span></p>
+    </div>
+
+    <p class="exercise-modal__instructions"></p>
+
+    <button class="favorites-btn">Add to favorites</button>
+  </div>
+</template>
