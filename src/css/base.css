@@ -19,6 +19,9 @@
   --color-accent: #eea10c;
   --color-text-placeholder: #f4f4f499;
   --btn-hover-color: #e0e0e0;
+  /* animation */
+  --ease-calm: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --anim-speed: 0.5s;
 }
 
 body {

@@ -1,13 +1,6 @@
 <section class="filters">
   <div class="container">
 
-    <!-- Хештеги -->
-    <div class="filters__tags">
-      <button class="filters__tag" type="button">#Sport</button>
-      <button class="filters__tag" type="button">#Healthy</button>
-      <button class="filters__tag" type="button">#Workout</button>
-      <button class="filters__tag" type="button">#Diet</button>
-    </div>
 
     <div class="filters__header">
   <h2 class="filters__title">
@@ -15,13 +8,18 @@
   </h2>
 
   <div class="filters__controls">
-    <div class="filters__search hidden">
+    <div class="filters__search">
       <input
         type="text"
         placeholder="Search"
         class="filters__input"
       />
-      <button class="filters__search-btn" type="button">
+
+        <button class="filters__clear-btn" type="button" aria-label="Clear search">
+           ×
+        </button>
+
+      <button class="filters__search-btn" type="button" aria-label="Search">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path
             d="M15.5 15.5L20 20"

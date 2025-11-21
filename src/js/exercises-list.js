@@ -4,12 +4,6 @@ import { renderPaginationUniversal } from './pagination.js';
 
 const api = new YourEnergyAPI();
 
-console.log(api);
-
-const exercisesSection = document.querySelector('.exercises');
-console.log(exercisesSection);
-
-// 8 карток на мобілі, 10 — на таблетці/десктопі
 function getPageLimit() {
   return window.innerWidth < 768 ? 8 : 10;
 }

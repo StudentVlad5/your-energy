@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://studentvlad5.github.io/your-energy/sitemap.xml

@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-
   margin-bottom: 80px;
 }
 
@@ -17,7 +16,6 @@
     justify-content: unset;
     column-gap: 16px;
     row-gap: 32px;
-
     margin-bottom: 100px;
   }
 
@@ -29,12 +27,9 @@
 @media (min-width: 1440px) {
   .sidebar {
     flex-direction: column;
-
     align-items: unset;
     justify-content: unset;
-
     gap: 32px;
-
     margin-bottom: 0;
     padding-bottom: 60px;
   }
@@ -46,37 +41,26 @@
 
 /* Element: photo card */
 .sidebar__photo-card {
-  background-image: url('../img/sidebar-img/sidebar-mob@1x.jpg');
-  background-position: center;
-  background-size: cover;
+  display: block;
   border-radius: 20px;
-
+  overflow: hidden;
   width: 335px;
   height: 242px;
+  flex-shrink: 0;
 }
 
-@media screen and (min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
-  .sidebar__photo-card {
-    background-image: url('../img/sidebar-img/sidebar-mob@2x.jpg');
-  }
+.sidebar__photo-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 @media (min-width: 768px) {
   .sidebar__photo-card {
     width: 288px;
     height: 249px;
-
-    background-image: url('../img/sidebar-img/sidebar-tabl@1x.jpg');
-  }
-}
-
-@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
-  (min-width: 768px) and (min-resolution: 192dpi),
-  (min-width: 768px) and (min-resolution: 2dppx) {
-  .sidebar__photo-card {
-    background-image: url('../img/sidebar-img/sidebar-tabl@2x.jpg');
   }
 }
 
@@ -84,32 +68,20 @@
   .sidebar__photo-card {
     width: 444px;
     height: 242px;
-
-    background-image: url('../img/sidebar-img/sidebar-desk@1x.jpg');
-  }
-}
-
-@media screen and (min-width: 1440px) and (min-device-pixel-ratio: 2),
-  (min-width: 1440px) and (min-resolution: 192dpi),
-  (min-width: 1440px) and (min-resolution: 2dppx) {
-  .sidebar__photo-card {
-    background-image: url('../img/sidebar-img/sidebar-desk@2x.jpg');
   }
 }
 
 /* Element: daily norm card */
 .sidebar__daily-norm {
-  background-color: var(--white-bg-color);
-
+  background-color: var(--white-color);
   border-radius: 20px;
-  width: 335px;
   height: 201px;
   padding: 20px;
 }
 
 @media (min-width: 768px) {
   .sidebar__daily-norm {
-    width: 400px;
+    width: 320px;
     height: 249px;
     padding: 40px;
   }
@@ -117,7 +89,7 @@
 
 @media (min-width: 1440px) {
   .sidebar__daily-norm {
-    width: 444px;
+    width: 364px;
     height: 315px;
   }
 }
@@ -162,7 +134,7 @@
 }
 
 .sidebar__daily-norm-subtitle {
-  color: var(--button-disabled-color);
+  color: #24242499;
   font-size: 14px;
 }
 
@@ -180,7 +152,6 @@
 }
 
 /* Favorites Page Styles can be used if anyone wants*/
-
 .favorites .sidebar__daily-norm-text {
   display: none;
 }
@@ -191,48 +162,8 @@
 }
 
 .favorites .sidebar__photo-card {
-  background-image: url('../img/fav-sidebar-img/sidebar-mob@1x.jpg');
-  background-position: center;
-  background-size: cover;
-  border-radius: 20px;
   width: 335px;
   height: 119px;
-}
-
-@media screen and (min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
-  .favorites .sidebar__photo-card {
-    background-image: url('../img/fav-sidebar-img/sidebar-mob@2x.jpg');
-  }
-}
-
-@media (min-width: 768px) {
-  .favorites .sidebar__photo-card {
-    background-image: url('../img/fav-sidebar-img/sidebar-tabl@1x.jpg');
-  }
-}
-
-@media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
-  (min-width: 768px) and (min-resolution: 192dpi),
-  (min-width: 768px) and (min-resolution: 2dppx) {
-  .favorites .sidebar__photo-card {
-    background-image: url('../img/fav-sidebar-img/sidebar-tabl@2x.jpg');
-  }
-}
-
-@media (min-width: 1440px) {
-  .favorites .sidebar__photo-card {
-    background-image: url('../img/fav-sidebar-img/sidebar-desk@1x.jpg');
-  }
-}
-
-@media screen and (min-width: 1440px) and (min-device-pixel-ratio: 2),
-  (min-width: 1440px) and (min-resolution: 192dpi),
-  (min-width: 1440px) and (min-resolution: 2dppx) {
-  .favorites .sidebar__photo-card {
-    background-image: url('../img/fav-sidebar-img/sidebar-desk@2x.jpg');
-  }
 }
 
 /* Favorites layout overrides */
