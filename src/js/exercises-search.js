@@ -1,57 +1,43 @@
-// import iziToast from 'izitoast';
-// import { loadExercisesList } from './exercises-list.js';
-
-// export function initExercisesSearch() {
-//   const searchForm = document.querySelector('.js-exercises-search');
-//   const searchInput = document.querySelector('.exercises__search-input');
-
-//   if (!searchForm || !searchInput) return;
-
-//   searchForm.addEventListener('submit', async e => {
-//     e.preventDefault();
-
-//     const query = searchInput.value.trim();
-
-//     if (!query) {
-//       iziToast.warning({
-//         title: 'Увага',
-//         message: 'Введіть пошуковий запит',
-//         position: 'topRight',
-//       });
-//       return;
-//     }
-
-//     // перезавантажуємо список з keyword
-//     await loadExercisesList({ page: 1, keyword: query });
-//   });
-// }
-
-
 import iziToast from 'izitoast';
 import { loadExercisesList } from './exercises-list.js';
 
 export function initExercisesSearch() {
-  const searchForm = document.querySelector('.js-exercises-search');
-  const searchInput = document.querySelector('.exercises__search-input');
+  const searchInput = document.querySelector('.filters__input');
+  const searchBtn = document.querySelector('.filters__search-btn');
+  const clearBtn = document.querySelector('.filters__clear-btn');
 
-  if (!searchForm || !searchInput) return;
+  if (!searchInput || !searchBtn) return;
 
-  searchForm.addEventListener('submit', async e => {
-    e.preventDefault();
-
+  const runSearch = () => {
     const query = searchInput.value.trim();
 
     if (!query) {
       iziToast.warning({
-        title: 'Увага',
-        message: 'Введіть пошуковий запит',
+        title: 'Attention',
+        message: 'Enter a search query',
         position: 'topRight',
       });
       return;
     }
 
-    // запускаємо ПЕРЕЗАВАНТАЖЕННЯ СПИСКУ з keyword
     loadExercisesList({ page: 1, keyword: query });
-  });
-}
+  };
 
+  searchBtn.addEventListener('click', runSearch);
+
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      runSearch();
+    }
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+
+      loadExercisesList({ page: 1, keyword: '' });
+    });
+  }
+}
