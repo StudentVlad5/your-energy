@@ -177,7 +177,7 @@
 }
 
 /* анимация для выезда поиска */
-@keyframes filtersSearchSlide {
+/* @keyframes filtersSearchSlide {
   from {
     opacity: 0;
     transform: translateX(-10px);
@@ -186,7 +186,7 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
+} */
 
 /* ===== Mobile & Tablet (до 1440px) ===== */
 @media (max-width: 1439px) {
@@ -247,7 +247,7 @@
 
   .filters__search {
     margin: 0;
-    max-width: 280px;
+    /* max-width: 280px; */
   }
 
   .filters__search--visible {
@@ -286,7 +286,7 @@
 
   .filters__search {
     display: flex;
-    opacity: 0;
+    /* opacity: 0; */
     pointer-events: none;
     transition: opacity var(--animation-duration) var(--timing-function);
   }
