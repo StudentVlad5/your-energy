@@ -62,7 +62,7 @@ function renderCards(items) {
         <span class="card-filter">${item.filter}</span>
       </div>
     `;
-    handleCategoryCardClick();
+    handleCategoryCardClick;
     card.addEventListener('click', handleCategoryCardClick(item));
     container.appendChild(card);
   });
@@ -73,29 +73,6 @@ function renderCards(items) {
 function renderPagination(currentPage, totalPages) {
   const container = document.getElementById('pagination');
   if (!container) return;
-  else if (filterKey === 'bodypart') {
-    // ✅ показуємо EXERCISES
-    categories.classList.add('hidden');
-    exercises.classList.remove('hidden');
-
-    // ✅ оновлюємо URL під формат exercises-list.js
-    const url = new URL(window.location.href);
-    url.searchParams.set('type', 'body-parts');
-
-    if (subtitleValue) {
-      // прийшли з Categories — filter вже правильний,
-      // тут НЕ робимо loadExercisesList, бо Categories вже його викликає
-      url.searchParams.set('filter', subtitleValue.toLowerCase());
-    } else {
-      // клік по табу — хай exercises-list візьме дефолт waist
-      url.searchParams.delete('filter');
-
-      // ✅ і тільки тут робимо запит
-      loadExercisesList({ page: 1 });
-    }
-
-    window.history.pushState({}, '', url);
-  }
   container.innerHTML = '';
 
   for (let i = 1; i <= totalPages; i++) {

@@ -29,7 +29,7 @@ export function handleCategoryCardClick(item) {
     // 5. Показуємо пошук (активує сама activateFiltersTab)
 
     // 6. Завантажуємо exercises за категорією
-    loadExercisesList({
+    loadExercisesList ({
       page: 1,
       filter: item.name.toLowerCase(),
       type,
