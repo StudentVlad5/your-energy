@@ -1,3 +1,5 @@
+import { REFS } from './constants.js';
+
 const FAVORITES_KEY = 'favorites';
 
 // Get favorites from LocalStorage
@@ -33,30 +35,26 @@ function removeFavorite(id) {
 
 const currentExercise = {};
 
-const refs = {
-  favoriteBtnElement: null,
-};
-
 function initFavoritesBtn(exercise) {
-  refs.favoriteBtnElement = document.querySelector('.favorites-btn');
+  const favoriteBtnElement = REFS.favoriteBtn;
 
-  if (!refs.favoriteBtnElement) return;
+  if (!favoriteBtnElement) return;
 
   Object.assign(currentExercise, exercise);
 
   if (isFavorite(exercise.id)) {
-    refs.favoriteBtnElement.textContent = 'Remove from favorites';
+    favoriteBtnElement.textContent = 'Remove from favorites';
   } else {
-    refs.favoriteBtnElement.textContent = 'Add to favorites';
+    favoriteBtnElement.textContent = 'Add to favorites';
   }
 
-  refs.favoriteBtnElement.onclick = () => {
+  favoriteBtnElement.onclick = () => {
     if (isFavorite(exercise.id)) {
       removeFavorite(exercise.id);
-      refs.favoriteBtnElement.textContent = 'Add to favorites';
+      favoriteBtnElement.textContent = 'Add to favorites';
     } else {
       addFavorite(exercise);
-      refs.favoriteBtnElement.textContent = 'Remove from favorites';
+      favoriteBtnElement.textContent = 'Remove from favorites';
     }
   };
 }
@@ -67,7 +65,6 @@ export {
   isFavorite,
   addFavorite,
   removeFavorite,
-  refs,
   currentExercise,
   initFavoritesBtn,
 };
