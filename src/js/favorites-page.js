@@ -1,27 +1,21 @@
 import { getFavorites, removeFavorite } from './favorites-btn.js';
+import { REFS } from './constants.js';
 
-const refs = {
-  quoteContainer: document.querySelector('.favorites-wrapper .quote'),
-  listContainer: document.querySelector('.favorites-list'),
-};
-const favorites = getFavorites();
-
-if (favorites.length === 0) {
-  refs.listContainer.innerHTML = `
+function renderEmptyMessage() {
+  REFS.favoritesList.innerHTML = `
     <div class="favorites-empty">
       <p>It appears that you haven’t added any exercises to your favorites yet.</p>
       <p>To get started, you can add exercises that you like to your favorites for easier access in the future.</p>
     </div>`;
-} else {
-  renderFavorites(favorites);
 }
-function renderFavorites(favorites) {
-  refs.listContainer.innerHTML = '';
 
-  favorites.forEach(item => {
+function renderFavorites(arr) {
+  REFS.favoritesList.innerHTML = '';
+
+  arr.forEach(item => {
     const card = document.createElement('div');
     card.classList.add('favorite-card');
-    card.setAttribute('data-id', item.id);
+    card.dataset.id = item.id;
 
     card.innerHTML = `
       <img src="${item.gifUrl}" alt="${item.name}" class="favorite-img">
@@ -33,14 +27,16 @@ function renderFavorites(favorites) {
       <button class="delete-btn" data-id="${item.id}">🗑</button>
     `;
 
-    refs.listContainer.appendChild(card);
+    REFS.favoritesList.appendChild(card);
 
     const deleteBtn = card.querySelector('.delete-btn');
-
     deleteBtn.addEventListener('click', () => {
       removeFavorite(item.id);
       const updated = getFavorites();
-      renderFavorites(updated);
+      updated.length ? renderFavorites(updated) : renderEmptyMessage();
     });
   });
 }
+
+const favorites = getFavorites();
+favorites.length ? renderFavorites(favorites) : renderEmptyMessage();

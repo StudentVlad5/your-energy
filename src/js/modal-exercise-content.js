@@ -1,10 +1,11 @@
 import { YourEnergyAPI } from './api.js';
 import { initFavoritesBtn } from './favorites-btn.js';
+import { REFS } from './constants.js';
 
 const api = new YourEnergyAPI();
 
 export function getExerciseModalContent() {
-  const modalTemplate = document.querySelector('.exercise-modal');
+  const modalTemplate = REFS.exerciseModal;
 
   if (!modalTemplate) {
     console.error(
@@ -18,7 +19,7 @@ export function getExerciseModalContent() {
 }
 
 export async function initExerciseModal(closeModalFn) {
-  const modalBody = document.querySelector('[data-modal-body]');
+  const modalBody = REFS.modalBody;
   const modal = modalBody?.querySelector('.exercise-modal');
 
   if (!modal) {
@@ -26,9 +27,7 @@ export async function initExerciseModal(closeModalFn) {
     return;
   }
 
-  let activeTrigger = document.querySelector(
-    '[data-modal="exercise"].modal-open-trigger'
-  );
+  let activeTrigger = REFS.exerciseTrigger;
 
   let exerciseId = activeTrigger?.getAttribute('data-exercise-id');
   if (!exerciseId) {
