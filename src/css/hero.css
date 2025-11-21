@@ -15,10 +15,12 @@
   display: inline-block;
   width: 38px;
   height: 38px;
-  margin-right: 10px;
-  /* vertical-align: middle; */
+  margin-right: 5px;
+  /* vertical-align: baseline; */
   background-image: url('../img/hero/hero-star.png');
   background-size: cover;
+  position: relative;
+  top: 5px;
 }
 
 .hero-text {
@@ -76,7 +78,7 @@
   .hero-title::before {
     width: 60px;
     height: 60px;
-    margin-right: 6px;
+    /* margin-right: 6px; */
   }
 
   .hero-text {
