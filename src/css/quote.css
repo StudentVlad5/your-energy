@@ -3,28 +3,31 @@
   display: flex;
   gap: 20px;
   padding: 20px;
-  background: var(--primary-color);
+  background: var(--color-header-bg-dark);
   border-radius: 20px;
   color: var(--white-color);
-  width: 335px;
+  width: 295px;
 }
 
 @media screen and (min-width: 768px) {
   .quote-of-the-day {
     padding: 40px;
     gap: 16px;
-    width: 400px;
+    width: 320px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .quote-of-the-day {
-    width: 444px;
+    width: 364px;
   }
 }
 
 /* Elements */
 .quote-of-the-day__icon-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-shrink: 0;
   width: 32px;
   height: 32px;
