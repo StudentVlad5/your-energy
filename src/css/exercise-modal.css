@@ -3,6 +3,7 @@ body > .exercise-modal {
 }
 
 .exercise-modal {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -25,6 +26,27 @@ body > .exercise-modal {
   @media screen and (min-width: 1440px) {
     width: 708px;
   }
+}
+
+.exercise-modal__loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-header-bg-dark);
+  border-radius: 20px;
+  z-index: 10;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+
+.exercise-modal__loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .exercise-modal__gif {

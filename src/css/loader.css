@@ -22,31 +22,22 @@
 .sport-loader {
   width: 60px;
   height: 60px;
-  border: 3px solid var(--white-color);
+  border: 3px solid rgba(238, 161, 12, 0.3);
+  border-top-color: var(--color-accent);
   border-radius: 50%;
-  animation: pulse 1.5s infinite ease-in-out;
-  box-shadow: 0 0 15px var(--color-header-link-hover-bg);
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px rgba(238, 161, 12, 0.3);
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(0.8); /* Зменшуємо */
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.1); /* Збільшуємо */
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.8); /* Повертаємо до зменшеного стану */
-    opacity: 0.7;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Додатково: стилі для body, щоб лоадер був помітний */
 .bg-loader {
   margin: 0;
   padding: 0;
   color: #333;
-  min-height: 150vh; /* Щоб можна було скролити і побачити, як лоадер зникає */
+  min-height: 150vh;
 }

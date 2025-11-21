@@ -35,6 +35,11 @@ export async function initExerciseModal(closeModalFn) {
     return;
   }
 
+  const loader = modal.querySelector('.exercise-modal__loader');
+  if (loader) {
+    loader.classList.remove('hidden');
+  }
+
   let exerciseId =
     sessionStorage.getItem('exerciseModalExerciseId') ||
     document
@@ -46,6 +51,7 @@ export async function initExerciseModal(closeModalFn) {
   }
 
   if (!exerciseId) {
+    if (loader) loader.classList.add('hidden');
     showError('Exercise ID is missing');
     return;
   }
@@ -56,12 +62,17 @@ export async function initExerciseModal(closeModalFn) {
     exercise.id = exercise.id || exercise._id;
   } catch (err) {
     console.error('Failed to load exercise:', err);
+    if (loader) loader.classList.add('hidden');
     showError(err.message || 'Failed to load exercise. Try later.');
     modal.innerHTML = `<p>Failed to load exercise. Try later.</p>`;
     return;
   }
 
   renderExerciseData(modal, exercise);
+
+  if (loader) {
+    loader.classList.add('hidden');
+  }
 
   const favoritesBtn = modal.querySelector('.favorites-btn');
   if (favoritesBtn) {
