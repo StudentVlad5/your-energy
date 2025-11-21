@@ -1,6 +1,7 @@
 import { YourEnergyAPI } from './api';
 import { showError } from './iziToast-helper';
 import { renderPaginationUniversal } from './pagination.js';
+import { REFS } from './constants.js';
 
 const api = new YourEnergyAPI();
 
@@ -12,14 +13,14 @@ let currentPage = 1;
 let currentTotalPages = 1;
 
 export async function initExercisesList() {
-  const listEl = document.querySelector('.js-exercises-list');
+  const listEl = REFS.exercisesList;
   if (!listEl) return;
 
   await loadExercisesList({ page: 1 });
 }
 
 export async function loadExercisesList({ page = 1, keyword = '' } = {}) {
-  const listEl = document.querySelector('.js-exercises-list');
+  const listEl = REFS.exercisesList;
   if (!listEl) return;
 
   const limit = getPageLimit();
@@ -54,9 +55,7 @@ function getTypeAndFilterFromUI() {
   const typeFromUrl = urlParams.get('type') || urlParams.get('tab');
 
   const activeTab =
-    document.querySelector('.exercises__tab--active')?.dataset.tab ||
-    typeFromUrl ||
-    'body-parts';
+    REFS.exercisesActiveTab?.dataset.tab || typeFromUrl || 'body-parts';
 
   const filterFromUrl = urlParams.get('filter');
   const fallbackFilter = getDefaultFilterForType(activeTab);
@@ -115,9 +114,6 @@ function renderExercisesList(listEl, items) {
   listEl.innerHTML = markup;
 }
 
-/**
- * Тут вставлена кнопка модалки Exercise
- */
 function createExerciseCardMarkup(item) {
   const { name, burnedCalories, bodyPart, target, rating } = item;
 
@@ -169,7 +165,7 @@ function createExerciseCardMarkup(item) {
 }
 
 export function renderExercisesPagination(currentPage, totalPages) {
-  const container = document.querySelector('.js-exercises-pagination');
+  const container = REFS.exercisesPagination;
 
   renderPaginationUniversal({
     container,

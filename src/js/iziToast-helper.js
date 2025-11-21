@@ -1,17 +1,20 @@
 import iziToast from 'izitoast';
-import { COLORS, TOAST } from './constants.js';
+
+const colorBlack = '#242424';
+const colorWhite = '#ffffff';
+const colorGray = '#8e8f99';
 
 // --- Базова конфігурація ---
 const defaultOptions = {
-  position: TOAST.POSITION.TOP_RIGHT,
-  timeout: TOAST.TIMEOUT.DEFAULT,
+  position: 'topRight',
+  timeout: 4000,
   close: true,
   closeOnEscape: true,
   pauseOnHover: true,
   progressBar: true,
-  progressBarColor: COLORS.GRAY_LIGHT,
-  transitionIn: TOAST.TRANSITION.IN,
-  transitionOut: TOAST.TRANSITION.OUT,
+  progressBarColor: colorGray,
+  transitionIn: 'fadeInLeft',
+  transitionOut: 'fadeOutRight',
   fontFamily: 'inherit',
   icon: '',
 };
@@ -20,13 +23,13 @@ const defaultOptions = {
 export const showSuccess = message => {
   iziToast.show({
     ...defaultOptions,
-    title: TOAST.TITLE.SUCCESS,
+    title: 'OK',
     message: message,
-    backgroundColor: COLORS.BLACK,
-    titleColor: COLORS.WHITE,
-    messageColor: COLORS.WHITE,
-    icon: TOAST.ICON.SUCCESS,
-    iconColor: COLORS.WHITE,
+    backgroundColor: colorBlack,
+    titleColor: colorWhite,
+    messageColor: colorWhite,
+    icon: 'icon-check',
+    iconColor: colorWhite,
   });
 };
 
@@ -34,14 +37,14 @@ export const showSuccess = message => {
 export const showError = message => {
   iziToast.show({
     ...defaultOptions,
-    title: TOAST.TITLE.ERROR,
+    title: 'Error',
     message: message,
-    backgroundColor: COLORS.BLACK,
-    titleColor: COLORS.WHITE,
-    messageColor: COLORS.GRAY_LIGHT,
-    progressBarColor: COLORS.WHITE,
-    icon: TOAST.ICON.ERROR,
-    iconColor: COLORS.WHITE,
+    backgroundColor: colorBlack,
+    titleColor: colorWhite,
+    messageColor: colorGray,
+    progressBarColor: colorWhite,
+    icon: 'icon-error',
+    iconColor: colorWhite,
   });
 };
 
@@ -49,12 +52,12 @@ export const showError = message => {
 export const showInfo = message => {
   iziToast.show({
     ...defaultOptions,
-    title: TOAST.TITLE.INFO,
+    title: 'Info',
     message: message,
-    backgroundColor: COLORS.WHITE,
-    titleColor: COLORS.BLACK,
-    messageColor: COLORS.BLACK,
-    progressBarColor: COLORS.BLACK,
-    borderBottom: `2px solid ${COLORS.BLACK}`,
+    backgroundColor: colorWhite,
+    titleColor: colorBlack,
+    messageColor: colorBlack,
+    progressBarColor: colorBlack,
+    borderBottom: `2px solid ${colorBlack}`,
   });
 };

@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { CONFIG } from './config.js';
-import { VALIDATION, ERROR_MESSAGES, API_ENDPOINTS } from './constants.js';
 
 export class YourEnergyAPI {
-  constructor(baseURL = CONFIG.BASE_API_URL) {
+  constructor(baseURL = 'https://your-energy.b.goit.study/api') {
     this.baseURL = baseURL;
     this.axios = axios.create({
       baseURL: this.baseURL,
@@ -13,10 +11,7 @@ export class YourEnergyAPI {
     this.axios.interceptors.response.use(
       response => response,
       error => {
-        const errorMessage =
-          error.response?.data?.message ||
-          error.message ||
-          ERROR_MESSAGES.API_ERROR;
+        const errorMessage = error.response?.data?.message || error.message || 'Something went wrong';
         console.error('API Error:', errorMessage);
         return Promise.reject(error);
       }
@@ -37,7 +32,7 @@ export class YourEnergyAPI {
       const config = { method, url };
       if (data) config.data = data;
       if (params) config.params = params;
-
+      
       const response = await this.axios(config);
       return response.data;
     } catch (error) {
@@ -52,7 +47,7 @@ export class YourEnergyAPI {
    * @returns {Promise<Object>}
    */
   async getFilters(params = {}) {
-    return this._request('get', API_ENDPOINTS.FILTERS, null, params);
+    return this._request('get', '/filters', null, params);
   }
 
   /**
@@ -61,14 +56,7 @@ export class YourEnergyAPI {
    * @returns {Promise<Object>}
    */
   async getExercises(params = {}) {
-    return this._request('get', API_ENDPOINTS.EXERCISES, null, params);
-  }
-
-  async getExerciseById(id) {
-    if (!id) {
-      throw new Error(ERROR_MESSAGES.EXERCISE_ID_REQUIRED);
-    }
-    return this._request('get', `${API_ENDPOINTS.EXERCISES}/${id}`);
+    return this._request('get', '/exercises', null, params);
   }
 
   /**
@@ -76,7 +64,7 @@ export class YourEnergyAPI {
    * @returns {Promise<Object>}
    */
   async getQuote() {
-    return this._request('get', API_ENDPOINTS.QUOTE);
+    return this._request('get', '/quote');
   }
 
   /**
@@ -85,10 +73,10 @@ export class YourEnergyAPI {
    * @returns {Promise<Object>}
    */
   async subscribe(data) {
-    if (!data.email || !VALIDATION.EMAIL_REGEX.test(data.email)) {
-      throw new Error(ERROR_MESSAGES.EMAIL_REQUIRED);
+    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      throw new Error('Valid email is required');
     }
-    return this._request('post', API_ENDPOINTS.SUBSCRIPTION, data);
+    return this._request('post', '/subscription', data);
   }
 
   /**
@@ -99,22 +87,14 @@ export class YourEnergyAPI {
    */
   async rateExercise(id, data) {
     if (!id) {
-      throw new Error(ERROR_MESSAGES.EXERCISE_ID_REQUIRED);
+      throw new Error('Exercise ID is required');
     }
-    if (
-      !data.rate ||
-      data.rate < VALIDATION.RATING_MIN ||
-      data.rate > VALIDATION.RATING_MAX
-    ) {
-      throw new Error(ERROR_MESSAGES.RATING_RANGE);
+    if (!data.rate || data.rate < 1 || data.rate > 5) {
+      throw new Error('Rating must be between 1 and 5');
     }
-    if (!data.email || !VALIDATION.EMAIL_REGEX.test(data.email)) {
-      throw new Error(ERROR_MESSAGES.EMAIL_REQUIRED);
+    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      throw new Error('Valid email is required');
     }
-    return this._request(
-      'patch',
-      `${API_ENDPOINTS.EXERCISES}/${id}/rating`,
-      data
-    );
+    return this._request('patch', `/exercises/${id}/rating`, data);
   }
 }
