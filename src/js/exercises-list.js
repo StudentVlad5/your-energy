@@ -24,11 +24,7 @@ let currentTotalPages = 1;
 // анти-гонка запитів
 let lastRequestId = 0;
 
-/**
- * Головна функція загрузки вправ
- * Викликається з Categories:
- * loadExercisesList({ page: 1, filter: 'abs', type: 'muscles' })
- */
+
 export async function loadExercisesList({
   page = 1,
   type,
