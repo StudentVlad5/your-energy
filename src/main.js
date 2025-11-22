@@ -22,7 +22,6 @@ import { initExercisesTabs } from './js/exercises-tabs.js';
 import { initExercisesList } from './js/exercises-list.js';
 // import { renderPagination } from './js/categories.js';
 import { initExercisesSearch } from './js/exercises-search.js';
-import { getExerciseModalContent, initExerciseModal } from './js/modal-exercise-content.js';
 
 // функція пошуку
 // ref.searchButton.addEventListener('click', onSearch);
@@ -32,7 +31,6 @@ import { getExerciseModalContent, initExerciseModal } from './js/modal-exercise-
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => cancelLoader(), 200);
   initModals();
-  initExercisesList();
 });
 // } else {
 //   cancelLoader();
@@ -54,3 +52,6 @@ initExercisesTabs();
 // initExercisesList();
 // renderPagination();
 initExercisesSearch();
+document.addEventListener('DOMContentLoaded', () => {
+  initExercisesList();
+});
