@@ -1,30 +1,8 @@
+/* Mobile styles */
 .favorites-wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-@media screen and (min-width: 768px) {
-  .favorites-wrapper {
-    gap: 32px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .favorites-wrapper {
-    display: grid;
-    grid-template-columns: 444px 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-
-  .favorites {
-    grid-column: 1;
-  }
-
-  .favorites-list {
-    grid-column: 2;
-  }
 }
 
 .favorites {
@@ -53,9 +31,29 @@
   color: #242424;
 }
 
+.favorites-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* Tablet styles */
 @media screen and (min-width: 768px) {
+  .favorites-wrapper {
+    gap: 32px;
+  }
+
   .favorites-empty {
     padding: 60px 40px;
+  }
+
+  .favorites-empty p {
+    font-size: 16px;
+    max-width: 554px;
   }
 
   .favorites-list {
@@ -64,42 +62,56 @@
     gap: 16px;
   }
 
-  .favorites-empty p {
-    font-size: 16px;
-    max-width: 554px;
+  .favorites-list .exercises__item {
+    width: 100%;
+    margin-bottom: 0;
   }
 
-  .favorites .exercises__item {
-    margin-bottom: 0;
+  .favorites-pagination {
+    margin-top: 60px;
   }
 }
 
+/* Desktop styles */
 @media screen and (min-width: 1440px) {
-  .favorites-empty p {
-    max-width: 481px;
+  .favorites-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
   }
 
   .favorites .sidebar {
     width: 494px;
+    flex-shrink: 0;
+  }
+
+  .favorites-empty p {
+    max-width: 481px;
   }
 
   .favorites-list {
     display: flex;
     flex-wrap: wrap;
     gap: 32px 16px;
+    margin-bottom: 50px;
+    max-height: 487px;
+    overflow-y: auto;
   }
 
-  .favorites .exercises__item {
+  .favorites-list .exercises__item {
     min-height: 141px;
     width: 405px;
   }
 
-  .favorites .exercises__item .exercises__name-container {
+  .favorites-list .exercises__item .exercises__name-container {
     margin-bottom: 8px;
   }
 
-  .favorites-wrapper {
-    display: flex;
-    flex-direction: row;
+  .favorites-pagination {
+    display: none;
+  }
+
+  .favorites .exercises__item-info {
+    gap: 9px;
   }
 }
