@@ -23,7 +23,7 @@ import {
   initRatingModal,
 } from './js/modal-rating-content.js';
 import { initExercisesTabs } from './js/exercises-tabs.js';
-import { loadExercisesList } from './js/exercises-list.js';
+import {  loadExercisesList } from './js/exercises-list.js';
 // import { renderPagination } from './js/categories.js';
 import { initExercisesSearch } from './js/exercises-search.js';
 
@@ -52,10 +52,7 @@ function initModals() {
   initModalButtons();
 }
 
+
+loadExercisesList();
 initExercisesTabs();
-// initExercisesList();
-// renderPagination();
 initExercisesSearch();
-document.addEventListener('DOMContentLoaded', () => {
-  loadExercisesList();
-});
