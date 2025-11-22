@@ -2,6 +2,7 @@ import { YourEnergyAPI } from './api';
 import { showError } from './iziToast-helper'; // якщо не хочеш тости — можеш замінити на console.error
 import { renderPaginationUniversal } from './pagination.js';
 import iziToast from 'izitoast';
+import { startLoader, cancelLoader } from './loader.js'; // <-- додали лоадер
 
 const api = new YourEnergyAPI();
 console.dir(api);
@@ -9,7 +10,6 @@ console.dir(api);
 function getPageLimit() {
   return window.innerWidth < 768 ? 8 : 10;
 }
-
 
 // мінімальний стан
 // (щоб пагінація знала останній filter/type)
@@ -19,7 +19,6 @@ let currentQuery = {
   keyword: '',
 };
 
-
 // Поточний стан
 let currentPage = 1;
 let currentTotalPages = 1;
@@ -27,11 +26,11 @@ let currentTotalPages = 1;
 // анти-гонка запитів
 let lastRequestId = 0;
 
+// щоб не спамити тостом "No results" при тих самих параметрах
+let lastEmptyToastKey = '';
 
 // тимчасова, щоб відмальовувалась на сторінці без кліку
-
 loadExercisesList({ page: 1 });
-
 
 export async function loadExercisesList({
   page = 1,
@@ -68,11 +67,14 @@ export async function loadExercisesList({
   // 2) анти-гонка
   const requestId = ++lastRequestId;
 
+ 
+  startLoader();
+
   try {
     const data = await api.getExercises(params);
     console.log(data);
 
-    // якщо це старий запит — нічого не робимо
+    // якщо це старий запит — нічого не робимо (і лоадер не чіпаємо)
     if (requestId !== lastRequestId) return;
 
     const items = data.results || [];
@@ -81,6 +83,31 @@ export async function loadExercisesList({
 
     renderExercisesList(listEl, items);
     renderExercisesPagination(currentPage, currentTotalPages);
+
+   
+    cancelLoader();
+
+  
+    if (!items.length) {
+      const emptyKey = `${activeType}:${activeFilter}:${activeKeyword || ''}`;
+
+      if (emptyKey !== lastEmptyToastKey) {
+        lastEmptyToastKey = emptyKey;
+
+        // показуємо лише якщо користувач щось змінював/шукає
+        if (activeKeyword || type || filter) {
+          iziToast.warning({
+            title: 'No results',
+            message: activeKeyword
+              ? `Nothing found for “${activeKeyword}”. Try another search.`
+              : 'No exercises found for this category.',
+            position: 'topRight',
+          });
+        }
+      }
+    } else {
+      lastEmptyToastKey = '';
+    }
 
     // 3) оновлюємо URL ТІЛЬКИ коли прийшли нові type/filter (тобто клік по категорії)
     if (type || filter || keyword) {
@@ -95,9 +122,24 @@ export async function loadExercisesList({
     }
   } catch (err) {
     console.error('Failed to load exercises:', err);
+
+    // якщо це старий запит — не чіпаємо лоадер
+    if (requestId !== lastRequestId) return;
+
+  
+    cancelLoader();
+
+    
     if (typeof showError === 'function') {
       showError(err.message || 'Failed to load exercises. Try again later.');
+    } else {
+      iziToast.error({
+        title: 'Error',
+        message: err.message || 'Failed to load exercises. Try again later.',
+        position: 'topRight',
+      });
     }
+
     listEl.innerHTML = `
       <li class="exercises__item">
         <p>Failed to load exercises. Try again later.</p>
