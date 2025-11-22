@@ -15,11 +15,12 @@
   display: inline-block;
   width: 38px;
   height: 38px;
-  margin-right: 10px;
-  /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><use xlink:href="../img/icons.svg#icon-sun"/></svg>'); */
+  margin-right: 5px;
+  /* vertical-align: baseline; */
   background-image: url('../img/hero/hero-star.png');
   background-size: cover;
-  /* background-position: center 5px; */
+  position: relative;
+  top: 5px;
 }
 
 .hero-text {
@@ -48,7 +49,7 @@
   width: 100%;
   border-radius: 30px;
   margin-bottom: 20px;
-  background: #fff;
+  background: #F4F4F4;
 }
 
 .hero-list {
@@ -77,7 +78,7 @@
   .hero-title::before {
     width: 60px;
     height: 60px;
-    margin-right: 6px;
+    /* margin-right: 6px; */
   }
 
   .hero-text {
@@ -91,6 +92,7 @@
   }
 
   .hero-img {
+    border-radius: 60px;
     margin-bottom: 16px;
   }
 
@@ -146,7 +148,7 @@
 
   .hero-mini-img {
     border-radius: 20px;
-    background: #fff;
+    background: #F4F4F4;
   }
 
 }
