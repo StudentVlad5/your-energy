@@ -57,13 +57,6 @@ loadExercisesList();
 initExercisesTabs();
 // initExercisesList();
 // renderPagination();
-<<<<<<< HEAD
 // document.addEventListener('DOMContentLoaded', () => {
 //   initExercisesList();
 // });
-=======
-initExercisesSearch();
-document.addEventListener('DOMContentLoaded', () => {
-  loadExercisesList();
-});
->>>>>>> origin/main
