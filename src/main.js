@@ -39,7 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initModals() {
   registerModalType(MODAL_TYPES.RATING, getRatingModalContent, initRatingModal);
-  // registerModalType(MODAL_TYPES.EXERCISE, getExerciseModalContent, initExerciseModal);
+  registerModalType(
+    MODAL_TYPES.EXERCISE,
+    getExerciseModalContent,
+    initExerciseModal
+  );
 
   initModalButtons();
 }

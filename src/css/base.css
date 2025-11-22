@@ -19,6 +19,7 @@
   --color-accent: #eea10c;
   --color-text-placeholder: #f4f4f499;
   --btn-hover-color: #e0e0e0;
+  --color-border-light: #f4f4f433;
   /* animation */
   --ease-calm: cubic-bezier(0.25, 0.8, 0.25, 1);
   --anim-speed: 0.5s;
@@ -28,7 +29,7 @@ body {
   font-family: var(--font-main);
   line-height: 1.5;
   color: #2f2f37;
-  background-color:  #F4F4F4;
+  background-color: #f4f4f4;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

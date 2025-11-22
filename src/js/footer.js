@@ -1,16 +1,16 @@
+import { VALIDATION, ERROR_MESSAGES } from './constants.js';
+
 const form = document.querySelector('.footer__form');
 const emailInput = form.querySelector('.footer__input');
 const messageEl = form.querySelector('.footer__message');
-
-const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
 
   const email = emailInput.value.trim();
 
-  if (!emailPattern.test(email)) {
-    messageEl.textContent = 'Please enter a valid email.';
+  if (!email || !VALIDATION.EMAIL_REGEX.test(email)) {
+    messageEl.textContent = ERROR_MESSAGES.EMAIL_REQUIRED;
     messageEl.classList.remove('footer__message--success');
     messageEl.classList.add('footer__message--error');
     return;

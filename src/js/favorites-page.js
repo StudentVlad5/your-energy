@@ -1,40 +1,50 @@
 import { getFavorites, removeFavorite } from './favorites-btn.js';
+import { YourEnergyAPI } from './api.js';
 import { REFS } from './constants.js';
+import { createExerciseCard } from './exercises-list.js';
+
+const api = new YourEnergyAPI();
 
 function renderEmptyMessage() {
   REFS.favoritesList.innerHTML = `
     <div class="favorites-empty">
       <p>It appears that you haven’t added any exercises to your favorites yet.</p>
-      <p>To get started, you can add exercises that you like to your favorites for easier access in the future.</p>
+      <p>To get started, add exercises that you like to your favorites for easier access.</p>
     </div>`;
+}
+
+async function loadFavoritesData(ids) {
+  const results = [];
+
+  for (const id of ids) {
+    try {
+      const exercise = await api.getExerciseById(id);
+      if (exercise) results.push(exercise);
+    } catch (err) {
+      console.error(`Failed to load exercise ${id}`, err);
+    }
+  }
+  return results;
 }
 
 function renderFavorites(arr) {
   REFS.favoritesList.innerHTML = '';
 
   arr.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('favorite-card');
-    card.dataset.id = item.id;
+    const cardHTML = createExerciseCard(item);
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = cardHTML.trim();
+    const cardElement = wrapper.firstElementChild;
 
-    card.innerHTML = `
-      <img src="${item.gifUrl}" alt="${item.name}" class="favorite-img">
-      <h3 class="favorite-title">${item.name}</h3>
-      <p class="favorite-info"><b>Target:</b> ${item.target}</p>
-      <p class="favorite-info"><b>Body part:</b> ${item.bodyPart}</p>
-      <p class="favorite-info"><b>Equipment:</b> ${item.equipment}</p>
+    const deleteBtn = cardElement.querySelector('.favorites-delete-btn');
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', () => {
+        removeFavorite(item.id);
+        updateFavoritesPage();
+      });
+    }
 
-      <button class="delete-btn" data-id="${item.id}">🗑</button>
-    `;
-
-    REFS.favoritesList.appendChild(card);
-
-    const deleteBtn = card.querySelector('.delete-btn');
-    deleteBtn.addEventListener('click', () => {
-      removeFavorite(item.id);
-      const updated = getFavorites();
-      updated.length ? renderFavorites(updated) : renderEmptyMessage();
-    });
+    REFS.favoritesList.appendChild(cardElement);
   });
 }
 
