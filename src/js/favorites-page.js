@@ -7,10 +7,9 @@ const api = new YourEnergyAPI();
 
 function renderEmptyMessage() {
   REFS.favoritesList.innerHTML = `
-    <div class="favorites-empty">
-      <p>It appears that you haven’t added any exercises to your favorites yet.</p>
-      <p>To get started, add exercises that you like to your favorites for easier access.</p>
-    </div>`;
+    <li class="favorites-empty">
+      <p>It appears that you haven't added any exercises to your favorites yet. To get started, you can add exercises that you like to your favorites for easier access in the future.</p>
+    </li>`;
 }
 
 async function loadFavoritesData(ids) {
@@ -22,26 +21,6 @@ async function loadFavoritesData(ids) {
   }
 }
 
-// function renderFavorites(arr) {
-//   REFS.favoritesList.innerHTML = '';
-
-//   arr.forEach(item => {
-//     const cardHTML = loadExercisesList(item);
-//     const wrapper = document.createElement('div');
-//     wrapper.innerHTML = cardHTML.trim();
-//     const cardElement = wrapper.firstElementChild;
-
-//     const deleteBtn = cardElement.querySelector('.favorites-delete-btn');
-//     if (deleteBtn) {
-//       deleteBtn.addEventListener('click', () => {
-//         removeFavorite(item.id);
-//         updateFavoritesPage();
-//       });
-//     }
-
-//     REFS.favoritesList.appendChild(cardElement);
-//   });
-// }
 async function renderFavorites(arr) {
   const listFavoritesExcecises = [];
 
