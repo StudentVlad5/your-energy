@@ -21,7 +21,7 @@ import { loadExercisesList } from './js/exercises-list.js';
 import { initExercisesSearch } from './js/exercises-search.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => cancelLoader(), 200);
+  setTimeout(() => cancelLoader(), 300);
   initModals();
 });
 
