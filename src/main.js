@@ -55,8 +55,4 @@ function initModals() {
 
 loadExercisesList();
 initExercisesTabs();
-// initExercisesList();
-// renderPagination();
-// document.addEventListener('DOMContentLoaded', () => {
-//   initExercisesList();
-// });
+initExercisesSearch();
