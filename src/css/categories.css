@@ -12,10 +12,12 @@
   display: flex;
   width: fit-content;
 }
+.card:hover {
+  transform: scale(1.03);
+}
 
 .card img {
   width: 100%;
-  height: 225px;
   object-fit: cover;
   border-radius: 12px;
 }

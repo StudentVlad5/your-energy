@@ -2,8 +2,8 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 import './js/quote-of-the-day.js';
 
-import './js/favorites-btn.js';
-import './js/favorites-page.js';
+// import './js/favorites-btn.js';
+// import './js/favorites-page.js';
 
 import './js/categories.js';
 
@@ -14,6 +14,10 @@ import './js/scroll-up.js';
 import { cancelLoader } from './js/loader.js';
 import { registerModalType, initModalButtons } from './js/modal-template.js';
 import { MODAL_TYPES } from './js/constants.js';
+import {
+  getExerciseModalContent,
+  initExerciseModal,
+} from './js/modal-exercise-content.js';
 import {
   getRatingModalContent,
   initRatingModal,
@@ -53,6 +57,13 @@ loadExercisesList();
 initExercisesTabs();
 // initExercisesList();
 // renderPagination();
+<<<<<<< HEAD
 // document.addEventListener('DOMContentLoaded', () => {
 //   initExercisesList();
 // });
+=======
+initExercisesSearch();
+document.addEventListener('DOMContentLoaded', () => {
+  loadExercisesList();
+});
+>>>>>>> origin/main

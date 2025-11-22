@@ -1,7 +1,7 @@
 import { getFavorites, removeFavorite } from './favorites-btn.js';
 import { YourEnergyAPI } from './api.js';
 import { REFS } from './constants.js';
-import { createExerciseCard } from './exercises-list.js';
+import { loadExercisesList } from './exercises-list.js';
 
 const api = new YourEnergyAPI();
 
@@ -31,7 +31,7 @@ function renderFavorites(arr) {
   REFS.favoritesList.innerHTML = '';
 
   arr.forEach(item => {
-    const cardHTML = createExerciseCard(item);
+    const cardHTML = loadExercisesList(item);
     const wrapper = document.createElement('div');
     wrapper.innerHTML = cardHTML.trim();
     const cardElement = wrapper.firstElementChild;
