@@ -8,6 +8,8 @@ body > .rating-modal {
   height: 357px;
   padding: 40px 20px;
   margin: 0 auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
 
   @media screen and (min-width: 768px) {
     width: 430px;
@@ -111,11 +113,23 @@ body > .rating-modal {
 .rating-modal__textarea:focus {
   outline: none;
   color: var(--color-header-bg-light);
+  background-color: transparent;
 }
 
 .rating-modal__input:not(:placeholder-shown),
 .rating-modal__textarea:not(:placeholder-shown) {
   color: var(--color-header-bg-light);
+  background-color: transparent;
+}
+
+.rating-modal__input:-webkit-autofill,
+.rating-modal__input:-webkit-autofill:hover,
+.rating-modal__input:-webkit-autofill:focus,
+.rating-modal__input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-header-bg-light);
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .rating-modal__input {

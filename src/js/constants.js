@@ -17,7 +17,7 @@ export const API_ENDPOINTS = {
 
 // ========== REGULAR EXPRESSIONS ==========
 export const REGEX = {
-  EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/,
 };
 
 // ========== VALIDATION CONSTANTS ==========
@@ -92,7 +92,7 @@ export const MODAL_TYPES = {
 // ========== ERROR MESSAGES ==========
 export const ERROR_MESSAGES = {
   API_ERROR: 'Something went wrong',
-  EMAIL_REQUIRED: 'Valid email is required',
+  EMAIL_REQUIRED: 'Please enter a valid email.',
   RATING_RANGE: `Rating must be between ${VALIDATION.RATING_MIN} and ${VALIDATION.RATING_MAX}`,
   EXERCISE_ID_REQUIRED: 'Exercise ID is required',
 };
@@ -113,6 +113,7 @@ export const REFS = {
 
   exerciseModal: document.querySelector('.exercise-modal'), // from modal-exercise.html
   exerciseTrigger: document.querySelector('[data-modal="exercise"]'),
+
 
   // Filters
   filtersTabs: document.querySelector('[data-filters-tabs]'),

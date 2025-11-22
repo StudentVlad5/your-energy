@@ -1,72 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your energy</title>
-  <meta name="description"
-    content="A free database of sports exercises, an overview of equipment and a designer of training programs. Exercise correctly with Your energy." />
-  <meta name="keywords" content="sport, fitness, exercises, training program, gym, weight loss" />
-  <link rel="canonical" href="https://studentvlad5.github.io/your-energy/" />
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your energy</title>
+    <meta
+      name="description"
+      content="A free database of sports exercises, an overview of equipment and a designer of training programs. Exercise correctly with Your energy."
+    />
+    <meta
+      name="keywords"
+      content="sport, fitness, exercises, training program, gym, weight loss"
+    />
+    <link rel="canonical" href="https://studentvlad5.github.io/your-energy/" />
 
-  <meta property="og:title" content="Your energy: Your guide in the world of sports" />
-  <meta property="og:description" content="Create your training program for free." />
-  <meta property="og:image" content="https://studentvlad5.github.io/your-energy/hero.webp" />
-  <meta property="og:type" content="website" />
-  <link rel="preload" href="./img/hero/hero-mini.jpg" as="image">
-  <link rel="preload" href="./img/hero/hero-mini.webp" as="image">
-  <link rel="preload" href="./img/hero/hero-mini@2x.webp" as="image">
+    <meta
+      property="og:title"
+      content="Your energy: Your guide in the world of sports"
+    />
+    <meta
+      property="og:description"
+      content="Create your training program for free."
+    />
+    <meta
+      property="og:image"
+      content="https://studentvlad5.github.io/your-energy/hero.webp"
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preload" href="./img/hero/hero-mini.jpg" as="image" />
+    <link rel="preload" href="./img/hero/hero-mini.webp" as="image" />
+    <link rel="preload" href="./img/hero/hero-mini@2x.webp" as="image" />
 
-  <link rel="preload" href="./img/hero/hero-mobile.jpg" as="image">
-  <link rel="preload" href="./img/hero/hero-mobile.webp" as="image">
-  <link rel="preload" href="./img/hero/hero-mobile@2x.webp" as="image">
+    <link rel="preload" href="./img/hero/hero-mobile.jpg" as="image" />
+    <link rel="preload" href="./img/hero/hero-mobile.webp" as="image" />
+    <link rel="preload" href="./img/hero/hero-mobile@2x.webp" as="image" />
 
-  <link rel="preload" href="./img/hero/hero-tablet.webp" as="image">
-  <link rel="preload" href="./img/hero/hero-tablet@2x.webp" as="image">
+    <link rel="preload" href="./img/hero/hero-tablet.webp" as="image" />
+    <link rel="preload" href="./img/hero/hero-tablet@2x.webp" as="image" />
 
-  <link rel="preload" href="./img/hero/hero-desktop.webp" as="image">
-  <link rel="preload" href="./img/hero/hero-desktop@2x.webp" as="image">
+    <link rel="preload" href="./img/hero/hero-desktop.webp" as="image" />
+    <link rel="preload" href="./img/hero/hero-desktop@2x.webp" as="image" />
 
-  <link rel="stylesheet" href="./css/styles.css" />
-</head>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
 
-<body class="fixedClass">
-  <load src="partials/header.html" />
+  <body class="fixedClass">
+    <load src="partials/header.html" />
 
-  <main>
-    <load src="partials/hero.html" />
-    <load src="partials/filters.html" />
-    <load src="partials/exercises.html" />
-    <load src="partials/categories.html" />
-    <load src="partials/sidebar.html" />
+    <main>
+      <load src="partials/hero.html" />
+      <load src="partials/filters.html" />
+      <load src="partials/exercises.html" />
+      <load src="partials/categories.html" />
+      <load src="partials/sidebar.html" />
+    </main>
 
-    <button type="button" data-modal="rating" data-exercise-id="64f389465ae26083f39b17a4" style="
-          padding: 10px 20px;
-          background-color: transparent;
-          color: #2f2f37;
-          border: 2px solid #ff6347;
-          border-radius: 6px;
-          cursor: pointer;
-          margin: 20px auto;
-          display: block;
-        ">
-      Modal Rating
-    </button>
-    <!-- TODO: delete after real implementation -->
-    <!-- TODO: data-exercise-id should be dynamic -->
-  </main>
+    <load src="partials/footer.html" />
 
-  <load src="partials/footer.html" />
+    <load src="partials/modal-exercise.html" />
+    <load src="partials/modal-template.html" />
+    <load src="partials/modal-rating.html" />
+    <load src="partials/modal-confirm.html" />
+    <load src="partials/mobile-menu.html" />
+    <load src="partials/loader.html" />
+    <load src="partials/scroll-up.html" />
 
-  <!-- <load src="partials/modal-exercise.html" /> -->
-  <load src="partials/modal-template.html" />
-  <load src="partials/modal-rating.html" />
-  <load src="partials/modal-confirm.html" />
-  <load src="partials/mobile-menu.html" />
-  <load src="partials/loader.html" />
-  <load src="partials/scroll-up.html" />
-
-  <script type="module" src="./main.js"></script>
-</body>
+    <script type="module" src="./main.js"></script>
+  </body>
 </html>
