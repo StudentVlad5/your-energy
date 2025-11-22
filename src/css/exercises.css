@@ -1,6 +1,7 @@
-.exercises {
-  padding: 32px 0;
-}
+/* no need in paddings */
+/* .exercises {
+  padding: 32px 0; 
+} */
 
 .hidden {
   display: none;

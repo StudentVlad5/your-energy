@@ -281,7 +281,7 @@
   }
 
   .filters__controls {
-    flex: 0 1 560px;
+    flex: 0 1 560px; /* increase the width of controls container */
   }
 
   .filters__search {
