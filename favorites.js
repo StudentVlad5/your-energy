@@ -1,4 +1,4 @@
-import{Y as d,g as c,R as e,l as v,r as f}from"./assets/main-D2gi3--0.js";import"./assets/vendor-3BNOZKAJ.js";new d;function p(){e.favoritesList.innerHTML=`
+import{Y as d,g as c,R as e,l as v,r as f}from"./assets/main-4v0IdOIu.js";import"./assets/vendor-3BNOZKAJ.js";new d;function p(){e.favoritesList.innerHTML=`
     <div class="favorites-empty">
       <p>It appears that you haven’t added any exercises to your favorites yet.</p>
       <p>To get started, add exercises that you like to your favorites for easier access.</p>
