@@ -85,7 +85,6 @@
   margin-bottom: 16px;
 }
 
-
 .exercises__badge {
   all: revert;
   display: inline-flex;
@@ -97,13 +96,12 @@
   padding-top: 5px;
   padding-bottom: 0;
   padding-left: 8px;
-  padding-right: 8px;   /* щоб вертикаль не роздувало */
+  padding-right: 8px; /* щоб вертикаль не роздувало */
   line-height: 1;
   border-radius: 30px;
   border: 1px solid #242424;
   text-transform: uppercase;
 }
-
 
 .exercises__name {
   font-size: 20px;
@@ -159,7 +157,6 @@
   letter-spacing: 0px;
   color: #24242466;
 }
-
 
 .exercises__meta-key,
 .exercises__meta-value {
@@ -375,4 +372,3 @@
   transform: scale(1.2);
   transition: all var(--animation-duration) var(--timing-function);
 }
-

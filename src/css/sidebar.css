@@ -157,8 +157,8 @@
 }
 
 .favorites .sidebar__daily-norm {
-  width: 335px;
-  height: 119px;
+  width: 295px;
+  height: 79px;
 }
 
 .favorites .sidebar__photo-card {
@@ -177,24 +177,37 @@
 
   .favorites .quote-of-the-day {
     grid-column: 1 / span 2;
-    width: 704px;
+    width: 624px;
   }
 
-  .favorites .sidebar__photo-card,
-  .favorites .sidebar__daily-norm {
+  .favorites .sidebar__photo-card {
     width: 344px;
     height: 141px;
+  }
+
+  .favorites .sidebar__daily-norm {
+    width: 264px;
+    height: 61px;
   }
 }
 
 @media (min-width: 1440px) {
   .favorites .quote-of-the-day {
-    width: 494px;
+    width: 414px;
+    height: 150px;
   }
 
-  .favorites .sidebar__photo-card,
-  .favorites .sidebar__daily-norm {
+  .favorites .sidebar__photo-card-img {
     width: 239px;
     height: 141px;
+  }
+
+  .favorites .sidebar__daily-norm {
+    width: 159px;
+    height: 61px;
+  }
+
+  .favorites .sidebar {
+    padding: 0;
   }
 }
