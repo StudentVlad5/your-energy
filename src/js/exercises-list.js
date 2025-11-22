@@ -172,14 +172,14 @@ function createExerciseCardMarkup(item, isFavorite = false) {
   const actionMarkup = isFavorite
     ? `<button type="button" class="favorites-delete-btn" data-id="${_id}">
          <svg class="favorites-icon-trash" width="16" height="16" aria-label="Remove from favorites">
-            <use href="/img/trash.svg"></use> 
+            <use href="./src/img/trash.svg"></use> 
          </svg>
        </button>`
     : `<div class="exercises__rating">
          <span class="exercises__meta-key">${rating}</span>
          <span class="exercises__meta-value">
            <svg class="star" width="18" height="18">
-             <use href="./sprite.svg#icon-star"></use>
+             <use href="./src/img/sprite.svg#icon-star"></use>
            </svg>
          </span>
        </div>`;
@@ -201,14 +201,14 @@ function createExerciseCardMarkup(item, isFavorite = false) {
         >
           Start
           <svg class="arrow__icon" width="16" height="16">
-             <use href="./sprite.svg#icon-arrow"></use>
+             <use href="./src/img/sprite.svg#icon-arrow"></use>
           </svg>
         </button>
       </div>
 
       <div class="exercises__name-container">
         <svg class="exercises__icon" width="24" height="24">
-           <use href="./sprite.svg#icon-running-man"></use>
+           <use href="./src/img/sprite.svg#icon-running-man"></use>
         </svg>
         <h3 class="exercises__name">${name}</h3>
       </div>
