@@ -1,107 +1,57 @@
-import { REFS } from './constants.js';
+const FAVORITES_KEY = 'favorites_exercises';
 
-const FAVORITES_KEY = 'favorites';
+export function getFavorites() {
+  try {
+    return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
 
-// Get favorites from LocalStorage
-function getFavorites() {
-  const data = localStorage.getItem(FAVORITES_KEY);
-  if (!data) return [];
+export function saveFavorites(ids) {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(ids));
+}
 
-  const parsed = JSON.parse(data);
+export function isFavorite(id) {
+  return getFavorites().includes(id);
+}
 
-  if (parsed.length > 0 && typeof parsed[0] === 'object' && parsed[0].id) {
-    const ids = parsed.map(item => item.id || item._id).filter(Boolean);
+export function addToFavorites(id) {
+  const ids = getFavorites();
+  if (!ids.includes(id)) {
+    ids.push(id);
     saveFavorites(ids);
-    return ids;
-  }
-
-  return parsed;
-}
-
-// Save favorites to LocalStorage
-function saveFavorites(favoritesArray) {
-  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoritesArray));
-}
-
-// Check if an exercise is in favorites
-function isFavorite(id) {
-  const favorites = getFavorites();
-  return favorites.includes(id);
-}
-
-// Add exercise to favorites (зберігаємо тільки ID)
-function addFavorite(exerciseObj) {
-  const favorites = getFavorites();
-  const exerciseId = exerciseObj.id || exerciseObj._id;
-  if (exerciseId && !favorites.includes(exerciseId)) {
-    favorites.push(exerciseId);
-    saveFavorites(favorites);
   }
 }
 
-// Remove exercise from favorites
-function removeFavorite(id) {
-  const favorites = getFavorites();
-  const updated = favorites.filter(itemId => itemId !== id);
-  saveFavorites(updated);
+export function removeFromFavorites(id) {
+  const ids = getFavorites().filter(favId => favId !== id);
+  saveFavorites(ids);
 }
 
-const currentExercise = {};
+export function initFavoritesBtn(exercise) {
+  const btn = document.querySelector('.exercise-modal__btn--favorites');
+  if (!btn) return;
 
-function initFavoritesBtn(exercise, buttonElement = null) {
-  const favoriteBtnElement = buttonElement || REFS.favoriteBtn;
+  function updateBtn() {
+    const added = isFavorite(exercise._id);
 
-  if (!favoriteBtnElement) return;
+    btn.classList.toggle('added', added);
 
-  Object.assign(currentExercise, exercise);
+    btn.textContent = added ? 'Remove from favorites' : 'Add to favorites';
+  }
 
-  const exerciseId = exercise.id || exercise._id;
-  const isInFavorites = isFavorite(exerciseId);
+  updateBtn();
 
-  updateButtonText(favoriteBtnElement, isInFavorites);
-  const newBtn = favoriteBtnElement.cloneNode(true);
-  favoriteBtnElement.parentNode.replaceChild(newBtn, favoriteBtnElement);
+  btn.addEventListener('click', () => {
+    const added = isFavorite(exercise._id);
 
-  newBtn.onclick = () => {
-    const currentId = exercise.id || exercise._id;
-    if (isFavorite(currentId)) {
-      removeFavorite(currentId);
-      updateButtonText(newBtn, false);
+    if (added) {
+      removeFromFavorites(exercise._id);
     } else {
-      addFavorite(exercise);
-      updateButtonText(newBtn, true);
+      addToFavorites(exercise._id);
     }
-  };
+
+    updateBtn();
+  });
 }
-
-function updateButtonText(button, isInFavorites) {
-  const textNodes = Array.from(button.childNodes).filter(
-    node => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
-  );
-
-  if (textNodes.length > 0) {
-    textNodes[0].textContent = isInFavorites
-      ? 'Remove from favorites'
-      : 'Add to favorites';
-  } else {
-    const svg = button.querySelector('svg');
-    const text = document.createTextNode(
-      isInFavorites ? 'Remove from favorites' : 'Add to favorites'
-    );
-    if (svg) {
-      button.insertBefore(text, svg);
-    } else {
-      button.appendChild(text);
-    }
-  }
-}
-
-export {
-  getFavorites,
-  saveFavorites,
-  isFavorite,
-  addFavorite,
-  removeFavorite,
-  currentExercise,
-  initFavoritesBtn,
-};

@@ -1,53 +1,46 @@
-import { getFavorites, removeFavorite } from './favorites-btn.js';
-import { YourEnergyAPI } from './api.js';
-import { REFS } from './constants.js';
+import { getFavorites, removeFromFavorites } from './favorites-btn.js';
+import { fetchExerciseById } from './api.js';
 import { createExerciseCard } from './exercises-list.js';
+import { REFS } from './constants.js';
 
-const api = new YourEnergyAPI();
+async function renderFavorites() {
+  const favoritesIds = getFavorites();
 
-function renderEmptyMessage() {
-  REFS.favoritesList.innerHTML = `
-    <div class="favorites-empty">
-      <p>It appears that you haven’t added any exercises to your favorites yet.</p>
-      <p>To get started, add exercises that you like to your favorites for easier access.</p>
-    </div>`;
-}
+  if (!favoritesIds.length) {
+    REFS.favoritesSection.innerHTML = `
+      <p class="favorites-empty">Your favorites list is empty.</p>
+    `;
+    return;
+  }
 
-async function loadFavoritesData(ids) {
-  const results = [];
+  REFS.favoritesSection.innerHTML = '';
+  const fragment = document.createDocumentFragment();
 
-  for (const id of ids) {
+  for (const id of favoritesIds) {
     try {
-      const exercise = await api.getExerciseById(id);
-      if (exercise) results.push(exercise);
-    } catch (err) {
-      console.error(`Failed to load exercise ${id}`, err);
+      const exercise = await fetchExerciseById(id);
+
+      const card = createExerciseCard(exercise);
+
+      card.classList.add('from-favorites');
+
+      const deleteBtn = card.querySelector('.exercise-card__delete');
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+          removeFromFavorites(id);
+          renderFavorites();
+        });
+      }
+
+      fragment.appendChild(card);
+    } catch (error) {
+      console.error(`Ошибка загрузки упражнения id=${id}`, error);
     }
   }
-  return results;
+
+  REFS.favoritesSection.appendChild(fragment);
 }
 
-function renderFavorites(arr) {
-  REFS.favoritesList.innerHTML = '';
-
-  arr.forEach(item => {
-    const cardHTML = createExerciseCard(item);
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = cardHTML.trim();
-    const cardElement = wrapper.firstElementChild;
-
-    const deleteBtn = cardElement.querySelector('.favorites-delete-btn');
-    if (deleteBtn) {
-      deleteBtn.addEventListener('click', () => {
-        removeFavorite(item.id);
-        updateFavoritesPage();
-      });
-    }
-
-    REFS.favoritesList.appendChild(cardElement);
-  });
+export function initFavoritesPage() {
+  renderFavorites();
 }
-
-const favorites = getFavorites();
-if (REFS.favoritesList)
-  favorites.length ? renderFavorites(favorites) : renderEmptyMessage();

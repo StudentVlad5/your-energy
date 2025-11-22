@@ -121,6 +121,10 @@ body > .exercise-modal {
   cursor: default;
 }
 
+.exercise-modal__stars .rating-star:hover .rating-star__path {
+  fill: rgba(244, 244, 244, 0.2) !important;
+}
+
 .exercise-modal__stars .rating-star__svg {
   width: 18px;
   height: 18px;

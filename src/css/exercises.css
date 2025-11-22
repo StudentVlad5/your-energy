@@ -271,6 +271,41 @@
   background-size: contain;
 }
 
+/* ===== FAVORITES BUTTON (Add / Remove) ===== */
+
+.favorites-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 30px;
+  border: 1px solid #24242480;
+  background: #f4f4f4;
+  color: #6c6c6c; /* серый, если НЕ добавлено */
+  font-size: 12px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+/* состояние: упражнение добавлено в избранное */
+.favorites-btn.added {
+  background: #242424;
+  color: #ffffff; /* белый */
+  border-color: #242424;
+}
+
+/* не двигается при наведении */
+.favorites-btn:hover {
+  background: #e6e6e6;
+}
+
+/* focus */
+.favorites-btn:focus {
+  outline: none;
+  border: 1px solid #242424;
+}
+
 /* PAGINATION */
 
 .exercises__pagination {
