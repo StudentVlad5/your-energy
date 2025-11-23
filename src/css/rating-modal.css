@@ -5,7 +5,6 @@ body > .rating-modal {
 .rating-modal {
   background-color: var(--color-header-bg-dark);
   width: 335px;
-  height: 357px;
   padding: 40px 20px;
   margin: 0 auto;
   box-sizing: border-box;
@@ -13,7 +12,6 @@ body > .rating-modal {
 
   @media screen and (min-width: 768px) {
     width: 430px;
-    height: 412px;
     padding: 40px;
   }
 }

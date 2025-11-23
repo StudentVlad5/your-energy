@@ -53,7 +53,7 @@ async function loadFavoritesData(ids) {
 }
 
 function renderPaginatedFavorites(page = 1) {
-  const container = document.querySelector('.favorites-wrapper');
+  const container = document.querySelector('.main-container');
   if (!container) return;
 
   let contentWrapper = container.querySelector('.favorites-content');

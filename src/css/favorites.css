@@ -50,6 +50,7 @@
   font-size: 28px;
   line-height: 136%;
   letter-spacing: -0.02em;
+  margin-bottom: 16px;
 }
 .favorites-list {
   list-style: none;
@@ -96,6 +97,12 @@
     align-items: center;
   }
 
+  .title {
+    font-size: 44px;
+    line-height: 136%;
+    letter-spacing: -0.02em;
+  }
+
   .favorites-empty p {
     font-size: 16px;
     max-width: 554px;
@@ -121,7 +128,6 @@
 @media screen and (min-width: 1440px) {
   .favorites-wrapper {
     display: flex;
-    flex-direction: row;
     gap: 32px;
   }
 
