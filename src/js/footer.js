@@ -1,51 +1,37 @@
 import { VALIDATION, ERROR_MESSAGES } from './constants.js';
-
+import { showSuccess, showError, showInfo } from './iziToast-helper.js';
 const form = document.querySelector('.footer__form');
-if (!form) {
-  console.log('Footer not found on this page');
-} else {
-  const emailInput = form.querySelector('.footer__input');
-  const messageEl = form.querySelector('.footer__message');
+const emailInput = form.querySelector('.footer__input');
 
-  form.addEventListener('submit', async event => {
-    event.preventDefault();
+form.addEventListener('submit', async event => {
+  event.preventDefault();
 
-    const email = emailInput.value.trim();
+  const email = emailInput.value.trim();
 
-    if (!email || !VALIDATION.EMAIL_REGEX.test(email)) {
-      messageEl.textContent = ERROR_MESSAGES.EMAIL_REQUIRED;
-      messageEl.classList.remove('footer__message--success');
-      messageEl.classList.add('footer__message--error');
-      return;
-    }
+  if (!email || !VALIDATION.EMAIL_REGEX.test(email)) {
+    return;
+  }
 
-    try {
-      const response = await fetch(
-        'https://your-energy.b.goit.study/api/subscription',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        }
-      );
-
-      if (response.ok) {
-        messageEl.textContent = 'Subscription successful!';
-        messageEl.classList.remove('footer__message--error');
-        messageEl.classList.add('footer__message--success');
-
-        emailInput.value = '';
-      } else {
-        const data = await response.json();
-
-        messageEl.textContent = data.message || 'Subscription failed.';
-        messageEl.classList.remove('footer__message--success');
-        messageEl.classList.add('footer__message--error');
+  try {
+    const response = await fetch(
+      'https://your-energy.b.goit.study/api/subscription',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
       }
-    } catch (error) {
-      messageEl.textContent = 'Network error. Try again later.';
-      messageEl.classList.remove('footer__message--success');
-      messageEl.classList.add('footer__message--error');
+    );
+
+    if (response.ok) {
+      showSuccess(
+        "We're excited to have you on board! 🎉 Thank you for subscribing to new exercises on Your Energy. You've just taken a significant step towards improving your fitness and well-being."
+      );
+      emailInput.value = '';
+    } else {
+      const data = await response.json();
+      showInfo('Subscription already exists');
     }
-  });
-}
+  } catch (error) {
+    showError('Server error');
+  }
+});
