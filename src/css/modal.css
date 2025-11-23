@@ -8,7 +8,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--animation-duration) var(--timing-function),
@@ -39,7 +38,7 @@
   position: relative;
   background-color: var(--color-header-bg-dark);
   border-radius: 20px;
-  max-width: 90vw;
+  max-width: 99vw;
   max-height: 90vh;
   width: fit-content;
   overflow: hidden;

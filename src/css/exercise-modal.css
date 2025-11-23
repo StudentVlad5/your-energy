@@ -237,8 +237,9 @@ body > .exercise-modal {
 @media screen and (min-width: 768px) {
   .exercise-modal {
     flex-direction: row;
-    width: 704px;
+    width: 752px;
     padding: 32px;
+    gap: 32px;
   }
 
   .exercise-modal__content {
@@ -297,7 +298,7 @@ body > .exercise-modal {
 
 @media screen and (min-width: 1440px) {
   .exercise-modal {
-    width: 708px;
+    width: 756px;
   }
 
   .exercise-modal__btn--rating {
