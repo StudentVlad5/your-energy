@@ -1,4 +1,5 @@
 import { loadExercisesList } from './exercises-list.js';
+import { getCategories } from './categories.js';
 const tabsContainer = document.querySelector('[data-filters-tabs]');
 const searchBox = document.querySelector('.filters__search');
 const subtitle = document.querySelector('.filters__subtitle');
@@ -61,6 +62,7 @@ export function activateFiltersTab(filterKey, subtitleValue = '') {
     url.searchParams.delete('type');
   } else if (filterKey === 'equipment') {
     window.activeFilter = 'Equipment';
+    getCategories(activeFilter, 1, 12);
     if (equipmentBox) equipmentBox.classList.remove('hidden');
     url.searchParams.delete('filter');
     url.searchParams.delete('type');

@@ -19,7 +19,7 @@ console.log('activeFilter=', activeFilter);
 
 let activePage = 1;
 
-async function getCategories(
+export async function getCategories(
   filter = activeFilter,
   page = 1,
   limit = PAGE_LIMIT
