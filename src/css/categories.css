@@ -12,6 +12,7 @@
   display: flex;
   width: fit-content;
 }
+
 .card:hover {
   transform: scale(1.03);
 }
@@ -26,25 +27,27 @@
   margin-top: 24px;
   text-align: center;
 }
+
 .card div {
-  position:absolute;
+  position: absolute;
   width: 100%;
   height: 100%;
   color: var(--color-header-bg-light);
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   flex-direction: column;
   z-index: 100;
-  top:0;
+  top: 0;
   border-radius: 12px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
+
 .card h3 {
   font-size: 20px;
   line-height: 20px;
-  font-weight: 400;  
+  font-weight: 400;
 }
 
 .card h3::first-letter {
@@ -55,11 +58,11 @@
   font-size: 12px;
   line-height: 18px;
   font-weight: 400;
-  color: rgba(244,244,244,0.4);  
+  color: rgba(244, 244, 244, 0.4);
 }
 
 #pagination button {
-  height:32px;
+  height: 32px;
   width: 32px;
   border-radius: 100%;
   color: #d4d4d4;
@@ -76,12 +79,16 @@
   #cards-container {
     grid-template-columns: auto auto auto;
     width: fit-content;
+    column-gap: 15px;
+    row-gap: 32px;
   }
+
   .card img {
     width: 100%;
     max-width: 225px;
     height: auto;
   }
+
   .card h3 {
     font-size: 24px;
     line-height: 24px;
