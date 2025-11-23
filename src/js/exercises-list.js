@@ -261,7 +261,6 @@ export function renderExercisesPagination(currentPage, totalPages) {
   });
 
   const el = document.querySelector('.filters__controls');
-  console.log(el);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
