@@ -279,18 +279,12 @@
     font-size: 16px;
   }
 
-  /* .exercises__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  } */
-
   .exercises__list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
-    gap: 20px;
+    gap: 16px;
   }
 
   .exercises__item {
@@ -338,10 +332,6 @@
     max-width: 900px;
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .exercises__list {
-    gap: 16px;
   }
 
   .exercises {
