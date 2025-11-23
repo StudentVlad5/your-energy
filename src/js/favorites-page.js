@@ -21,14 +21,21 @@ function getItemsPerPage() {
 }
 
 function renderEmptyMessage() {
-  const container = document.querySelector('.favorites-wrapper');
-  if (!container) return;
+  const wrapper = document.querySelector('.favorites-wrapper');
+  if (!wrapper) return;
 
-  const existingContent = container.querySelector('.favorites-content');
+  const existingContent = wrapper.querySelector('.favorites-content');
   if (existingContent) existingContent.remove();
 
-  const existingEmpty = container.querySelector('.favorites-empty');
+  const existingEmpty = wrapper.querySelector('.favorites-empty');
   if (existingEmpty) existingEmpty.remove();
+
+  let mainContainer = wrapper.querySelector('.main-container');
+  if (!mainContainer) {
+    mainContainer = document.createElement('div');
+    mainContainer.className = 'main-container container';
+    wrapper.appendChild(mainContainer);
+  }
 
   const emptyDiv = document.createElement('div');
   emptyDiv.className = 'favorites-empty';
@@ -36,7 +43,7 @@ function renderEmptyMessage() {
     <p>It appears that you haven't added any exercises to your favorites yet. To get started, you can add exercises that you like to your favorites for easier access in the future.</p>
   `;
 
-  container.appendChild(emptyDiv);
+  mainContainer.appendChild(emptyDiv);
 }
 
 async function loadFavoritesData(ids) {
@@ -66,10 +73,13 @@ function renderPaginatedFavorites(page = 1) {
     contentWrapper.appendChild(listEl);
   }
 
-  let paginationContainer = contentWrapper.querySelector('.js-favorites-pagination');
+  let paginationContainer = contentWrapper.querySelector(
+    '.js-favorites-pagination'
+  );
   if (!paginationContainer) {
     paginationContainer = document.createElement('div');
-    paginationContainer.className = 'favorites-pagination js-favorites-pagination';
+    paginationContainer.className =
+      'favorites-pagination js-favorites-pagination';
     contentWrapper.appendChild(paginationContainer);
   }
 
@@ -98,18 +108,18 @@ function renderPaginatedFavorites(page = 1) {
           page: 'exercises__page',
           active: 'active',
           prev: 'exercises__page-prev',
-          next: 'exercises__page-next'
+          next: 'exercises__page-next',
         },
         icons: {
           prev: '<',
-          next: '>'
+          next: '>',
         },
         scrollToTop: true,
         scrollTarget: '.favorites-wrapper',
         onPageChange(newPage) {
           currentPage = newPage;
           renderPaginatedFavorites(newPage);
-        }
+        },
       });
     } else {
       paginationContainer.innerHTML = '';
@@ -141,18 +151,18 @@ function renderPaginatedFavorites(page = 1) {
         page: 'exercises__page',
         active: 'active',
         prev: 'exercises__page-prev',
-        next: 'exercises__page-next'
+        next: 'exercises__page-next',
       },
       icons: {
         prev: '<',
-        next: '>'
+        next: '>',
       },
       scrollToTop: true,
       scrollTarget: '.favorites-wrapper',
       onPageChange(newPage) {
         currentPage = newPage;
         renderPaginatedFavorites(newPage);
-      }
+      },
     });
   } else {
     paginationContainer.innerHTML = '';
