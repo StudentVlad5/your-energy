@@ -65,13 +65,13 @@ export async function loadExercisesList({
 
   try {
     const data = await api.getExercises(params);
+
     if (requestId !== lastRequestId) return;
 
     const items = data.results || [];
     currentPage = data.page || page;
     currentTotalPages = data.totalPages || 1;
     injectSchemaExercises(data);
-    console.log();
     renderExercisesList(listEl, items);
     renderExercisesPagination(currentPage, currentTotalPages);
 

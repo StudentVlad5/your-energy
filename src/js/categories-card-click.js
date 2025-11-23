@@ -1,5 +1,6 @@
 import { activateFiltersTab } from './filters';
 import { loadExercisesList } from './exercises-list';
+import { resetExercisesSearch } from './exercises-search';
 
 
 export function handleCategoryCardClick(item) {
@@ -26,14 +27,23 @@ export function handleCategoryCardClick(item) {
     // 4. Активуємо таб Body parts + чорна риска
     activateFiltersTab('bodypart', item.name);
 
+    resetExercisesSearch();
+
+      loadExercisesList({
+        page: 1,
+        filter: item.name.toLowerCase(),
+        type,
+        keyword: '', // <-- критично
+      });
+
     // 5. Показуємо пошук (активує сама activateFiltersTab)
 
     // 6. Завантажуємо exercises за категорією
-    loadExercisesList ({
-      page: 1,
-      filter: item.name.toLowerCase(),
-      type,
-    });
+    // loadExercisesList ({
+    //   page: 1,
+    //   filter: item.name.toLowerCase(),
+    //   type,
+    // });
 
     // 7. Оновлюємо URL
     const url = new URL(window.location.href);

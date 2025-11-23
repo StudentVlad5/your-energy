@@ -8,6 +8,8 @@ export function initExercisesSearch() {
 
   if (!searchInput || !searchBtn) return;
 
+  searchInput.value = '';
+
   const runSearch = () => {
     const query = searchInput.value.trim();
     console.log(query);
@@ -41,4 +43,9 @@ export function initExercisesSearch() {
       loadExercisesList({ page: 1, keyword: '' });
     });
   }
+}
+
+export function resetExercisesSearch() {
+  const searchInput = document.querySelector('.filters__input');
+  if (searchInput) searchInput.value = '';
 }
