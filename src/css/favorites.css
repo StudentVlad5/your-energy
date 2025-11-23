@@ -103,6 +103,7 @@
 
   .favorites-wrapper .quote-of-the-day {
     max-width: 1440px;
+    max-height: 230px;
   }
   .favorites-wrapper .sidebar__daily-norm,
   .favorites-wrapper .sidebar__photo-card {
@@ -167,6 +168,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 16px;
+    align-content: flex-start;
   }
 
   .favorites-wrapper .title {
@@ -203,14 +205,14 @@
     flex-wrap: wrap;
     gap: 32px 16px;
     margin-bottom: 50px;
-    max-height: 487px;
+    /* max-height: 487px; */
   }
   .favorites.favorites-list {
-    overflow-y: scroll;
+    /* overflow-y: scroll;
     overflow-x: hidden;
-    margin-top: 80px;
+    margin-top: 80px; */
     min-width: 826px;
-    scrollbar-gutter: stable;
+    /* scrollbar-gutter: stable; */
   }
 
   .favorites-list .exercises__item {
@@ -221,6 +223,12 @@
   .favorites-list .exercises__item .exercises__name-container {
     margin-bottom: 8px;
   }
+  .favorites-list .exercises__item .exercises__name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* show only 1 line */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   .favorites-pagination {
     display: none;
@@ -230,3 +238,99 @@
     gap: 9px;
   }
 }
+
+/* Pagination container */
+.favorites-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* Pagination buttons (circle, minimal) */
+.exercises__page {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: #d4d4d4;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect */
+.exercises__page:hover {
+  color: #242424;
+}
+
+/* Active page */
+.exercises__page.active {
+  border: 1px solid #242424;
+  color: #242424;
+}
+
+/* Disabled buttons (if renderPagination gives them) */
+.exercises__page.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .favorites-pagination {
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  .exercises__page {
+    height: 28px;
+    width: 28px;
+    font-size: 13px;
+  }
+}
+
+/* Prev/Next buttons (match circle style) */
+.exercises__page-prev,
+.exercises__page-next {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: #d4d4d4;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exercises__page-prev:hover,
+.exercises__page-next:hover {
+  color: #242424;
+}
+
+.exercises__page-prev.disabled,
+.exercises__page-next.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .exercises__page-prev,
+  .exercises__page-next {
+    height: 28px;
+    width: 28px;
+    font-size: 13px;
+  }
+}
+

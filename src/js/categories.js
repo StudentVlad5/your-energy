@@ -2,6 +2,7 @@ import { YourEnergyAPI } from './api';
 import { showError } from './iziToast-helper';
 import { injectSchema } from './seo-function';
 import { handleCategoryCardClick } from './categories-card-click';
+import { renderPaginationUniversal } from './pagination.js';
 export const fetchApi = new YourEnergyAPI();
 
 const PAGE_LIMIT = window.innerWidth < 768 ? 9 : 12;
@@ -89,33 +90,32 @@ function renderCards(items) {
   });
 }
 
-// Pagination
 function renderPagination(currentPage, totalPages) {
   const container = document.getElementById('pagination');
   if (!container) return;
-  container.innerHTML = '';
 
-  for (let i = 1; i <= totalPages; i++) {
-    const pageNum = i;
-    const btn = document.createElement('button');
-
-    btn.textContent = pageNum;
-    btn.className = 'pagination-page';
-    btn.setAttribute('data-page', pageNum);
-
-    if (pageNum === currentPage) {
-      btn.classList.add('active');
+  renderPaginationUniversal({
+    container,
+    currentPage,
+    totalPages,
+    mode: 'neighbors',
+    showPrevNext: totalPages > 2,
+    classes: {
+      page: 'pagination-page',
+      active: 'active',
+      prev: 'pagination-page-prev',
+      next: 'pagination-page-next'
+    },
+    icons: {
+      prev: '<',
+      next: '>'
+    },
+    scrollToTop: true,
+    onPageChange(page) {
+      activePage = page;
+      getCategories(activeFilter, page, PAGE_LIMIT);
     }
-
-    btn.addEventListener('click', () => {
-      if (pageNum === activePage) return;
-      activePage = pageNum;
-      getCategories(activeFilter, pageNum, PAGE_LIMIT);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    container.appendChild(btn);
-  }
+  });
 }
 
 // Clear Helpers
