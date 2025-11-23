@@ -6,17 +6,19 @@ const subtitle = document.querySelector('.filters__subtitle');
 const isDesktop = () => window.matchMedia('(min-width: 1440px)').matches;
 
 // ✅ універсальна функція оновлення UI
-function updateUIForFilter(filter, subtitleValue = '') {
+function updateUIForFilter(filter, subtitleValue = '') { 
   if (!searchBox || !subtitle) return;
 
   const desktop = isDesktop();
 
-  if (filter === 'bodypart') {
-    // якщо прийшло значення з Categories — показуємо його,
-    // інакше лишаємо дефолт Waist
-    subtitle.textContent = ` / ${subtitleValue || 'Waist'}`;
+  // Capitalize logic
+  const capitalizedSubtitle = subtitleValue
+    ? subtitleValue.charAt(0).toUpperCase() + subtitleValue.slice(1)
+    : 'Waist';
 
-    // 👉 ДОБАВЛЕНО: рендер ексесайзів
+  if (filter === 'bodypart') {
+    subtitle.textContent = ` / ${capitalizedSubtitle}`;
+
     if (typeof renderExercises === 'function') {
       renderExercises(window.exercisesList || []);
     }
@@ -31,6 +33,7 @@ function updateUIForFilter(filter, subtitleValue = '') {
     searchBox.classList.remove('filters__search--visible');
   }
 }
+
 
 // ✅ ЕКСПОРТ: те, що викликає Categories
 export function activateFiltersTab(filterKey, subtitleValue = '') {

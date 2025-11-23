@@ -1,8 +1,3 @@
-/* no need in paddings */
-/* .exercises {
-  padding: 32px 0; 
-} */
-
 .hidden {
   display: none;
 }
@@ -22,7 +17,6 @@
   font-weight: 400;
   line-height: 1.36;
   margin-bottom: 40px;
-  /* letter-spacing: -0.2em; */
 }
 
 .exercises__subtitle {
@@ -34,7 +28,6 @@
 }
 
 .exercises__icon {
-  /* position: absolute; */
   fill: currentColor;
   width: 24px;
   height: 24px;
@@ -60,7 +53,6 @@
   background-color: #ffffff;
   border-radius: 16px;
   padding: 16px;
-  /* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04); */
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -79,12 +71,10 @@
 }
 
 .exercises__name-container {
-  /* position: relative; */
   display: flex;
   align-items: center;
   margin-bottom: 16px;
 }
-
 
 .exercises__badge {
   all: revert;
@@ -97,13 +87,12 @@
   padding-top: 5px;
   padding-bottom: 0;
   padding-left: 8px;
-  padding-right: 8px;   /* щоб вертикаль не роздувало */
+  padding-right: 8px;
   line-height: 1;
   border-radius: 30px;
   border: 1px solid #242424;
   text-transform: uppercase;
 }
-
 
 .exercises__name {
   font-size: 20px;
@@ -160,15 +149,12 @@
   color: #24242466;
 }
 
-
 .exercises__meta-key,
 .exercises__meta-value {
   width: 100%;
-  /* height: 18px; */
   font-weight: 400;
   font-size: 12px;
   line-height: 1.5;
-  /* letter-spacing: 0px; */
   color: #242424;
 }
 
@@ -192,7 +178,7 @@
   border-radius: 30px;
   border: 1px solid #24242480;
   background: #f4f4f4;
-  color: #6c6c6c; /* серый, если НЕ добавлено */
+  color: #6c6c6c;
   font-size: 12px;
   line-height: 1.4;
   cursor: pointer;
@@ -200,19 +186,16 @@
     border-color 200ms ease;
 }
 
-/* состояние: упражнение добавлено в избранное */
 .favorites-btn.added {
   background: #242424;
-  color: #ffffff; /* белый */
+  color: #ffffff;
   border-color: #242424;
 }
 
-/* не двигается при наведении */
 .favorites-btn:hover {
   background: #e6e6e6;
 }
 
-/* focus */
 .favorites-btn:focus {
   outline: none;
   border: 1px solid #242424;
@@ -229,8 +212,6 @@
 
   margin-top: 20px;
   margin-bottom: 20px;
-
-  /* щоб кнопки не переходили на 2 рядок */
   flex-wrap: wrap;
 }
 
@@ -250,9 +231,9 @@
 .active {
   border: 1px solid #242424;
   border-radius: 18px;
-  /* background: #242424; */
   color: #242424;
 }
+
 .exercises__arrow {
   width: 34px;
   height: 34px;
@@ -275,25 +256,19 @@
 
 @media screen and (min-width: 768px) {
   .exercises__container {
-    /* width: 768px; */
     margin: 0 auto;
   }
+
   .exercises__tab {
     font-size: 16px;
   }
-
-  /* .exercises__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  } */
 
   .exercises__list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
-    gap: 20px;
+    gap: 16px;
   }
 
   .exercises__item {
@@ -315,7 +290,6 @@
     align-items: flex-end;
     align-content: center;
     justify-content: space-between;
-    gap: 24px;
     max-width: 722px;
     width: 100%;
   }
@@ -343,12 +317,7 @@
     flex-wrap: wrap;
   }
 
-  .exercises__list {
-    gap: 16px;
-  }
-
   .exercises {
-    /* padding: 56px 0; */
     max-width: 900px;
     margin-left: auto;
   }
@@ -356,6 +325,7 @@
   .exercises__title {
     font-size: 32px;
   }
+
   .exercises__item {
     width: 442px;
   }
@@ -370,9 +340,9 @@
   border: none;
   background-color: transparent;
 }
+
 .favorites-delete-btn:focus,
 .favorites-delete-btn:hover {
   transform: scale(1.2);
   transition: all var(--animation-duration) var(--timing-function);
 }
-

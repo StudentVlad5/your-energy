@@ -6,20 +6,32 @@
   background: var(--color-header-bg-dark);
   border-radius: 20px;
   color: var(--white-color);
-  width: 295px;
+  min-width: 295px;
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
   .quote-of-the-day {
     padding: 40px;
     gap: 16px;
-    width: 320px;
+    width: 100%;
+  }
+  .quote-of-the-day {
+    max-width: 370px;
+  }
+}
+
+@media screen and (min-width: 788px) {
+  .quote-of-the-day {
+    max-width: 400px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .quote-of-the-day {
-    width: 364px;
+    min-width: 364px;
+    max-width: 450px;
+    width: 100%;
   }
 }
 
@@ -61,7 +73,7 @@
 }
 
 .quote-of-the-day__content {
-  color: var(--text-secondary-color);
+  color: var(--color-secondary);
   margin-bottom: 10px;
 }
 

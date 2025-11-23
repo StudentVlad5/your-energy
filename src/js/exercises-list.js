@@ -8,6 +8,7 @@ import {
   getExerciseModalContent,
   initExerciseModal,
 } from './modal-exercise-content.js';
+import { injectSchemaExercises } from './seo-function.js';
 
 const api = new YourEnergyAPI();
 
@@ -59,16 +60,13 @@ export async function loadExercisesList({
 
   try {
     const data = await api.getExercises(params);
-console.log(data)
 
     if (requestId !== lastRequestId) return;
 
     const items = data.results || [];
     currentPage = data.page || page;
     currentTotalPages = data.totalPages || 1;
-
-    console.log(items);
-
+    injectSchemaExercises(data);
     renderExercisesList(listEl, items);
     renderExercisesPagination(currentPage, currentTotalPages);
 
@@ -176,14 +174,14 @@ function createExerciseCardMarkup(item, isFavorite = false) {
   const actionMarkup = isFavorite
     ? `<button type="button" class="favorites-delete-btn" data-id="${_id}">
          <svg class="favorites-icon-trash" width="16" height="16" aria-label="Remove from favorites">
-            <use href="./src/img/trash.svg"></use> 
+            <use href="./img/icons.svg#icon-trash"></use> 
          </svg>
        </button>`
     : `<div class="exercises__rating">
          <span class="exercises__meta-key">${rating}</span>
          <span class="exercises__meta-value">
            <svg class="star" width="18" height="18">
-             <use href="./src/img/star"></use>
+             <use href="./img/icons.svg#icon-star"></use>
            </svg>
          </span>
        </div>`;
@@ -205,14 +203,14 @@ function createExerciseCardMarkup(item, isFavorite = false) {
         >
           Start
           <svg class="arrow__icon" width="16" height="16">
-             <use href="./src/img/arrow-right.svg"></use>
+             <use href="./img/icons.svg#icon-arrow"></use>
           </svg>
         </button>
       </div>
 
       <div class="exercises__name-container">
         <svg class="exercises__icon" width="24" height="24">
-           <use href="./src/img/runing-man.svg"></use>
+           <use href="./img/icons.svg#icon-running-man"></use>
         </svg>
         <h3 class="exercises__name">${name}</h3>
       </div>
@@ -244,9 +242,16 @@ export function renderExercisesPagination(currentPage, totalPages) {
     currentPage,
     totalPages,
     mode: 'neighbors',
+    showPrevNext: totalPages > 2,
     classes: {
       page: 'exercises__page',
       active: 'active',
+      prev: 'exercises__page-prev',
+      next: 'exercises__page-next',
+    },
+    icons: {
+      prev: '<',
+      next: '>',
     },
     scrollToTop: true,
     scrollTarget: '.exercises',
@@ -254,6 +259,9 @@ export function renderExercisesPagination(currentPage, totalPages) {
       return loadExercisesList({ page });
     },
   });
+
+  const el = document.querySelector('.filters__controls');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
 function handleExerciseItemClick(listEl) {
