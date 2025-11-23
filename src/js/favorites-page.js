@@ -19,22 +19,21 @@ function getItemsPerPage() {
   }
   return 8;
 }
-
 function renderEmptyMessage() {
-  const wrapper = document.querySelector('.favorites-wrapper');
-  if (!wrapper) return;
+  const container = document.querySelector('.favorites-wrapper');
+  if (!container) return;
 
-  const existingContent = wrapper.querySelector('.favorites-content');
+  const existingContent = container.querySelector('.favorites-content');
   if (existingContent) existingContent.remove();
 
-  const existingEmpty = wrapper.querySelector('.favorites-empty');
+  const existingEmpty = container.querySelector('.favorites-empty');
   if (existingEmpty) existingEmpty.remove();
 
-  let mainContainer = wrapper.querySelector('.main-container');
+  let mainContainer = container.querySelector('.main-container');
   if (!mainContainer) {
     mainContainer = document.createElement('div');
     mainContainer.className = 'main-container container';
-    wrapper.appendChild(mainContainer);
+    container.appendChild(mainContainer);
   }
 
   const emptyDiv = document.createElement('div');
