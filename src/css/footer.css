@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.container {
+.footer_container {
   padding: 40px 20px 10px 20px;
 }
 
@@ -204,7 +204,7 @@ input:focus {
 /*  */
 /* 768px */
 @media (min-width: 768px) {
-  .container {
+  .footer_container {
     padding: 69px 32px 0 32px;
     width: 704px;
   }
@@ -270,7 +270,7 @@ input:focus {
 
 @media (min-width: 1440px) {
 
-  .container {
+  .footer_container {
     padding-top: 64px;
     width: 1376px;
   }

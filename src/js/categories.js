@@ -131,7 +131,6 @@ function clearPagination() {
 
 // Callback on card click
 export function onCardBodyClick(nameValue) {
-  console.log("Clicked name:", nameValue);
   // here need to add logic how to join categories and exercises
 }
 
