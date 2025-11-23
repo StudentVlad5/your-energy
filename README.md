@@ -7,10 +7,6 @@
 Проект реалізовано на ванільному **JavaScript** з використанням зборщика
 **Vite**.
 
-## Жива сторінка (Live Page)
-
-[Посилання на GitHub Pages або Netlify](https://studentvlad5.github.io/your-energy/)
-
 ---
 
 ## Технологічний стек
