@@ -23,13 +23,11 @@ function saveFavorites(favoritesArray) {
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoritesArray));
 }
 
-// Check if an exercise is in favorites
 function isFavorite(id) {
   const favorites = getFavorites();
   return favorites.includes(id);
 }
 
-// Add exercise to favorites (зберігаємо тільки ID)
 function addFavorite(exerciseObj) {
   const favorites = getFavorites();
   const exerciseId = exerciseObj.id || exerciseObj._id;
@@ -39,7 +37,6 @@ function addFavorite(exerciseObj) {
   }
 }
 
-// Remove exercise from favorites
 function removeFavorite(id) {
   const favorites = getFavorites();
   const updated = favorites.filter(itemId => itemId !== id);
@@ -58,40 +55,38 @@ function initFavoritesBtn(exercise, buttonElement = null) {
   const exerciseId = exercise.id || exercise._id;
   const isInFavorites = isFavorite(exerciseId);
 
-  updateButtonText(favoriteBtnElement, isInFavorites);
-  const newBtn = favoriteBtnElement.cloneNode(true);
-  favoriteBtnElement.parentNode.replaceChild(newBtn, favoriteBtnElement);
+  updateButtonState(favoriteBtnElement, isInFavorites);
 
-  newBtn.onclick = () => {
+  favoriteBtnElement.onclick = () => {
     const currentId = exercise.id || exercise._id;
     if (isFavorite(currentId)) {
       removeFavorite(currentId);
-      updateButtonText(newBtn, false);
+      updateButtonState(favoriteBtnElement, false);
     } else {
       addFavorite(exercise);
-      updateButtonText(newBtn, true);
+      updateButtonState(favoriteBtnElement, true);
     }
   };
 }
 
-function updateButtonText(button, isInFavorites) {
-  const textNodes = Array.from(button.childNodes).filter(
-    node => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
-  );
+function updateButtonState(button, isInFavorites) {
+  const textElement = button.querySelector('.exercise-modal__btn-text');
+  const heartIcon = button.querySelector('.exercise-modal__btn-icon--heart');
+  const trashIcon = button.querySelector('.exercise-modal__btn-icon--trash');
 
-  if (textNodes.length > 0) {
-    textNodes[0].textContent = isInFavorites
+  if (textElement) {
+    textElement.textContent = isInFavorites
       ? 'Remove from favorites'
       : 'Add to favorites';
-  } else {
-    const svg = button.querySelector('svg');
-    const text = document.createTextNode(
-      isInFavorites ? 'Remove from favorites' : 'Add to favorites'
-    );
-    if (svg) {
-      button.insertBefore(text, svg);
+  }
+
+  if (heartIcon && trashIcon) {
+    if (isInFavorites) {
+      heartIcon.classList.add('exercise-modal__btn-icon--hidden');
+      trashIcon.classList.remove('exercise-modal__btn-icon--hidden');
     } else {
-      button.appendChild(text);
+      heartIcon.classList.remove('exercise-modal__btn-icon--hidden');
+      trashIcon.classList.add('exercise-modal__btn-icon--hidden');
     }
   }
 }
