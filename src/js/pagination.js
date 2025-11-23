@@ -4,8 +4,8 @@ export function renderPaginationUniversal({
   totalPages,
   onPageChange,
   mode = 'full',
-  showArrows = false,
-  showPrevNext = false,
+  showArrows = false, // подвійні «»
+  showPrevNext = false, // одинарні <>
   classes = {},
   icons = {},
   scrollToTop = true,
@@ -20,9 +20,16 @@ export function renderPaginationUniversal({
     arrow: arrowClass = '',
     prev: prevClass = '',
     next: nextClass = '',
+    first: firstClass = '',
+    last: lastClass = '',
   } = classes;
 
-  const { prev: prevIcon = 'Prev', next: nextIcon = 'Next' } = icons;
+  const {
+    prev: prevIcon = '<',
+    next: nextIcon = '>',
+    first: firstIcon = '<<',
+    last: lastIcon = '>>',
+  } = icons;
 
   const createBtn = (label, page, className = '') => {
     const btn = document.createElement('button');
@@ -49,9 +56,12 @@ export function renderPaginationUniversal({
     }
   };
 
-  if (showPrevNext && currentPage > 1) {
-    const prevBtn = createBtn(prevIcon, currentPage - 1, prevClass);
-    container.appendChild(prevBtn);
+  // Prev/Next зовні тільки не в neighbors
+  if (mode !== 'neighbors') {
+    if (showPrevNext && currentPage > 1) {
+      const prevBtn = createBtn(prevIcon, currentPage - 1, prevClass);
+      container.appendChild(prevBtn);
+    }
   }
 
   if (mode === 'full') {
@@ -73,6 +83,33 @@ export function renderPaginationUniversal({
       pages = [currentPage - 1, currentPage, currentPage + 1];
     }
 
+    const needDouble = showArrows && totalPages > 3;
+    const isAtStart = pages[0] === 1; // ще вікно 123
+    const isAtEnd = pages[2] === totalPages; // останнє вікно
+
+    // << — завжди, але disabled поки 123
+    if (needDouble) {
+      const firstBtn = createBtn(
+        firstIcon,
+        1,
+        `${arrowClass} ${prevClass} ${firstClass}`.trim()
+      );
+      if (isAtStart) firstBtn.disabled = true;
+      container.appendChild(firstBtn);
+    }
+
+    // < — завжди, але disabled поки 123
+    if (showPrevNext) {
+      const prevBtn = createBtn(
+        prevIcon,
+        Math.max(1, currentPage - 1),
+        prevClass
+      );
+      if (isAtStart) prevBtn.disabled = true;
+      container.appendChild(prevBtn);
+    }
+
+    // pages
     pages.forEach(p => {
       const btn = createBtn(
         p,
@@ -81,15 +118,42 @@ export function renderPaginationUniversal({
       );
       container.appendChild(btn);
     });
+
+    // > — завжди, disabled на останньому вікні
+    if (showPrevNext) {
+      const nextBtn = createBtn(
+        nextIcon,
+        Math.min(totalPages, currentPage + 1),
+        nextClass
+      );
+      if (isAtEnd) nextBtn.disabled = true;
+      container.appendChild(nextBtn);
+    }
+
+    // >> — завжди, disabled на останньому вікні
+    if (needDouble) {
+      const lastBtn = createBtn(
+        lastIcon,
+        totalPages,
+        `${arrowClass} ${nextClass} ${lastClass}`.trim()
+      );
+      if (isAtEnd) lastBtn.disabled = true;
+      container.appendChild(lastBtn);
+    }
   }
 
-  if (showPrevNext && currentPage < totalPages) {
-    const nextBtn = createBtn(nextIcon, currentPage + 1, nextClass);
-    container.appendChild(nextBtn);
+  // Next зовні тільки не в neighbors
+  if (mode !== 'neighbors') {
+    if (showPrevNext && currentPage < totalPages) {
+      const nextBtn = createBtn(nextIcon, currentPage + 1, nextClass);
+      container.appendChild(nextBtn);
+    }
   }
 
   container.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.disabled) return;
+
       const page = Number(btn.dataset.page);
       if (Number.isNaN(page) || page === currentPage) return;
 

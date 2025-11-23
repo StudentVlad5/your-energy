@@ -60,3 +60,7 @@ section {
 .iziToast-capsule {
   font-family: var(--font-main, 'Roboto', sans-serif) !important;
 }
+
+.exercises__page-next{
+  color: red
+}

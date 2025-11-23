@@ -4,6 +4,7 @@ import { handleCategoryCardClick } from './categories-card-click';
 import { cancelLoader, startLoader } from './loader';
 import { YourEnergyAPI } from './api';
 import { renderPaginationUniversal } from './pagination';
+
 export const fetchApi = new YourEnergyAPI();
 
 const PAGE_LIMIT = window.innerWidth < 768 ? 9 : 12;
@@ -75,11 +76,10 @@ function renderCards(items) {
     const card = document.createElement('div');
     card.className = 'card';
 
-    // Safe values
     const safeImg =
       item.imgURL && item.imgURL.trim() !== ''
         ? item.imgURL
-        : '/img/no-image.jpg'; // fallback image
+        : '/img/no-image.jpg';
 
     const safeName = item.name || '';
     const safeFilter = item.filter || '';
@@ -91,8 +91,10 @@ function renderCards(items) {
         <span>${safeFilter}</span>
       </div>
     `;
-    handleCategoryCardClick;
+
+    // card click
     card.addEventListener('click', handleCategoryCardClick(item));
+
     container.appendChild(card);
 
     const cardBody = card.querySelector('.card-body');
@@ -102,6 +104,7 @@ function renderCards(items) {
   });
 }
 
+// Pagination
 function renderPagination(currentPage, totalPages) {
   const container = document.getElementById('pagination');
   if (!container) return;
@@ -111,19 +114,25 @@ function renderPagination(currentPage, totalPages) {
     currentPage,
     totalPages,
     mode: 'neighbors',
-    showPrevNext: totalPages > 2,
+
+    showPrevNext: totalPages > 2, 
+    showArrows: totalPages > 3, 
+
     classes: {
       page: 'pagination-page',
       active: 'active',
       prev: 'pagination-page-prev',
       next: 'pagination-page-next',
     },
+
     icons: {
       prev: '<',
       next: '>',
     },
+
     scrollToTop: true,
     scrollTarget: '.main-container',
+
     onPageChange(page) {
       activePage = page;
       return getCategories(activeFilter, page, PAGE_LIMIT);
@@ -145,8 +154,7 @@ function clearPagination() {
 // Callback on card click
 export function onCardBodyClick(nameValue) {
   console.log('Clicked name:', nameValue);
-  // here need to add logic how to join categories and exercises
 }
 
-// First load
+// Initial load
 getCategories(activeFilter, activePage, PAGE_LIMIT);

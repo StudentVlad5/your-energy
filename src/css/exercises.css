@@ -252,6 +252,30 @@
   background-image: url('../img/arrow.svg');
 }
 
+button.exercises__page-prev,
+button.exercises__page-next,
+button.exercises__page-first,
+button.exercises__page-last {
+  border: 1px solid black;
+  color: #242424;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+button.exercises__page-prev:disabled {
+  background: #f6f6f6; /* як у Figma */
+  border-color: #e1e1e1; /* світліша рамка */
+  color: #c7c7c7; /* сірий текст */
+  cursor: default;
+  opacity: 0.6;
+}
+
 /* TABLET */
 
 @media screen and (min-width: 768px) {
