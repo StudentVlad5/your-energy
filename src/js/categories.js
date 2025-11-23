@@ -45,8 +45,11 @@ async function getCategories(
       return;
     }
 
-    renderCards(data.results || []);
-    renderPagination(activePage, data.totalPages || 1);
+    const results = data.results || [];
+    const totalPages = data.totalPages || 1;
+
+    renderCards(results);
+    renderPagination(activePage, totalPages);
 
     if (typeof injectSchema === 'function') {
       injectSchema(data);
@@ -119,8 +122,10 @@ function renderPagination(currentPage, totalPages) {
 
     btn.addEventListener('click', () => {
       if (pageNum === activePage) return;
+
       activePage = pageNum;
       getCategories(activeFilter, pageNum, PAGE_LIMIT);
+
 
       if (el) {
         const y = el.getBoundingClientRect().top + window.scrollY;
