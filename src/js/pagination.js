@@ -5,6 +5,7 @@ export function renderPaginationUniversal({
   onPageChange,
   mode = 'full',
   showArrows = false,
+  showPrevNext = false,
   classes = {},
   icons = {},
   scrollToTop = true,
@@ -17,6 +18,8 @@ export function renderPaginationUniversal({
     page: pageClass = '',
     active: activeClass = 'active',
     arrow: arrowClass = '',
+    prev: prevClass = '',
+    next: nextClass = '',
   } = classes;
 
   const { prev: prevIcon = 'Prev', next: nextIcon = 'Next' } = icons;
@@ -28,6 +31,28 @@ export function renderPaginationUniversal({
     btn.dataset.page = page;
     return btn;
   };
+
+  const scrollHandler = () => {
+    if (scrollToTop) {
+      if (scrollTarget) {
+        const el =
+          typeof scrollTarget === 'string'
+            ? document.querySelector(scrollTarget)
+            : scrollTarget;
+
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  if (showPrevNext && currentPage > 1) {
+    const prevBtn = createBtn(prevIcon, currentPage - 1, prevClass);
+    container.appendChild(prevBtn);
+  }
 
   if (mode === 'full') {
     for (let i = 1; i <= totalPages; i++) {
@@ -56,6 +81,11 @@ export function renderPaginationUniversal({
       );
       container.appendChild(btn);
     });
+  }
+
+  if (showPrevNext && currentPage < totalPages) {
+    const nextBtn = createBtn(nextIcon, currentPage + 1, nextClass);
+    container.appendChild(nextBtn);
   }
 
   container.querySelectorAll('button').forEach(btn => {

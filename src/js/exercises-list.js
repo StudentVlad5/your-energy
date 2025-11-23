@@ -242,9 +242,16 @@ export function renderExercisesPagination(currentPage, totalPages) {
     currentPage,
     totalPages,
     mode: 'neighbors',
+    showPrevNext: totalPages > 2,
     classes: {
       page: 'exercises__page',
       active: 'active',
+      prev: 'exercises__page-prev',
+      next: 'exercises__page-next'
+    },
+    icons: {
+      prev: '<',
+      next: '>'
     },
     scrollToTop: true,
     scrollTarget: '.exercises',

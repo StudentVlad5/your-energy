@@ -101,22 +101,30 @@ function renderCards(items) {
   });
 }
 
-// Pagination
 function renderPagination(currentPage, totalPages) {
   const container = document.getElementById('pagination');
   if (!container) return;
-  container.innerHTML = '';
 
-  for (let i = 1; i <= totalPages; i++) {
-    const pageNum = i;
-    const btn = document.createElement('button');
-
-    btn.textContent = pageNum;
-    btn.className = 'pagination-page';
-    btn.setAttribute('data-page', pageNum);
-
-    if (pageNum === currentPage) {
-      btn.classList.add('active');
+  renderPaginationUniversal({
+    container,
+    currentPage,
+    totalPages,
+    mode: 'neighbors',
+    showPrevNext: totalPages > 2,
+    classes: {
+      page: 'pagination-page',
+      active: 'active',
+      prev: 'pagination-page-prev',
+      next: 'pagination-page-next'
+    },
+    icons: {
+      prev: '<',
+      next: '>'
+    },
+    scrollToTop: true,
+    onPageChange(page) {
+      activePage = page;
+      getCategories(activeFilter, page, PAGE_LIMIT);
     }
     const el = document.getElementById('cards-box');
 

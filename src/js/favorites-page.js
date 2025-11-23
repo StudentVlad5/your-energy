@@ -25,14 +25,10 @@ function renderEmptyMessage() {
   if (!container) return;
 
   const existingContent = container.querySelector('.favorites-content');
-  if (existingContent) {
-    existingContent.remove();
-  }
+  if (existingContent) existingContent.remove();
 
   const existingEmpty = container.querySelector('.favorites-empty');
-  if (existingEmpty) {
-    existingEmpty.remove();
-  }
+  if (existingEmpty) existingEmpty.remove();
 
   const emptyDiv = document.createElement('div');
   emptyDiv.className = 'favorites-empty';
@@ -53,7 +49,7 @@ async function loadFavoritesData(ids) {
 }
 
 function renderPaginatedFavorites(page = 1) {
-  const container = document.querySelector('.favorites-wrapper');
+  const container = document.querySelector('.main-container');
   if (!container) return;
 
   let contentWrapper = container.querySelector('.favorites-content');
@@ -70,27 +66,66 @@ function renderPaginatedFavorites(page = 1) {
     contentWrapper.appendChild(listEl);
   }
 
-  let paginationContainer = contentWrapper.querySelector(
-    '.js-favorites-pagination'
-  );
+  let paginationContainer = contentWrapper.querySelector('.js-favorites-pagination');
   if (!paginationContainer) {
     paginationContainer = document.createElement('div');
-    paginationContainer.className =
-      'favorites-pagination js-favorites-pagination';
+    paginationContainer.className = 'favorites-pagination js-favorites-pagination';
     contentWrapper.appendChild(paginationContainer);
   }
 
+  // ----------------------------------------
+  // 🔥 DESKTOP PAGINATION (12 per page)
+  // ----------------------------------------
   if (isDesktop()) {
-    renderExercisesList(listEl, allFavoritesData, true);
-    paginationContainer.innerHTML = '';
+    const desktopLimit = 12;
+    const totalPages = Math.ceil(allFavoritesData.length / desktopLimit);
+    const needsPagination = totalPages > 1;
+
+    const startIndex = (page - 1) * desktopLimit;
+    const endIndex = startIndex + desktopLimit;
+
+    const paginatedDesktop = allFavoritesData.slice(startIndex, endIndex);
+    renderExercisesList(listEl, paginatedDesktop, true);
+
+    if (needsPagination) {
+      renderPaginationUniversal({
+        container: paginationContainer,
+        currentPage: page,
+        totalPages: totalPages,
+        mode: 'neighbors',
+        showPrevNext: totalPages > 2,
+        classes: {
+          page: 'exercises__page',
+          active: 'active',
+          prev: 'exercises__page-prev',
+          next: 'exercises__page-next'
+        },
+        icons: {
+          prev: '<',
+          next: '>'
+        },
+        scrollToTop: true,
+        scrollTarget: '.favorites-wrapper',
+        onPageChange(newPage) {
+          currentPage = newPage;
+          renderPaginatedFavorites(newPage);
+        }
+      });
+    } else {
+      paginationContainer.innerHTML = '';
+    }
+
     return;
   }
 
+  // ----------------------------------------
+  // 📱 MOBILE/TABLET (8/10 per page)
+  // ----------------------------------------
   const itemsPerPage = getItemsPerPage();
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedData = allFavoritesData.slice(startIndex, endIndex);
 
+  const paginatedData = allFavoritesData.slice(startIndex, endIndex);
   renderExercisesList(listEl, paginatedData, true);
 
   const totalPages = Math.ceil(allFavoritesData.length / itemsPerPage);
@@ -101,16 +136,23 @@ function renderPaginatedFavorites(page = 1) {
       currentPage: page,
       totalPages: totalPages,
       mode: 'neighbors',
+      showPrevNext: totalPages > 2,
       classes: {
         page: 'exercises__page',
         active: 'active',
+        prev: 'exercises__page-prev',
+        next: 'exercises__page-next'
+      },
+      icons: {
+        prev: '<',
+        next: '>'
       },
       scrollToTop: true,
       scrollTarget: '.favorites-wrapper',
       onPageChange(newPage) {
         currentPage = newPage;
         renderPaginatedFavorites(newPage);
-      },
+      }
     });
   } else {
     paginationContainer.innerHTML = '';
@@ -122,9 +164,7 @@ async function renderFavorites(arr) {
   if (!container) return;
 
   const emptyDiv = container.querySelector('.favorites-empty');
-  if (emptyDiv) {
-    emptyDiv.remove();
-  }
+  if (emptyDiv) emptyDiv.remove();
 
   allFavoritesData = [];
 
@@ -132,11 +172,8 @@ async function renderFavorites(arr) {
     try {
       const promises = arr.map(it => loadFavoritesData(it.trim()));
       const results = await Promise.all(promises);
-
       results.forEach(data => {
-        if (data) {
-          allFavoritesData.push(data);
-        }
+        if (data) allFavoritesData.push(data);
       });
     } catch (error) {
       console.error('Error loading:', error);
@@ -184,6 +221,7 @@ if (wrapper) {
         removeFavorite(idToRemove);
         startRenderFavorites();
         cancelLoader();
+
         setTimeout(() => {
           wrapper.style.pointerEvents = 'auto';
         }, 500);
