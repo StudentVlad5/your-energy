@@ -12,7 +12,11 @@ const PAGE_LIMIT = window.innerWidth < 768 ? 9 : 12;
 // activeFilter:  'Muscles', 'Equipment', 'Body parts'
 // let activeFilter = 'Equipment';
 //let activeFilter = 'Body parts';
-let activeFilter = 'Muscles';
+let activeFilter = window.activeFilter || 'Muscles';
+console.log('categories window.activeFilter: ', window.activeFilter);
+
+console.log('activeFilter=', activeFilter);
+
 let activePage = 1;
 
 async function getCategories(
@@ -21,6 +25,7 @@ async function getCategories(
   limit = PAGE_LIMIT
 ) {
   activeFilter = filter;
+  window.activeFilter = activeFilter;
   activePage = page;
 
   try {
@@ -70,7 +75,24 @@ async function getCategories(
 
 // Cards
 function renderCards(items) {
-  const container = document.getElementById('cards-container');
+  let cardsContainerId = 'cards-container';
+  console.log('window.activeFilter in renderCards', window.activeFilter);
+
+  switch (window.activeFilter) {
+    case 'Muscles':
+      cardsContainerId = 'cards-container';
+      break;
+    case 'Equipment':
+      cardsContainerId = 'cards-container-equipment';
+      break;
+    case 'Body parts':
+      cardsContainerId = 'body-part-cards';
+      break;
+    default:
+      cardsContainerId = 'cards-container'; // Значення за замовчуванням
+  }
+  const container = document.getElementById(cardsContainerId);
+  console.log(container);
   if (!container) return;
   container.innerHTML = '';
 

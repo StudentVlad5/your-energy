@@ -6,7 +6,7 @@ const subtitle = document.querySelector('.filters__subtitle');
 const isDesktop = () => window.matchMedia('(min-width: 1440px)').matches;
 
 // ✅ універсальна функція оновлення UI
-function updateUIForFilter(filter, subtitleValue = '') { 
+function updateUIForFilter(filter, subtitleValue = '') {
   if (!searchBox || !subtitle) return;
 
   const desktop = isDesktop();
@@ -34,12 +34,14 @@ function updateUIForFilter(filter, subtitleValue = '') {
   }
 }
 
-
 // ✅ ЕКСПОРТ: те, що викликає Categories
 export function activateFiltersTab(filterKey, subtitleValue = '') {
   if (!tabsContainer) return;
+  console.log('-- function activateFiltersTab');
 
   const btn = tabsContainer.querySelector(`[data-filter="${filterKey}"]`);
+  console.log('btn = tabsContainer.querySelector data-filter=filterKey: ', btn);
+
   if (!btn) return;
 
   const categoriesBox = document.getElementById('cards-box');
@@ -53,14 +55,17 @@ export function activateFiltersTab(filterKey, subtitleValue = '') {
   const url = new URL(window.location.href);
 
   if (filterKey === 'muscles') {
+    window.activeFilter = 'Muscles';
     if (categoriesBox) categoriesBox.classList.remove('hidden');
     url.searchParams.delete('filter');
     url.searchParams.delete('type');
   } else if (filterKey === 'equipment') {
+    window.activeFilter = 'Equipment';
     if (equipmentBox) equipmentBox.classList.remove('hidden');
     url.searchParams.delete('filter');
     url.searchParams.delete('type');
   } else if (filterKey === 'bodypart') {
+    window.activeFilter = 'Body parts';
     if (exercisesBox) exercisesBox.classList.remove('hidden');
     url.searchParams.set('type', 'body-parts');
     if (subtitleValue) {
@@ -84,6 +89,8 @@ export function activateFiltersTab(filterKey, subtitleValue = '') {
 if (tabsContainer && searchBox && subtitle) {
   tabsContainer.addEventListener('click', e => {
     const btn = e.target.closest('.filters__tab');
+    console.log("e.target.closest('.filters__tab':", btn);
+
     if (!btn) return;
 
     // subtitleValue тут не передаємо — буде дефолтний Waist
@@ -94,6 +101,7 @@ if (tabsContainer && searchBox && subtitle) {
   const activeBtn = tabsContainer.querySelector('.filters__tab--active');
   if (activeBtn) {
     updateUIForFilter(activeBtn.dataset.filter);
+    console.log('activeBtn.dataset.filter: ', activeBtn.dataset.filter);
   }
 }
 

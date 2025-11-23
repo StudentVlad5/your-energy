@@ -2,10 +2,10 @@ import { activateFiltersTab } from './filters';
 import { loadExercisesList } from './exercises-list';
 import { resetExercisesSearch } from './exercises-search';
 
-
 export function handleCategoryCardClick(item) {
   return function (e) {
     e.preventDefault();
+    console.log('-- handleCategoryCardClick(item)');
 
     // 1. Визначаємо тип фільтру
     const TYPE_MAP = {
@@ -29,12 +29,12 @@ export function handleCategoryCardClick(item) {
 
     resetExercisesSearch();
 
-      loadExercisesList({
-        page: 1,
-        filter: item.name.toLowerCase(),
-        type,
-        keyword: '', // <-- критично
-      });
+    loadExercisesList({
+      page: 1,
+      filter: item.name.toLowerCase(),
+      type,
+      keyword: '', // <-- критично
+    });
 
     // 5. Показуємо пошук (активує сама activateFiltersTab)
 
