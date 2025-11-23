@@ -91,6 +91,7 @@
 @media (min-width: 1440px) {
   .sidebar__daily-norm {
     min-width: 364px;
+    max-width: 450px;
     min-height: 315px;
     width: 100%;
   }

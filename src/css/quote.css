@@ -6,7 +6,8 @@
   background: var(--color-header-bg-dark);
   border-radius: 20px;
   color: var(--white-color);
-  width: 295px;
+  min-width: 295px;
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
@@ -21,6 +22,7 @@
 @media screen and (min-width: 1440px) {
   .quote-of-the-day {
     min-width: 364px;
+    max-width: 450px;
     width: 100%;
   }
 }
