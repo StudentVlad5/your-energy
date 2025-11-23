@@ -9,6 +9,9 @@ export const fetchApi = new YourEnergyAPI();
 const PAGE_LIMIT = window.innerWidth < 768 ? 9 : 12;
 
 // UI state
+// activeFilter:  'Muscles', 'Equipment', 'Body parts'
+// let activeFilter = 'Equipment';
+//let activeFilter = 'Body parts';
 let activeFilter = 'Muscles';
 let activePage = 1;
 
@@ -150,3 +153,4 @@ export function onCardBodyClick(nameValue) {
 
 // First load
 getCategories(activeFilter, activePage, PAGE_LIMIT);
+console.log('activeFilter', activeFilter);

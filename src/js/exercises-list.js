@@ -16,6 +16,11 @@ function getPageLimit() {
   return window.innerWidth < 768 ? 8 : 10;
 }
 
+// let currentQuery = {
+//   type: 'body-parts',
+//   filter: 'waist',
+//   keyword: '',
+// };
 let currentQuery = {
   type: 'body-parts',
   filter: 'waist',
@@ -174,7 +179,7 @@ function createExerciseCardMarkup(item, isFavorite = false) {
   const actionMarkup = isFavorite
     ? `<button type="button" class="favorites-delete-btn" data-id="${_id}">
          <svg class="favorites-icon-trash" width="16" height="16" aria-label="Remove from favorites">
-            <use href="./img/icons.svg#icon-trash"></use> 
+            <use href="./img/icons.svg#icon-trash"></use>
          </svg>
        </button>`
     : `<div class="exercises__rating">
@@ -191,9 +196,9 @@ function createExerciseCardMarkup(item, isFavorite = false) {
       <div class="exercises__item-top">
         <div class="exercises__item-info">
           <span class="exercises__badge">Workout</span>
-          
-          ${actionMarkup} 
-          
+
+          ${actionMarkup}
+
         </div>
 
         <button

@@ -9,9 +9,6 @@
 //   });
 // }
 
-
-
-
 // src/js/exercises-tabs.js
 // import { loadExercisesList } from './exercises-list.js';
 
@@ -37,16 +34,26 @@
 //   });
 // }
 
+// !!! цей модуль не використовується
+
 import { loadExercisesList } from './exercises-list.js';
 
 export function initExercisesTabs() {
+  console.log('function initExercisesTabs()');
+
   const tabsContainer = document.querySelector('.js-exercises-tabs');
+  console.log('tabsContainer', tabsContainer);
+  // tabsContainer завжди null так як ніде немає класу .js-exercises-tabs
   if (!tabsContainer) return;
 
   const tabs = tabsContainer.querySelectorAll('.exercises__tab');
   const searchInput = document.querySelector('.exercises__search-input');
 
+  // через помилку Could not find name 'tab'. Did you mean 'tabs'?
+  // цей лістенер не використовується
   tab.addEventListener('click', () => {
+    console.log(' tab.addEventListener');
+
     document.getElementById('categories-section')?.classList.add('hidden');
     document.getElementById('exercises-section')?.classList.remove('hidden');
 
