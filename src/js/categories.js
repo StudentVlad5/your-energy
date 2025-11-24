@@ -147,7 +147,8 @@ function renderPagination(currentPage, totalPages) {
     mode: 'neighbors',
 
     showPrevNext: totalPages > 2,
-    showArrows: totalPages > 3,
+    showArrows: totalPages >= 3,
+    
 
     // ✅ беремо ті самі класи що в exercises
     classes: {

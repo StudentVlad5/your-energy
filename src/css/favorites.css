@@ -225,7 +225,7 @@
   }
 
   .favorites-list .exercises__item {
-    height: 141px;
+    height: 100%;
     width: calc((100% - 16px) / 2);
   }
 
