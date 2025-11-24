@@ -29,7 +29,7 @@ form.addEventListener('submit', async event => {
       emailInput.value = '';
     } else {
       const data = await response.json();
-      showInfo('Subscription already exists');
+      showError('Subscription already exists');
     }
   } catch (error) {
     showError('Server error');
