@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+  order: 2;
 }
 
 @media (min-width: 768px) {
@@ -31,6 +32,7 @@
     margin-bottom: 0;
     padding-bottom: 60px;
     max-width: 444px;
+    order: 0;
   }
 }
 
