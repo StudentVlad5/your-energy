@@ -24,11 +24,11 @@
   border-radius: 12px;
 }
 
-#pagination,
+/* #pagination,
 #pagination_1 {
   margin-top: 24px;
   text-align: center;
-}
+} */
 
 .card div {
   position: absolute;

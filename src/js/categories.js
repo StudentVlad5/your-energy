@@ -126,69 +126,44 @@ function renderCards(items) {
 
 // Pagination
 function renderPagination(currentPage, totalPages) {
-  const container = document.getElementById('pagination');
-  const container_2 = document.getElementById('pagination_1');
-  if (!container && !container_2) return;
-  if (container) {
-    renderPaginationUniversal({
-      container,
-      currentPage,
-      totalPages,
-      mode: 'neighbors',
+  const container = document.querySelector('.js-categories-pagination');
+  if (!container) return;
 
-      showPrevNext: totalPages > 2,
-      showArrows: totalPages > 3,
+  renderPaginationUniversal({
+    container,
+    currentPage,
+    totalPages,
+    mode: 'neighbors',
 
-      classes: {
-        page: 'pagination-page',
-        active: 'active',
-        prev: 'pagination-page-prev',
-        next: 'pagination-page-next',
-      },
+    showPrevNext: totalPages > 2,
+    showArrows: totalPages > 3,
 
-      icons: {
-        prev: '<',
-        next: '>',
-      },
+    classes: {
+      page: 'exercises__page',
+      active: 'active',
+      prev: 'exercises__page-prev',
+      next: 'exercises__page-next',
 
-      scrollToTop: false,
-      onPageChange(page) {
-        activePage = page;
-        scrollToFilter();
-        return getCategories(activeFilter, page, PAGE_LIMIT);
-      },
-    });
-  }
-  if (container_2) {
-    renderPaginationUniversal({
-      container: container_2,
-      currentPage,
-      totalPages,
-      mode: 'neighbors',
+      first: 'exercises__page-first',
+      last: 'exercises__page-last',
+      arrow: 'exercises__page-arrow',
+    },
 
-      showPrevNext: totalPages > 2,
-      showArrows: totalPages > 3,
+    icons: {
+      prev: '<',
+      next: '>',
+      first: '<<',
+      last: '>>',
+    },
 
-      classes: {
-        page: 'pagination-page',
-        active: 'active',
-        prev: 'pagination-page-p',
-        next: 'pagination-page-n',
-      },
+    scrollToTop: true,
+    scrollTarget: '.main-container',
 
-      icons: {
-        prev: '<',
-        next: '>',
-      },
-
-      scrollToTop: false,
-      onPageChange(page) {
-        activePage = page;
-        scrollToFilter();
-        return getCategories(activeFilter, page, PAGE_LIMIT);
-      },
-    });
-  }
+    onPageChange(page) {
+      activePage = page;
+      return getCategories(activeFilter, page, PAGE_LIMIT);
+    },
+  });
 }
 
 // Clear Helpers
@@ -198,7 +173,7 @@ function clearCards() {
 }
 
 function clearPagination() {
-  const container = document.getElementById('pagination');
+  const container = document.querySelector('.js-categories-pagination');
   if (container) container.innerHTML = '';
 }
 
