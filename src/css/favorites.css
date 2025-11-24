@@ -10,6 +10,11 @@
   margin-bottom: 40px;
 }
 
+.favorites-position {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .favorites-wrapper .sidebar__daily-norm-wrapper {
   display: flex;
   flex-direction: column;
@@ -161,6 +166,10 @@
     display: flex;
     gap: 32px;
     padding-top: 90px;
+  }
+
+  .favorites-position {
+    flex-direction: row;
   }
 
   .favorites-wrapper .sidebar {
@@ -333,4 +342,3 @@
     font-size: 13px;
   }
 }
-
