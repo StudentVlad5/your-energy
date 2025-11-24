@@ -126,24 +126,21 @@ footer {
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.5);
   background: transparent;
-  color: #F4F4F4;
+  color: #f4f4f4;
   font-size: 14px;
   outline: none;
 }
 
-
-
-
 .footer__input:hover,
 .foorel__input:focus {
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 input:hover,
 input:focus {
-  border-color: #F4F4F4;
+  border-color: #f4f4f4;
   background-color: #918d8d5c;
-  color: #F4F4F4;
+  color: #f4f4f4;
   transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
 }
 
@@ -167,7 +164,6 @@ input:focus {
 .footer__btn:focus {
   background-color: #bfbfbfdc;
   transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
-
 }
 
 .footer__bottom {
@@ -211,12 +207,7 @@ input:focus {
   padding: 42px 20px 0;
 }
 
-
 @media (min-width: 768px) {
-  .container {
-    padding: 69px 32px 0 32px;
-  }
-
   .footer__top {
     max-width: 704px;
     margin-left: auto;
