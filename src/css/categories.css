@@ -50,6 +50,7 @@
   font-size: 20px;
   line-height: 20px;
   font-weight: 400;
+  text-align: center;
 }
 
 .card h3::first-letter {
@@ -80,6 +81,7 @@
 }
 
 @media (min-width: 768px) {
+
   #cards-container,
   #cards-container-equipment {
     grid-template-columns: auto auto auto;
