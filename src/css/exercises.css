@@ -268,7 +268,6 @@ button.exercises__page-last {
   cursor: pointer;
 }
 
-
 button.exercises__page-prev:disabled {
   background: #f6f6f6;
   border-color: #24242480;
@@ -290,9 +289,8 @@ button.exercises__page-prev:disabled {
 
   .exercises__list {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    margin: 0 auto;
     gap: 16px;
   }
 
@@ -343,7 +341,7 @@ button.exercises__page-prev:disabled {
   }
 
   .exercises {
-    max-width: 900px;
+    width: 100%;
     margin-left: auto;
   }
 
