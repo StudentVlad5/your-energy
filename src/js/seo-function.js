@@ -58,7 +58,6 @@ function updateSchemaScript(schemaId, data) {
   }
 
   script.textContent = JSON.stringify(data);
-  // console.log(`Schema updated for: ${schemaId}`);
 }
 
 function capitalize(str) {

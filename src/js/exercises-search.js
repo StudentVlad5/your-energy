@@ -12,8 +12,6 @@ export function initExercisesSearch() {
 
   const runSearch = () => {
     const query = searchInput.value.trim();
-    console.log(query);
-
     if (!query) {
       iziToast.warning({
         title: 'Attention',

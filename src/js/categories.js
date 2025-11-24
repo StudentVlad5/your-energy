@@ -76,8 +76,6 @@ export async function getCategories(
 // Cards
 function renderCards(items) {
   let cardsContainerId = 'cards-container';
-  //console.log('window.activeFilter in renderCards', window.activeFilter);
-
   switch (window.activeFilter) {
     case 'Muscles':
       cardsContainerId = 'cards-container';
@@ -89,11 +87,9 @@ function renderCards(items) {
       cardsContainerId = 'cards-container';
       break;
     default:
-      cardsContainerId = 'cards-container'; // Значення за замовчуванням
+      cardsContainerId = 'cards-container';
   }
-  console.log('cardsContainerId :', cardsContainerId);
   const container = document.getElementById(cardsContainerId);
-  //const container = document.getElementById('cards-container');
   if (!container) return;
   container.innerHTML = '';
 

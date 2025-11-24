@@ -30,7 +30,6 @@ window.activeFilter = 'Muscles';
 function initializeGlobalVariables() {
   // Global variables
   window.activeFilter = 'Muscles';
-  console.log('window.activeFilter = ', window.activeFilter);
 }
 
 initializeGlobalVariables();
