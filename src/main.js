@@ -25,6 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
 });
 
+window.activeFilter = 'Muscles';
+
+function initializeGlobalVariables() {
+  // Global variables
+  window.activeFilter = 'Muscles';
+  console.log('window.activeFilter = ', window.activeFilter);
+}
+
+initializeGlobalVariables();
+
 function initModals() {
   registerModalType(MODAL_TYPES.RATING, getRatingModalContent, initRatingModal);
   registerModalType(

@@ -36,14 +36,17 @@ export function activateFiltersTab(filterKey, subtitleValue = '') {
   if (equipmentBox) equipmentBox.classList.add('hidden');
 
   if (filterKey === 'muscles') {
+    window.activeFilter = 'Muscles';
     getCategories('Muscles');
     if (categoriesBox) categoriesBox.classList.remove('hidden');
     setOpenExercises(false);
   } else if (filterKey === 'equipment') {
+    window.activeFilter = 'Equipment';
     getCategories('Equipment');
     if (equipmentBox) equipmentBox.classList.remove('hidden');
     setOpenExercises(false);
   } else if (filterKey === 'bodypart') {
+    window.activeFilter = 'Body parts';
     getCategories('Body parts');
     if (categoriesBox) categoriesBox.classList.remove('hidden');
     setOpenExercises(false);

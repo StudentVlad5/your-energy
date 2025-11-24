@@ -14,7 +14,9 @@ export const fetchApi = new YourEnergyAPI();
 const PAGE_LIMIT = window.innerWidth < 768 ? 9 : 12;
 
 // UI state
-let activeFilter = 'Muscles';
+// activeFilter: 'Muscles', 'Equipment', 'Body parts'
+//let activeFilter = 'Muscles';
+let activeFilter = window.activeFilter || 'Muscles';
 let activePage = 1;
 
 export async function getCategories(
@@ -23,6 +25,7 @@ export async function getCategories(
   limit = PAGE_LIMIT
 ) {
   activeFilter = filter;
+  window.activeFilter = activeFilter;
   activePage = page;
 
   try {
@@ -72,7 +75,25 @@ export async function getCategories(
 
 // Cards
 function renderCards(items) {
-  const container = document.getElementById('cards-container');
+  let cardsContainerId = 'cards-container';
+  //console.log('window.activeFilter in renderCards', window.activeFilter);
+
+  switch (window.activeFilter) {
+    case 'Muscles':
+      cardsContainerId = 'cards-container';
+      break;
+    case 'Equipment':
+      cardsContainerId = 'cards-container-equipment';
+      break;
+    case 'Body parts':
+      cardsContainerId = 'cards-container';
+      break;
+    default:
+      cardsContainerId = 'cards-container'; // Значення за замовчуванням
+  }
+  console.log('cardsContainerId :', cardsContainerId);
+  const container = document.getElementById(cardsContainerId);
+  //const container = document.getElementById('cards-container');
   if (!container) return;
   container.innerHTML = '';
 
