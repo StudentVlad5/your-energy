@@ -1,5 +1,10 @@
-import { getOpenExercises, setOpenExercises } from './state.js';
+import {
+  getOpenExercises,
+  setOpenExercises,
+  getExercisesContext,
+} from './state.js';
 import { getCategories } from './categories.js';
+import { loadExercisesList } from './exercises-list.js';
 
 const tabsContainer = document.querySelector('[data-filters-tabs]');
 const searchBox = document.querySelector('.filters__search');
@@ -23,17 +28,18 @@ function updateUIForFilter(filter, subtitleValue = '') {
 
 export function activateFiltersTab(filterKey, subtitleValue = '') {
   if (!tabsContainer) return;
+
+  sessionStorage.setItem('activeFilter', filterKey);
+
   if (searchBox) searchBox.classList.remove('filters__search--visible');
   const btn = tabsContainer.querySelector(`[data-filter="${filterKey}"]`);
   if (!btn) return;
 
   const categoriesBox = document.getElementById('cards-box');
   const exercisesBox = document.getElementById('exercises');
-  const equipmentBox = document.getElementById('equipment-box');
 
   if (categoriesBox) categoriesBox.classList.add('hidden');
   if (exercisesBox) exercisesBox.classList.add('hidden');
-  if (equipmentBox) equipmentBox.classList.add('hidden');
 
   if (filterKey === 'muscles') {
     window.activeFilter = 'Muscles';
@@ -43,7 +49,7 @@ export function activateFiltersTab(filterKey, subtitleValue = '') {
   } else if (filterKey === 'equipment') {
     window.activeFilter = 'Equipment';
     getCategories('Equipment');
-    if (equipmentBox) equipmentBox.classList.remove('hidden');
+    if (categoriesBox) categoriesBox.classList.remove('hidden');
     setOpenExercises(false);
   } else if (filterKey === 'bodypart') {
     window.activeFilter = 'Body parts';
@@ -61,18 +67,59 @@ export function activateFiltersTab(filterKey, subtitleValue = '') {
   updateUIForFilter(filterKey, subtitleValue);
 }
 
-if (tabsContainer && searchBox && subtitle) {
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!tabsContainer || !searchBox || !subtitle) return;
+
   tabsContainer.addEventListener('click', e => {
     const btn = e.target.closest('.filters__tab');
     if (!btn) return;
+
+    // при кліку по табу – повертаємось до карток
+    setOpenExercises(false);
     activateFiltersTab(btn.dataset.filter);
   });
 
-  const activeBtn = tabsContainer.querySelector('.filters__tab--active');
-  if (activeBtn) {
-    updateUIForFilter(activeBtn.dataset.filter);
+  const savedFilter = sessionStorage.getItem('activeFilter');
+  const initialFilter = savedFilter || 'muscles';
+
+  const isExercisesOpen = getOpenExercises();
+
+  if (isExercisesOpen) {
+
+    const categoriesBox = document.getElementById('cards-box');
+    const exercisesBox = document.getElementById('exercises');
+
+    if (categoriesBox) categoriesBox.classList.add('hidden');
+    if (exercisesBox) exercisesBox.classList.remove('hidden');
+    if (searchBox) searchBox.classList.add('filters__search--visible');
+
+    // Підсвічуємо правильний таб
+    const btn = tabsContainer.querySelector(`[data-filter="${initialFilter}"]`);
+    if (btn) {
+      tabsContainer.querySelectorAll('.filters__tab').forEach(tab => {
+        const isActive = tab === btn;
+        tab.classList.toggle('filters__tab--active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    //  Відновлюємо exercises з тими ж параметрами, що були
+    const { name, type } = getExercisesContext();
+
+    if (name) {
+      loadExercisesList({
+        page: 1,
+        filter: name,
+        type: type || initialFilter,
+        keyword: '',
+      });
+    }
+  } else {
+    //  Стандартний сценарій – відкриті картки
+    activateFiltersTab(initialFilter);
   }
-}
+});
 
 const searchInput = document.querySelector('.filters__input');
 const clearBtn = document.querySelector('.filters__clear-btn');

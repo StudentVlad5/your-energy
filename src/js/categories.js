@@ -4,41 +4,18 @@ import { handleCategoryCardClick } from './categories-card-click';
 import { cancelLoader, startLoader } from './loader';
 import { YourEnergyAPI } from './api';
 import { renderPaginationUniversal } from './pagination';
-import { loadExercisesList } from './exercises-list.js';
-import { setOpenExercises } from './state.js';
-import { resetExercisesSearch } from './exercises-search';
-import { scrollToFilter } from './scrollToFilter';
 
 export const fetchApi = new YourEnergyAPI();
 
 const PAGE_LIMIT = window.innerWidth < 768 ? 9 : 12;
 
 // UI state
-let activeFilter = window.activeFilter || 'Muscles';
+let activeFilter = 'Muscles';
 let activePage = 1;
 
-/**
- * ✅ Єдина мапа для всіх табів
- * Уніфікує: де рендерити картки і куди рендерити пагінацію
- */
-const FILTER_UI = {
-  Muscles: {
-    cardsId: 'cards-container',
-    paginationSel: '.js-categories-pagination',
-  },
-  Equipment: {
-    cardsId: 'cards-container-equipment',
-    paginationSel: '.js-equipment-pagination',
-  },
-  'Body parts': {
-    cardsId: 'cards-container',
-    paginationSel: '.js-categories-pagination',
-  },
-};
-
-function getActiveUI() {
-  return FILTER_UI[window.activeFilter] || FILTER_UI.Muscles;
-}
+// ЄДИНИЙ контейнер
+const CARDS_CONTAINER_ID = 'cards-container';
+const PAGINATION_SELECTOR = '.js-categories-pagination';
 
 export async function getCategories(
   filter = activeFilter,
@@ -94,10 +71,10 @@ export async function getCategories(
   }
 }
 
-// Cards
+// Cards ----------------------------------------------------------------------
+
 function renderCards(items) {
-  const ui = getActiveUI();
-  const container = document.getElementById(ui.cardsId);
+  const container = document.getElementById(CARDS_CONTAINER_ID);
   if (!container) return;
 
   container.innerHTML = '';
@@ -122,22 +99,17 @@ function renderCards(items) {
       </div>
     `;
 
-    card.addEventListener('click', () => handleCategoryCardClick(item));
-    container.appendChild(card);
+    //  переход на exercises
+    card.addEventListener('click', handleCategoryCardClick(item));
 
-    const cardBody = card.querySelector('.card-body');
-    if (cardBody) {
-      cardBody.addEventListener('click', () => {
-        onCardBodyClick(safeName);
-      });
-    }
+    container.appendChild(card);
   });
 }
 
-// Pagination
+// Pagination ---------------------------------------------------------------------
+
 function renderPagination(currentPage, totalPages) {
-  const ui = getActiveUI();
-  const container = document.querySelector(ui.paginationSel);
+  const container = document.querySelector(PAGINATION_SELECTOR);
   if (!container) return;
 
   renderPaginationUniversal({
@@ -145,12 +117,9 @@ function renderPagination(currentPage, totalPages) {
     currentPage,
     totalPages,
     mode: 'neighbors',
-
     showPrevNext: totalPages > 2,
     showArrows: totalPages >= 3,
-    
 
-    // ✅ беремо ті самі класи що в exercises
     classes: {
       page: 'exercises__page',
       active: 'active',
@@ -178,52 +147,14 @@ function renderPagination(currentPage, totalPages) {
   });
 }
 
-// Clear Helpers
+// Helpers ---------------------------------------------------------------------
+
 function clearCards() {
-  const ui = getActiveUI();
-  const container = document.getElementById(ui.cardsId);
+  const container = document.getElementById(CARDS_CONTAINER_ID);
   if (container) container.innerHTML = '';
 }
 
 function clearPagination() {
-  const ui = getActiveUI();
-  const container = document.querySelector(ui.paginationSel);
+  const container = document.querySelector(PAGINATION_SELECTOR);
   if (container) container.innerHTML = '';
 }
-
-export function onCardBodyClick(nameValue) {
-  const searchBox = document.querySelector('.filters__search');
-  const categoriesBox = document.getElementById('cards-box');
-  const exercisesBox = document.getElementById('exercises');
-  const equipmentBox = document.getElementById('equipment-box');
-
-  const tabsContainer = document.querySelector('[data-filters-tabs]');
-  const activeTab = tabsContainer?.querySelector('.filters__tab--active');
-  const activeFilterType = activeTab ? activeTab.dataset.filter : null;
-
-  if (categoriesBox) categoriesBox.classList.add('hidden');
-  if (exercisesBox) exercisesBox.classList.remove('hidden');
-  if (equipmentBox) equipmentBox.classList.add('hidden');
-
-  setOpenExercises(true);
-  if (searchBox) searchBox.classList.add('filters__search--visible');
-
-  const filtersSubtitle = document.querySelector('.filters__subtitle');
-  if (filtersSubtitle) {
-    filtersSubtitle.textContent =
-      nameValue.charAt(0).toUpperCase() + nameValue.slice(1);
-  }
-
-  resetExercisesSearch();
-  scrollToFilter();
-
-  loadExercisesList({
-    page: 1,
-    filter: nameValue,
-    type: activeFilterType,
-    keyword: '',
-  });
-}
-
-// Initial load
-getCategories(activeFilter, activePage, PAGE_LIMIT);
