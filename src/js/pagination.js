@@ -12,6 +12,13 @@ export function renderPaginationUniversal({
   scrollTarget = null,
 }) {
   if (!container) return;
+
+  // 👉 Якщо всього одна сторінка — ховаємо пагінацію повністю
+  if (totalPages <= 1) {
+    container.innerHTML = '';
+    return;
+  }
+
   container.innerHTML = '';
 
   const {
@@ -84,9 +91,11 @@ export function renderPaginationUniversal({
 
     const disablePrev = currentPage === 1;
     const disableFirst = currentPage <= 2;
-    const isAtEnd = currentPage === totalPages;
 
-    if (showArrows && totalPages > 3) {
+    // ✅ ТІЛЬКИ на останній сторінці
+    const disableNext = currentPage === totalPages;
+
+    if (showArrows) {
       const firstBtn = createBtn(
         firstIcon,
         1,
@@ -121,17 +130,17 @@ export function renderPaginationUniversal({
         Math.min(totalPages, currentPage + 1),
         `${nextClass}`.trim()
       );
-      if (isAtEnd) nextBtn.disabled = true;
+      if (disableNext) nextBtn.disabled = true; // ✅ >
       container.appendChild(nextBtn);
     }
 
-    if (showArrows && totalPages > 3) {
+    if (showArrows) {
       const lastBtn = createBtn(
         lastIcon,
         totalPages,
         `${arrowClass} ${nextClass} ${lastClass}`.trim()
       );
-      if (isAtEnd) lastBtn.disabled = true;
+      if (disableNext) lastBtn.disabled = true; // ✅ >>
       container.appendChild(lastBtn);
     }
   }

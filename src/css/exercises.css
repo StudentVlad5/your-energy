@@ -276,6 +276,21 @@ button.exercises__page-prev:disabled {
   opacity: 0.6;
 }
 
+
+.exercises__page[disabled],
+.exercises__page-prev[disabled],
+.exercises__page-next[disabled],
+.exercises__page-first[disabled],
+.exercises__page-last[disabled],
+.exercises__page-arrow[disabled] {
+background: #f6f6f6;
+  border-color: #24242480;
+  color: #24242480;
+  cursor: default;
+  opacity: 0.6;
+}
+
+
 /* TABLET */
 
 @media screen and (min-width: 768px) {
