@@ -1,9 +1,18 @@
-import { getOpenExercises, setOpenExercises } from './state.js';
+import {
+  getOpenExercises,
+  setOpenExercises,
+  getExercisesContext,
+} from './state.js';
 import { getCategories } from './categories.js';
+import { loadExercisesList } from './exercises-list.js';
 
 const tabsContainer = document.querySelector('[data-filters-tabs]');
 const searchBox = document.querySelector('.filters__search');
 const subtitle = document.querySelector('.filters__subtitle');
+
+// ---------------------------------------
+// helpers для UI
+// ---------------------------------------
 
 function updateUIForFilter(filter, subtitleValue = '') {
   if (!searchBox || !subtitle) return;
@@ -18,40 +27,57 @@ function updateUIForFilter(filter, subtitleValue = '') {
     if (typeof renderExercises === 'function') {
       renderExercises(window.exercisesList || []);
     }
+  } else {
+    subtitle.textContent = '';
   }
 }
 
+// запис стану табу в history + URL
+function pushTabState(filterKey) {
+  const url = new URL(location.href);
+  url.searchParams.set('tab', filterKey);
+
+  history.pushState(
+    { tab: filterKey }, // важливо: тільки tab, без type/page, щоб history-state це ігнорував
+    '',
+    url
+  );
+}
+
+// ---------------------------------------
+// основний перемикач табів
+// ---------------------------------------
+
 export function activateFiltersTab(filterKey, subtitleValue = '') {
   if (!tabsContainer) return;
+
+  // запам’ятовуємо активний таб (для перезавантаження)
+  sessionStorage.setItem('activeFilter', filterKey);
+
   if (searchBox) searchBox.classList.remove('filters__search--visible');
   const btn = tabsContainer.querySelector(`[data-filter="${filterKey}"]`);
   if (!btn) return;
 
   const categoriesBox = document.getElementById('cards-box');
   const exercisesBox = document.getElementById('exercises');
-  const equipmentBox = document.getElementById('equipment-box');
 
-  if (categoriesBox) categoriesBox.classList.add('hidden');
+  // за замовчуванням – показуємо картки категорій, а не exercises
+  if (categoriesBox) categoriesBox.classList.remove('hidden');
   if (exercisesBox) exercisesBox.classList.add('hidden');
-  if (equipmentBox) equipmentBox.classList.add('hidden');
+  setOpenExercises(false);
 
   if (filterKey === 'muscles') {
     window.activeFilter = 'Muscles';
     getCategories('Muscles');
-    if (categoriesBox) categoriesBox.classList.remove('hidden');
-    setOpenExercises(false);
   } else if (filterKey === 'equipment') {
     window.activeFilter = 'Equipment';
     getCategories('Equipment');
-    if (equipmentBox) equipmentBox.classList.remove('hidden');
-    setOpenExercises(false);
   } else if (filterKey === 'bodypart') {
     window.activeFilter = 'Body parts';
     getCategories('Body parts');
-    if (categoriesBox) categoriesBox.classList.remove('hidden');
-    setOpenExercises(false);
   }
 
+  // підсвічуємо активний таб
   tabsContainer.querySelectorAll('.filters__tab').forEach(tab => {
     const isActive = tab === btn;
     tab.classList.toggle('filters__tab--active', isActive);
@@ -61,18 +87,76 @@ export function activateFiltersTab(filterKey, subtitleValue = '') {
   updateUIForFilter(filterKey, subtitleValue);
 }
 
-if (tabsContainer && searchBox && subtitle) {
+// ---------------------------------------
+// ініціалізація
+// ---------------------------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!tabsContainer || !searchBox || !subtitle) return;
+
+  // клік по табу
   tabsContainer.addEventListener('click', e => {
     const btn = e.target.closest('.filters__tab');
     if (!btn) return;
-    activateFiltersTab(btn.dataset.filter);
+
+    const filterKey = btn.dataset.filter;
+
+    // при кліку – записуємо стан табу в history
+    pushTabState(filterKey);
+
+    // при кліку по табу – повертаємось до карток
+    setOpenExercises(false);
+    activateFiltersTab(filterKey);
   });
 
-  const activeBtn = tabsContainer.querySelector('.filters__tab--active');
-  if (activeBtn) {
-    updateUIForFilter(activeBtn.dataset.filter);
+  // читаємо tab з URL (якщо є)
+  const url = new URL(location.href);
+  const urlTab = url.searchParams.get('tab');
+
+  const savedFilter = sessionStorage.getItem('activeFilter');
+  const initialFilter = urlTab || savedFilter || 'muscles';
+
+  const isExercisesOpen = getOpenExercises();
+
+  if (isExercisesOpen) {
+    // режим exercises (коли вже відкривали вправи)
+    const categoriesBox = document.getElementById('cards-box');
+    const exercisesBox = document.getElementById('exercises');
+
+    if (categoriesBox) categoriesBox.classList.add('hidden');
+    if (exercisesBox) exercisesBox.classList.remove('hidden');
+    if (searchBox) searchBox.classList.add('filters__search--visible');
+
+    // підсвічуємо правильний таб
+    const btn = tabsContainer.querySelector(`[data-filter="${initialFilter}"]`);
+    if (btn) {
+      tabsContainer.querySelectorAll('.filters__tab').forEach(tab => {
+        const isActive = tab === btn;
+        tab.classList.toggle('filters__tab--active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    // відновлюємо exercises з тими ж параметрами, що були
+    const { name, type } = getExercisesContext();
+
+    if (name) {
+      loadExercisesList({
+        page: 1,
+        filter: name,
+        type: type || initialFilter,
+        keyword: '',
+      });
+    }
+  } else {
+    // стандартний сценарій – відкриті картки
+    activateFiltersTab(initialFilter);
   }
-}
+});
+
+// ---------------------------------------
+// логіка для clear button в пошуку
+// ---------------------------------------
 
 const searchInput = document.querySelector('.filters__input');
 const clearBtn = document.querySelector('.filters__clear-btn');
@@ -96,3 +180,20 @@ if (searchInput && clearBtn) {
 
   toggleClear();
 }
+
+// ---------------------------------------
+// Повернення стрілкою "Назад" / "Вперед"
+// ---------------------------------------
+
+window.addEventListener('popstate', event => {
+  const state = event.state;
+
+  // нас цікавлять тільки state, де є tab
+  if (!state || !state.tab) return;
+
+  const tabKey = state.tab;
+
+  // коли повертаємось по історії табів – показуємо картки, а не exercises
+  setOpenExercises(false);
+  activateFiltersTab(tabKey);
+});

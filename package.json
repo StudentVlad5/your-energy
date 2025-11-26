@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/your-energy/",
+    "build": "vite build --base=/your-energy-reload-page/",
     "preview": "vite preview"
   },
   "devDependencies": {

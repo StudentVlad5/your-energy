@@ -92,7 +92,7 @@ export function renderPaginationUniversal({
     const disablePrev = currentPage === 1;
     const disableFirst = currentPage <= 2;
 
-    // ✅ ТІЛЬКИ на останній сторінці
+    // ТІЛЬКИ на останній сторінці
     const disableNext = currentPage === totalPages;
 
     if (showArrows) {
@@ -130,7 +130,7 @@ export function renderPaginationUniversal({
         Math.min(totalPages, currentPage + 1),
         `${nextClass}`.trim()
       );
-      if (disableNext) nextBtn.disabled = true; // ✅ >
+      if (disableNext) nextBtn.disabled = true; //  >
       container.appendChild(nextBtn);
     }
 
@@ -140,7 +140,7 @@ export function renderPaginationUniversal({
         totalPages,
         `${arrowClass} ${nextClass} ${lastClass}`.trim()
       );
-      if (disableNext) lastBtn.disabled = true; // ✅ >>
+      if (disableNext) lastBtn.disabled = true; // >>
       container.appendChild(lastBtn);
     }
   }

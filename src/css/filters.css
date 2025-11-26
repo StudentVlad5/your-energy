@@ -118,6 +118,7 @@
 }
 
 .filters__input {
+  height:100%;
   width: 100%;
   min-width: 200px;
   padding: 12px 52px 12px 14px;
