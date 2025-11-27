@@ -17,6 +17,20 @@ let activePage = 1;
 const CARDS_CONTAINER_ID = 'cards-container';
 const PAGINATION_SELECTOR = '.js-categories-pagination';
 
+// 🆕 допоміжна функція: назва фільтра → ключ табу (data-filter)
+function getTabKeyFromFilter(filter) {
+  switch (filter) {
+    case 'Muscles':
+      return 'muscles';
+    case 'Equipment':
+      return 'equipment';
+    case 'Body parts':
+      return 'bodypart';
+    default:
+      return 'muscles';
+  }
+}
+
 export async function getCategories(
   filter = activeFilter,
   page = 1,
@@ -140,8 +154,28 @@ function renderPagination(currentPage, totalPages) {
     scrollToTop: true,
     scrollTarget: '.main-container',
 
+    // 🆕 тут додаємо історію для пагінації категорій
     onPageChange(page) {
       activePage = page;
+
+      // визначаємо tab (muscles/equipment/bodypart) з activeFilter
+      const tabKey = getTabKeyFromFilter(activeFilter);
+
+      const url = new URL(location.href);
+      url.searchParams.set('tab', tabKey);
+      url.searchParams.set('page', String(page));
+
+      // кладемо в history стейт тільки для категорій
+      history.pushState(
+        {
+          tab: tabKey,
+          page,
+        },
+        '',
+        url
+      );
+
+      // як і раніше — вантажимо потрібну сторінку
       return getCategories(activeFilter, page, PAGE_LIMIT);
     },
   });

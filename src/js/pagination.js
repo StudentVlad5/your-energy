@@ -10,10 +10,11 @@ export function renderPaginationUniversal({
   icons = {},
   scrollToTop = true,
   scrollTarget = null,
+  // 🆕 новий колбек
+  onHistoryChange = null,
 }) {
   if (!container) return;
 
-  // 👉 Якщо всього одна сторінка — ховаємо пагінацію повністю
   if (totalPages <= 1) {
     container.innerHTML = '';
     return;
@@ -47,20 +48,22 @@ export function renderPaginationUniversal({
   };
 
   const scrollHandler = () => {
-    if (scrollToTop) {
-      if (scrollTarget) {
-        const el =
-          typeof scrollTarget === 'string'
-            ? document.querySelector(scrollTarget)
-            : scrollTarget;
+    if (!scrollToTop) return;
 
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (scrollTarget) {
+      const el =
+        typeof scrollTarget === 'string'
+          ? document.querySelector(scrollTarget)
+          : scrollTarget;
+
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: y - 200, behavior: 'smooth' });
+        return;
       }
     }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (mode !== 'neighbors') {
@@ -91,8 +94,6 @@ export function renderPaginationUniversal({
 
     const disablePrev = currentPage === 1;
     const disableFirst = currentPage <= 2;
-
-    // ТІЛЬКИ на останній сторінці
     const disableNext = currentPage === totalPages;
 
     if (showArrows) {
@@ -130,7 +131,7 @@ export function renderPaginationUniversal({
         Math.min(totalPages, currentPage + 1),
         `${nextClass}`.trim()
       );
-      if (disableNext) nextBtn.disabled = true; //  >
+      if (disableNext) nextBtn.disabled = true;
       container.appendChild(nextBtn);
     }
 
@@ -140,7 +141,7 @@ export function renderPaginationUniversal({
         totalPages,
         `${arrowClass} ${nextClass} ${lastClass}`.trim()
       );
-      if (disableNext) lastBtn.disabled = true; // >>
+      if (disableNext) lastBtn.disabled = true;
       container.appendChild(lastBtn);
     }
   }
@@ -159,23 +160,16 @@ export function renderPaginationUniversal({
       const page = Number(btn.dataset.page);
       if (Number.isNaN(page) || page === currentPage) return;
 
+      // 1) міняємо дані
       onPageChange(page);
 
-      if (scrollToTop) {
-        if (scrollTarget) {
-          const el =
-            typeof scrollTarget === 'string'
-              ? document.querySelector(scrollTarget)
-              : scrollTarget;
-
-          if (el) {
-            const y = el.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({ top: y - 200, behavior: 'smooth' });
-          }
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+      // 2) пишемо в history, якщо дали колбек
+      if (typeof onHistoryChange === 'function') {
+        onHistoryChange(page);
       }
+
+      // 3) скрол
+      scrollHandler();
     });
   });
 }

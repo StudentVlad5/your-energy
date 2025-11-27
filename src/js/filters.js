@@ -38,7 +38,7 @@ function pushTabState(filterKey) {
   url.searchParams.set('tab', filterKey);
 
   history.pushState(
-    { tab: filterKey }, // важливо: тільки tab, без type/page, щоб history-state це ігнорував
+    { tab: filterKey }, // важливо: тільки tab, без type/page для exercises
     '',
     url
   );
@@ -192,8 +192,18 @@ window.addEventListener('popstate', event => {
   if (!state || !state.tab) return;
 
   const tabKey = state.tab;
+  const page = state.page || 1;
 
-  // коли повертаємось по історії табів – показуємо картки, а не exercises
+  // коли повертаємось по історії табів/категорій – показуємо картки, а не exercises
   setOpenExercises(false);
   activateFiltersTab(tabKey);
+
+  // якщо в history збережена конкретна сторінка пагінації — вантажимо саме її
+  if (page > 1) {
+    let filterName = 'Muscles';
+    if (tabKey === 'equipment') filterName = 'Equipment';
+    else if (tabKey === 'bodypart') filterName = 'Body parts';
+
+    getCategories(filterName, page);
+  }
 });
